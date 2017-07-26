@@ -28,26 +28,9 @@
          - ws-webserver
       register: ec2
 
-    - name: Wait for instance creation to complete
-      async_status: jid="{{ item.ansible_job_id }}"
-      register: instances
-      until: instances.finished
-      retries: 300
-      with_items: "{{ ec2_jobs.results }}"
-      ignore_errors: yes
-      
-    - name: Wait for instances to finish initializing
-      pause:
-        seconds: 90
-      when: instances | changed
-      tags:
-        - always
-        - provision
+  
+- hosts: ws-webserver
 
-    - name: Waiting for servers to come online
-      wait_for: host="{{ item.tagged_instances[0].public_ip }}" port="{{ ssh_port }}" search_regex=OpenSSH
-      with_items: "{{ instances.results }}"
-      when: instances | changed
-      tags:
-        - always
-        - provision
+  tasks:
+  - name: wait for webserver to come up
+    wait_for: 'host{{ inventory_hostname }} port=22 state=started timeout=80'
