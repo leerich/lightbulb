@@ -18,6 +18,6 @@
      instance_tags:
        ansible_group: WS-webservers
        Name: Lightbulb_Linux_Webserver
-     tags:
-       - ws-webserver
-     register: ec2
+  tags:
+    - ws-webserver
+  register: ec2
