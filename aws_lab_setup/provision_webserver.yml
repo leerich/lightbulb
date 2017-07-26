@@ -4,9 +4,8 @@
   gather_facts: False
 
   roles:
-  - role: web_instance
+  - web_instance
 
 - hosts: ws-webserver
   roles:
-  - role: web_server
-  
+  - web_server
