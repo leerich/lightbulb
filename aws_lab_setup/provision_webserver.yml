@@ -5,6 +5,8 @@
 
   roles:
   - web_instance
+  tags:
+    - skip
 
 - hosts: WS-webserver
   roles:
