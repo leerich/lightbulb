@@ -37,6 +37,8 @@
   
   - name: install httpd
     package: name=httpd state=latest
+    become: true
     
   - name: start httpd
     service: name=httpd state=running
+    become: true
