@@ -3,7 +3,7 @@
   connection: local
   gather_facts: False
  
-  tasks:
+  pre_tasks:
 
     - name: Provision a Webserver Instance
       ec2:
@@ -31,7 +31,7 @@
   
 - hosts: ws-webserver
 
-  tasks:
+  post_tasks:
   - name: wait for webserver to come up
     wait_for: 'host{{ inventory_hostname }} port=22 state=started timeout=80'
   
