@@ -6,6 +6,6 @@
   roles:
   - web_instance
 
-- hosts: ws-webserver
+- hosts: WS-webserver
   roles:
   - web_server
