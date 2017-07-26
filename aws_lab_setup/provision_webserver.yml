@@ -20,10 +20,10 @@
          assign_public_ip: yes
          exact_count: 1
          count_tag:
-            Name: Demo_Linux_Webserver
+            Name: Lightbulb_Linux_Webserver
          instance_tags:
             ansible_group: WS-webservers
-            Name: Demo_Linux_Webserver
+            Name: Lightbulb_Linux_Webserver
       tags:
          - ws-webserver
       register: ec2
