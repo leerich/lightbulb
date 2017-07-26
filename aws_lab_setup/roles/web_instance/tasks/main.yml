@@ -1,0 +1,29 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+
+  pre_tasks:
+
+    - name: Provision a Webserver Instance
+      ec2:
+         #access_key: "{{ ec2_access_key }}"
+         #secret_key: "{{ ec2_secret_key }}"
+         key_name: "{{ ec2_key_name }}"
+         group_id: sg-8b184ef3
+         instance_type: t2.micro
+         image: ami-2051294a
+         region: "{{ ec2_region }}"
+         vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
+         #count: "{{ ec2_instance_count }}"
+         wait: false
+         assign_public_ip: yes
+         exact_count: 1
+         count_tag:
+            Name: Lightbulb_Linux_Webserver
+         instance_tags:
+            ansible_group: WS-webservers
+            Name: Lightbulb_Linux_Webserver
+      tags:
+         - ws-webserver
+      register: ec2
