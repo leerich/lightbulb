@@ -9,3 +9,10 @@
 - name: start httpd
   service: name=httpd state=running
   become: true
+
+- name: transfer index.html file
+  copy:
+    src: index.html
+    dest: /var/www/html
+    owner: apache
+    group: apache
