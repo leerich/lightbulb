@@ -21,3 +21,4 @@
   tags:
     - ws-webserver
   register: ec2
+  become: false
