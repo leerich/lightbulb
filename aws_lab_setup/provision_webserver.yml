@@ -1,12 +1,12 @@
 ---
-- hosts: localhost
-  connection: local
-  gather_facts: False
+#- hosts: localhost
+#  connection: local
+#  gather_facts: False
 
-  roles:
-  - web_instance
-  tags:
-    - skip
+#  roles:
+#  - web_instance
+#  tags:
+#    - skip
 
 - hosts: "{{ host_addr }}"
   roles:
