@@ -1,6 +1,6 @@
 ---
-- name: wait for webserver to come up
-  wait_for: 'host{{ inventory_hostname }} port=22 state=started timeout=80'
+#- name: wait for webserver to come up
+#  wait_for: 'host{{ inventory_hostname }} port=22 state=started timeout=80'
 
 - name: install httpd
   package: name=httpd state=latest
