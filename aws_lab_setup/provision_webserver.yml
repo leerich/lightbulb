@@ -8,6 +8,6 @@
   tags:
     - skip
 
-- hosts: "{{ host_addr }}"
+- hosts: WS-webservers
   roles:
   - web_server
