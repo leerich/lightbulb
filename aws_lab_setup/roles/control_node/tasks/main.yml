@@ -45,7 +45,7 @@
     dest: /etc/yum.repos.d/CentOS-Base.repo
     owner: root
     group: root
-    tags:
+  tags:
     - control_node
     - control
 
