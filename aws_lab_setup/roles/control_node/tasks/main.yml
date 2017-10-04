@@ -17,16 +17,16 @@
     
 - name: Install Base Repo
   yum_repository:
-    name: Extras
-    description: Some YUM repo
+    name: "rhui-REGION-rhel-server-extras"
+    description: "Red Hat Enterprise Linux Server 7 Extra(RPMs)"
     file: redhat-rhui
     mirrorlist: https://rhui2-cds01.REGION.aws.ce.redhat.com/pulp/mirror/content/dist/rhel/rhui/server/7/$releasever/$basearch/extras/os
     enabled: yes
-    gpgcheck: no
-    sslverify: yes
-    sslclientkey: /etc/pki/rhui/content-rhel7.key
-    sslclientcert: /etc/pki/rhui/product/content-rhel7.crt
-    sslcacert: /etc/pki/rhui/cdn.redhat.com-chain.crt
+    #gpgcheck: no
+    #sslverify: yes
+    #sslclientkey: /etc/pki/rhui/content-rhel7.key
+    #sslclientcert: /etc/pki/rhui/product/content-rhel7.crt
+    #sslcacert: /etc/pki/rhui/cdn.redhat.com-chain.crt
   tags:
     - control_node
     - control
