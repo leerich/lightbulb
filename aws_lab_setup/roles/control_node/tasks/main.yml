@@ -17,7 +17,7 @@
     
 - name: Install Base Repo
   yum_repository:
-    name: "Red Hat Enterprise Linux Server 7 Extra(RPMs)"
+    name: "Red Hat Enterprise Linux Server 7 Extras"
     file: redhat-rhui
     mirrorlist: https://rhui2-cds01.REGION.aws.ce.redhat.com/pulp/mirror/content/dist/rhel/rhui/server/7/$releasever/$basearch/extras/os
     enabled: yes
