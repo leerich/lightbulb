@@ -45,7 +45,9 @@
     dest: /etc/yum.repos.d
     owner: root
     group: root
-    
+    tags:
+    - control_node
+    - control
 
 - name: Install base packages
   yum:
