@@ -11,40 +11,10 @@
     - control
 
 - name: Install Base Repo
-  copy:
-    content: |
-      [base]
-      name=CentOS-$releasever - Base
-      mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=os&infra=$infra
-      gpgcheck=1
-      gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
-
-      [updates]
-      name=CentOS-$releasever - Updates
-      mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=updates&infra=$infra
-      #baseurl=http://mirror.centos.org/centos/$releasever/updates/$basearch/
-      gpgcheck=1
-      gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
-
-      #additional packages that may be useful
-      [extras]
-      name=CentOS-$releasever - Extras
-      mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=extras&infra=$infra
-      #baseurl=http://mirror.centos.org/centos/$releasever/extras/$basearch/
-      gpgcheck=1
-      gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
-      
-      #additional packages that extend functionality of existing packages
-      [centosplus]
-      name=CentOS-$releasever - Plus
-      mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=centosplus&infra=$infra
-      #baseurl=http://mirror.centos.org/centos/$releasever/centosplus/$basearch/
-      gpgcheck=1
-      enabled=0
-      gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
-    dest: /etc/yum.repos.d/CentOS-Base.repo
-    owner: root
-    group: root
+  yum_repository:
+    name: "Red Hat Enterprise Linux Server 7 Extra(RPMs)"
+    file: redhat-rhui.repo
+    enabled: yes
   tags:
     - control_node
     - control
