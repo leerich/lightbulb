@@ -10,6 +10,11 @@
     - control_node
     - control
 
+- name: Remove repo file
+  file:
+    path: /etc/yum.repos.d/CentOS-Base.repo
+    state: absent
+    
 - name: Install Base Repo
   yum_repository:
     name: "Red Hat Enterprise Linux Server 7 Extra(RPMs)"
