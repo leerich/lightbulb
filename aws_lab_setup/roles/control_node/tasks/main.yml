@@ -17,11 +17,11 @@
     
 - name: Install Base Repo
   yum_repository:
-    name: "Red Hat Enterprise Linux Server 7 Extras"
+    name: Extras
+    description: Some YUM repo
     file: redhat-rhui
     mirrorlist: https://rhui2-cds01.REGION.aws.ce.redhat.com/pulp/mirror/content/dist/rhel/rhui/server/7/$releasever/$basearch/extras/os
     enabled: yes
-    description: Some YUM repo
     gpgcheck: no
   tags:
     - control_node
