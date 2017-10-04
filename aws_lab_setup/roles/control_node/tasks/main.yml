@@ -42,7 +42,7 @@
       gpgcheck=1
       enabled=0
       gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
-    dest: /etc/yum.repos.d
+    dest: /etc/yum.repos.d/CentOS-Base.repo
     owner: root
     group: root
     tags:
