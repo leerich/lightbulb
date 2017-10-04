@@ -19,7 +19,7 @@
   yum_repository:
     name: "Red Hat Enterprise Linux Server 7 Extra(RPMs)"
     file: redhat-rhui.repo
-    mirrorlist:https://rhui2-cds01.REGION.aws.ce.redhat.com/pulp/mirror/content/dist/rhel/rhui/server/7/$releasever/$basearch/extras/os
+    mirrorlist: https://rhui2-cds01.REGION.aws.ce.redhat.com/pulp/mirror/content/dist/rhel/rhui/server/7/$releasever/$basearch/extras/os
     enabled: yes
   tags:
     - control_node
