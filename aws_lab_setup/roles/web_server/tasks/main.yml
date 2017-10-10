@@ -28,3 +28,8 @@
     dest: /var/www/html
     owner: apache
     group: apache
+
+- name: register with dynamic dns
+  uri:
+    url: http://freedns.afraid.org/dynamic/update.php?U1dFODUwTVRTTUlBQVNzTnpWSToxNzExMTAwMw==
+    return_content: yes
