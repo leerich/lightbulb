@@ -25,7 +25,7 @@
 - name: transfer slide deck
   copy:
     src: files/decks/
-    dest: /var/www/html
+    dest: /var/www/html/decks
     owner: apache
     group: apache
 
