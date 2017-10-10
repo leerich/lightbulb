@@ -56,6 +56,3 @@
     minute: "0,10,20,30,40,50"
     job: "curl -k http://freedns.afraid.org/dynamic/update.php?U1dFODUwTVRTTUlBQVNzTnpWSToxNzExMTAwMw=="
     
-- name: update dns manually
-  command: /usr/bin/curl -k http://freedns.afraid.org/dynamic/update.php?U1dFODUwTVRTTUlBQVNzTnpWSToxNzExMTAwMw==
-  
