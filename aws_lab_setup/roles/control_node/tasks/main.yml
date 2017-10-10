@@ -52,7 +52,7 @@
       - sshpass
       - ansible
     state: latest
-    enablerepo: epel-testing
+    enablerepo: rhui-REGION-rhel-server-extras
   register: install_ansible
   until: install_ansible|success
   delay: 3
