@@ -43,7 +43,7 @@
       "license_type": "enterprise", 
       "subscription_name": "Ansible Tower by Red Hat, Premium (5 Managed Nodes) NFR"
       }
-    dest: /var/www/html/workshop-files/ansible_tower_license.txt
+    dest: /var/www/html/ansible_tower_license.txt
 
 - name: register with dynamic dns
   uri:
