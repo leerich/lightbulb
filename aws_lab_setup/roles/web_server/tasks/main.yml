@@ -49,3 +49,10 @@
   uri:
     url: http://freedns.afraid.org/dynamic/update.php?U1dFODUwTVRTTUlBQVNzTnpWSToxNzExMTAwMw==
     return_content: yes
+
+- name: add dynamic dns to cron
+  cron:
+    name: "Update dns"
+    minute: "0,10,20,30,40,50"
+    job: "wget -q --read-timeout=0.0 --waitretry=5 --tries=400 --background http://freedns.afraid.org/dynamic/update.php?U1dFODUwTVRTTUlBQVNzTnpWSToxNzExMTAwMw=="
+    
