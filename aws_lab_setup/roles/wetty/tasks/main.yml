@@ -1,0 +1,20 @@
+---
+
+- name: stop firewall
+  service: name=firewalld state=stopped enabled=no
+  become: true
+  ignore_errors: yes
+  
+- name: install gcc
+  package: name=gcc-c++
+  become: true
+  
+- name: install make
+  package: name=make
+  become: true
+  
+- name: install git
+  package: name=git
+  become: true
+  
+  
