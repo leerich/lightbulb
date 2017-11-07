@@ -9,13 +9,13 @@
     mode: 0755
     validate_certs: no
     force_basic_auth: yes
-    
-  
+
+
 - name: run script
   become: yes
   command: /root/install_repo.sh
 
-  
+
 - name: Install Make & GCC
   become: yes
   yum:
@@ -28,8 +28,7 @@
 
 - name: Install Wetty Globaly
   become: yes
-  command: npm install wetty -g 
-  #chdir=/home/{{ system_user }}
+  command: npm install wetty -g chdir=/home/{{ system_user }}
   args:
     creates: /usr/lib/node_modules/wetty/bin/wetty.js
 
@@ -138,34 +137,34 @@
     state: stopped
   when: rf_result.rc == 0
 
-- name: Create SELinux dir
-  become: yes
-  file:
-    group: "{{ system_user }}"
-    owner: "{{ system_user }}"
-    mode:  0700
-    path:  "/home/{{ system_user }}/.selinux"
-    state: directory
-
-- name: Copy over SELinux modules for Wetty
-  become: yes
-  copy:
-    src:   "{{ item }}"
-    dest:  "/home/{{ system_user }}/.selinux"
-    group: "{{system_user}}"
-    owner: "{{system_user}}"
-    mode:  0700
-  with_items:
-    - wetty.pp
-    - wetty.te
-  register: result
-
-- name: Update SELinux for Wetty
-  become: yes
-  command: semodule -i wetty.pp chdir=/home/{{ system_user }}/.selinux
-  notify: wetty
-  when: result.changed
-
+#- name: Create SELinux dir
+#  become: yes
+#  file:
+#    group: "{{ system_user }}"
+#    owner: "{{ system_user }}"
+#    mode:  0700
+#    path:  "/home/{{ system_user }}/.selinux"
+#    state: directory
+#
+#- name: Copy over SELinux modules for Wetty
+#  become: yes
+#  copy:
+#    src:   "{{ item }}"
+#    dest:  "/home/{{ system_user }}/.selinux"
+#    group: "{{system_user}}"
+#    owner: "{{system_user}}"
+#    mode:  0700
+#  with_items:
+#    - wetty.pp
+#    - wetty.te
+#  register: result
+#
+#- name: Update SELinux for Wetty
+#  become: yes
+#  command: semodule -i wetty.pp chdir=/home/{{ system_user }}/.selinux
+#  notify: wetty
+#  when: result.changed
+#
 ###########################################################
 #   Build from Source
 ###########################################################
