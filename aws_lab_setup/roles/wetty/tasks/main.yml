@@ -1,6 +1,15 @@
 # file: roles/wetty/tasks/main.yml
 ---
 
+- name: Set student password
+  become: yes
+  user:
+    name:      "student"
+    password:  "{{ workshop_password |password_hash('sha512') }}"
+    #password: redr00t
+    state:     present
+    append:    yes
+    
 #- name: Install nodejs Repo
 #  become: yes
 #  get_url:
@@ -97,14 +106,7 @@
 
 # password_hash requires the passlib python module to generate password hashes
 # pip install passlib
-- name: Set student password
-  become: yes
-  user:
-    name:      "student"
-    password:  "{{ workshop_password |password_hash('sha512') }}"
-    #password: redr00t
-    state:     present
-    append:    yes
+
 
 - name: Update SSH Config
   become: yes
