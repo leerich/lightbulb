@@ -24,7 +24,6 @@
   with_items:
     - make
     - gcc-c++
-    - epel-release
     - nodejs
 
 - name: Install Wetty Globaly
