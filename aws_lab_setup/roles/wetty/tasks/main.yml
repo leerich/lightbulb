@@ -1,9 +1,14 @@
 # file: roles/wetty/tasks/main.yml
 ---
 
-#- name: Install nodejs Repo
-#  become: yes
-#  command: curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
+- name: Install nodejs Repo
+  become: yes
+  command: curl --silent --location https://rpm.nodesource.com/setup_8.x > install_repo.sh
+  
+- name: run script
+  become: yes
+  command: install_repo.sh
+
   
 - name: Install Make & GCC
   become: yes
