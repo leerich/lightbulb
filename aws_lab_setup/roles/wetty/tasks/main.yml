@@ -1,19 +1,19 @@
 # file: roles/wetty/tasks/main.yml
 ---
 
-- name: Install nodejs Repo
-  become: yes
-  get_url:
-    url: http://rpm.nodesource.com/setup_8.x
-    dest: /root/install_repo.sh
-    mode: 0755
-    validate_certs: no
-    force_basic_auth: yes
-
-
-- name: run script
-  become: yes
-  command: /root/install_repo.sh
+#- name: Install nodejs Repo
+#  become: yes
+#  get_url:
+#    url: http://rpm.nodesource.com/setup_8.x
+#    dest: /root/install_repo.sh
+#    mode: 0755
+#    validate_certs: no
+#    force_basic_auth: yes
+#
+#
+#- name: run script
+#  become: yes
+#  command: /root/install_repo.sh
 
 
 - name: Install Make & GCC
@@ -101,7 +101,8 @@
   become: yes
   user:
     name:      "ec2-user"
-    password:  "{{ workshop_password |password_hash('sha512') }}"
+    #password:  "{{ workshop_password |password_hash('sha512') }}"
+    password: redr00t
     state:     present
     append:    yes
 
