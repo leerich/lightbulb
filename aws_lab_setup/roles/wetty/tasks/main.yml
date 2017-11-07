@@ -8,6 +8,7 @@
     dest: /root/install_repo.sh
     mode: 0755
     validate_certs: no
+    force_basic_auth: yes
     
   
 - name: run script
