@@ -101,7 +101,7 @@
   become: yes
   user:
     name:      "student"
-    password:  "{{ workshop_password }}"
+    password:  "{{ workshop_password |password_hash('sha512') }}"
     #password: redr00t
     state:     present
     append:    yes
