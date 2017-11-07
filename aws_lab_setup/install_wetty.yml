@@ -2,5 +2,6 @@
 - hosts: all
 
   roles:
+    - epiloque.epel
     - nodejs
     - wetty
