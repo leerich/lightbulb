@@ -9,7 +9,7 @@ SyslogFacility AUTHPRIV
 AuthorizedKeysFile .ssh/authorized_keys
 
 
-PasswordAuthentication no
+PasswordAuthentication yes
 
 ChallengeResponseAuthentication no
 
