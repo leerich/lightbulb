@@ -12,7 +12,8 @@
 
 - name: Install Wetty Globaly
   become: yes
-  command: npm install wetty -g chdir=/home/{{ system_user }}
+  command: npm install wetty -g 
+  #chdir=/home/{{ system_user }}
   args:
     creates: /usr/lib/node_modules/wetty/bin/wetty.js
 
