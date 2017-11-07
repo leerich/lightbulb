@@ -3,11 +3,15 @@
 
 - name: Install nodejs Repo
   become: yes
-  command: curl --silent --location https://rpm.nodesource.com/setup_8.x > install_repo.sh
+  get_url:
+    url: https://rpm.nodesource.com/setup_8.x
+    dest: /root/install_repo.sh
+    mode: 0755
+    
   
 - name: run script
   become: yes
-  command: install_repo.sh
+  command: /root/install_repo.sh
 
   
 - name: Install Make & GCC
