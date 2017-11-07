@@ -2,6 +2,6 @@
 - hosts: all
 
   roles:
-    - geerlingguy.repo-epel
+    - repo-epel
     - nodejs
     - wetty
