@@ -97,10 +97,10 @@
 
 # password_hash requires the passlib python module to generate password hashes
 # pip install passlib
-- name: Set ec2-user password
+- name: Set student password
   become: yes
   user:
-    name:      "ec2-user"
+    name:      "student"
     #password:  "{{ workshop_password |password_hash('sha512') }}"
     password: redr00t
     state:     present
