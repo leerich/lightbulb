@@ -2,6 +2,6 @@
 - hosts: "{{ host_pattern }}"
 
   roles:
-    - { role: repo-epel, when: 'control' in inventory_hostname }
+    - { role: repo-epel, when: inventory_hostname == 'control' }
     #- nodejs
     #- wetty
