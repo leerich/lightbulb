@@ -2,6 +2,6 @@
 - hosts: "{{ host_pattern }}"
 
   roles:
-    - repo-epel
-    - nodejs
-    - wetty
+    - { role: repo-epel, when: "'control' in {{ ec2_tag_Name }}"
+    #- nodejs
+    #- wetty
