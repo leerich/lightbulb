@@ -9,7 +9,7 @@
 #    #password: redr00t
 #    state:     present
 #    append:    yes
-#    
+#
 #- name: Install nodejs Repo
 #  become: yes
 #  get_url:
@@ -37,7 +37,7 @@
 
 - name: Install Wetty Globaly
   become: yes
-  command: npm install wetty -g chdir=/home/{{ system_user }}
+  command: npm install wetty -g chdir=~
   args:
     creates: /usr/lib/node_modules/wetty/bin/wetty.js
 
