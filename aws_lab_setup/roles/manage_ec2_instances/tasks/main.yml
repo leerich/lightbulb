@@ -23,6 +23,7 @@
     instance_type: "{{ ec2_instance_types[item.1.type].size }}"
     image: "{{ ec2_instance_types[item.1.type].ami_id }}"
     region: "{{ ec2_region }}"
+    zone: "{{ ec2_zone }}"
     exact_count: "{{ ec2_exact_count }}"
     count_tag:
       Name: "{{ ec2_name_prefix }}-{{ item.0.username }}-{{ item.1.name }}"
