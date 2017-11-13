@@ -3,7 +3,7 @@
     name: insecure_all
     description: all ports open
     region: "{{ ec2_region }}"
-    vpc_id: "{{ ec2_vpc_id }}"
+    #vpc_id: "{{ ec2_vpc_id }}"
     rules:
       - proto: all
         cidr_ip: 0.0.0.0/0
