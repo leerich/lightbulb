@@ -4,10 +4,6 @@
   #gather_facts: false
   
   tasks:
-    - name: clean up rpm
-      command: yum update -y
-      when: '"control" in ec2_tag_Name'
-      
     - name: remove duplicate packages
       yum: 
         name: "{{ item }}"
@@ -25,3 +21,7 @@
         - libgcc.i686
         - glibc.i686
       when: '"control" in ec2_tag_Name'
+      
+     - name: clean up rpm
+       command: yum update -y
+       when: '"control" in ec2_tag_Name'
