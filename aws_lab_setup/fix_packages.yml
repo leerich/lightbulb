@@ -7,7 +7,7 @@
     - name: remove duplicate packages
       yum: 
         name: "{{ item }}"
-        state: absent
+        state: removed
       with_items:
         - libgcc-4.8.5-16.el7.x86_64
         - glibc-common-2.17-196.el7.x86_64
