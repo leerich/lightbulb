@@ -2,6 +2,10 @@
 - hosts: "{{ host_pattern }}"
   #gather_facts: false
   
+  tasks:
+    - name: clean up rpm
+      command: yum-complete-transaction -y
+      when: '"control" in ec2_tag_Name'
   roles:
     - { role: repo-epel, when: '"control" in ec2_tag_Name' }
     - { role: nodejs, when: '"control" in ec2_tag_Name' }
