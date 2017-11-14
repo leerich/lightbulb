@@ -1,6 +1,7 @@
 ---
 - hosts: "{{ host_pattern }}"
-
+  gather_facts: false
+  
   roles:
     - { role: repo-epel, when: '"control" in ec2_tag_Name' }
     - { role: nodejs, when: '"control" in ec2_tag_Name' }
