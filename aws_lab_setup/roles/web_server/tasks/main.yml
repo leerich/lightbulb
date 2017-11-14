@@ -33,15 +33,16 @@
   copy: 
     content: |
       {
-      "company_name": "Red Hat, Inc.", 
-      "contact_email": "kholmes@redhat.com", 
-      "contact_name": "Kevin Holmes", 
-      "hostname": "b055543e66264c038eb73656f406aba2", 
+      "company_name": "Red Hat Workshop", 
+      "contact_email": "lrich@redhat.com", 
+      "contact_name": "Lee Rich", 
+      "hostname": "f850b465eaf44fff813056ee87b60173", 
       "instance_count": 5, 
-      "license_date": 1508340988, 
-      "license_key": "4877f6ef15874461e8627c1f03f0edd2efbd6433a81dc43fb67dad124578d046", 
+      "license_date": 1518633658, 
+      "license_key": "719a29f1a71091a780b7b65fdc1256a757ca2776ea9b57c76b50b08369110eff", 
       "license_type": "enterprise", 
-      "subscription_name": "Ansible Tower by Red Hat, Premium (5 Managed Nodes) NFR"
+      "subscription_name": "Lightbulb Workshop", 
+      "trial": true
       }
     dest: /var/www/html/ansible_tower_license.txt
 
