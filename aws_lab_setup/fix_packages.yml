@@ -1,10 +1,11 @@
 ---
 - hosts: "{{ host_pattern }}"
+  become: true
   #gather_facts: false
   
   tasks:
     - name: clean up rpm
-      command: yum-complete-transaction -y
+      command: yum update -y
       when: '"control" in ec2_tag_Name'
       
     - name: remove duplicate packages
