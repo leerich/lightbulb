@@ -6,6 +6,7 @@
   tasks:
     - name:  complete yum transactions
       command: yum-complete-transaction
+      when: '"control" in ec2_tag_Name'
       
     - name: remove duplicate packages
       yum: 
