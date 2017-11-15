@@ -8,6 +8,7 @@
       stat: path=/usr/bin/wetty
       register: wetty_status
 
+    - name: block below
       block:
         - name:  complete yum transactions
           command: yum-complete-transaction
