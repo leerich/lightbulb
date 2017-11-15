@@ -2,34 +2,34 @@
 - hosts: "{{ host_pattern }}"
   become: true
   gather_facts: false
-  
+
   tasks:
     - name: See if wetty exists
       stat: path=/usr/bin/wetty
       register: wetty_status
-      
-    block:
-      - name:  complete yum transactions
-        command: yum-complete-transaction
-      
-      - name: remove duplicate packages
-        yum: 
-          name: "{{ item }}"
-          state: removed
-        with_items:
-          - libgcc-4.8.5-16.el7.x86_64
-          - glibc-common-2.17-196.el7.x86_64
-      
-      - name: install needed packages
-        yum:
-          name: "{{item }}"
-          state: installed
-        with_items:
-          - libgcc-4.8.5-4.el7.i686
-          - glibc.i686
-          - gcc-c++
-      when: '"control" in ec2_tag_Name' and wetty_status.stat.exists == False
-      
+
+      block:
+        - name:  complete yum transactions
+          command: yum-complete-transaction
+        
+        - name: remove duplicate packages
+          yum: 
+            name: "{{ item }}"
+            state: removed
+          with_items:
+            - libgcc-4.8.5-16.el7.x86_64
+            - glibc-common-2.17-196.el7.x86_64
+        
+        - name: install needed packages
+          yum:
+            name: "{{item }}"
+            state: installed
+          with_items:
+            - libgcc-4.8.5-4.el7.i686
+            - glibc.i686
+            - gcc-c++
+        when: '"control" in ec2_tag_Name' and wetty_status.stat.exists == False
+
     #- name: clean up rpm
     #  command: yum update -y
     #  when: '"control" in ec2_tag_Name'
