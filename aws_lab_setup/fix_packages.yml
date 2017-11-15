@@ -21,7 +21,7 @@
         name: "{{item }}"
         state: installed
       with_items:
-        - libgcc.i686
+        - libgcc-4.8.5-4.el7.i686
         - glibc.i686
         - gcc-c++
       when: '"control" in ec2_tag_Name'
