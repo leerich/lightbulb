@@ -55,7 +55,7 @@
   ignore_errors: yes
 
 - name: Include tasks only needed when creating instances
-  include: create.yml
+  include_tasks: create.yml
   static: no
   when: ec2_exact_count >= 1
   tags:
