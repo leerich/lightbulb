@@ -25,7 +25,7 @@
   gather_facts: no
   roles:
     - domain-names
-    
+
 - name: Configure common options on managed nodes and control nodes
   hosts: "managed_nodes:control_nodes"
   become: yes
@@ -39,6 +39,12 @@
   roles:
     - control_node
 
+- name: Install Ansible tower
+  hosts: control_nodes
+  become: yes
+  roles:
+    - ansible-tower
+    
 - name: Email inventory to instructor
   hosts: localhost
   connection: local
