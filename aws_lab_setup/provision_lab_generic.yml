@@ -18,6 +18,14 @@
   roles:
     - manage_ec2_instances
 
+- name: create Route53 domain names for control nodes
+  hosts: localhost
+  connection: local
+  become: no
+  gather_facts: no
+  roles:
+    - domain_names
+    
 - name: Configure common options on managed nodes and control nodes
   hosts: "managed_nodes:control_nodes"
   become: yes
