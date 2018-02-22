@@ -1,6 +1,6 @@
 - name: Print out variables
   debug: msg="{{ item }}"
-  with_items: "{{ instances }}"
+  with_items: "{{ instances.results }}"
 
 - name: Create DNS name for each control node
   route53:
