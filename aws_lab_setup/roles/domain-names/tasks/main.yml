@@ -9,7 +9,7 @@
   when: "'control' in item.invocation.module_args.instance_tags.Name"
 
 - name: Print out dns name
-  debug: msg="{{ workshop_dns_zone }}"
+  debug: msg="{{ item.item[0].name }}"
 
 - name: Create DNS name for each control node
   route53:
@@ -23,6 +23,6 @@
     type: A
   with_items: "{{ instances.results }}"
   when: "'control' in item.invocation.module_args.instance_tags.Name"
-  
+
 - name: Break me here
   debug: msg="{{ broken_variable }}"
