@@ -33,18 +33,18 @@
     - user_accounts
     - common
 
-- name: Configure control node
-  hosts: control_nodes
-  become: yes
-  roles:
-    - control_node
+#- name: Configure control node
+#  hosts: control_nodes
+#  become: yes
+#  roles:
+#    - control_node
 
 - name: Install Ansible tower
   hosts: control_nodes
   become: yes
   roles:
     - ansible-tower
-    
+
 - name: Email inventory to instructor
   hosts: localhost
   connection: local
