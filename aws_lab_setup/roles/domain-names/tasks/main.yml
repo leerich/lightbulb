@@ -9,7 +9,7 @@
   when: "'control' in item.invocation.module_args.instance_tags.Name"
 
 - name: Print out dns name
-  debug: msg="{{ item.item[0].username }}"
+  debug: msg="{{ item.item.item[0].username }}"
   with_items: "{{ instances.results }}"
   when: "'control' in item.invocation.module_args.instance_tags.Name"
 
