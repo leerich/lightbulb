@@ -19,24 +19,24 @@
     url: https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-{{ towerversion }}.tar.gz
     dest: /tmp/ansible-tower-setup-{{ towerversion }}.tar.gz
     mode: 0640
-  when: towerchk != towerversion
+  #when: towerchk != towerversion
 
 - name: extract installer
   unarchive:
     src: /tmp/ansible-tower-setup-{{ towerversion }}.tar.gz
     dest: /tmp/
     remote_src: True
-  when: towerchk != towerversion
+  #when: towerchk != towerversion
 
 - name: template inventory file
   template:
     src: inventory
     dest: /tmp/ansible-tower-setup-{{ towerversion }}/inventory
-  when: towerchk != towerversion
+  #when: towerchk != towerversion
 
 - name: run the tower installer
   shell: ./setup.sh chdir=/tmp/ansible-tower-setup-{{ towerversion }}
-  when: towerchk != towerversion
+  #when: towerchk != towerversion
 
 - name: wait for tower to be up
   uri:
@@ -49,7 +49,7 @@
   until: check2.json is defined and check2.json.version == towerversion
   retries: 10
   delay: 30
-  when: towerchk != towerversion
+  #when: towerchk != towerversion
 
 - name: Post license key
   uri:
