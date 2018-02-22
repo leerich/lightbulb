@@ -21,7 +21,8 @@
     overwrite: yes
     value: "{{ item.tagged_instances[0].public_ip }}"
     type: A
-  with_items: "{{ groups.control_nodes }}"
-
+  with_items: "{{ instances.results }}"
+  when: "'control' in item.invocation.module_args.instance_tags.Name"
+  
 - name: Break me here
   debug: msg="{{ broken_variable }}"
