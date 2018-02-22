@@ -1,0 +1,11 @@
+- name: Create DNS name for each control node
+  route53:
+    state: present
+    zone: "{{workshop_dns_zone}}"
+    region: "{{ec2_region}}"
+    record: "{{ec2_name_prefix|lower}}.{{workshop_dns_zone}}"
+    type: CNAME
+    overwrite: yes
+    value: "{{ ansible_host }}"
+    type: A
+  with_items: "{{ groups.control_nodes }}"
