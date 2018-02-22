@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<font face="verdana,sans,arial">
+<style>
+
+/* unvisited link */
+a:link {
+    color: #FF6978;
+}
+
+/* visited link */
+a:visited {
+    color: #FF6978;
+}
+
+/* mouse over link */
+a:hover {
+    color: #3DCCCC;
+}
+
+/* selected link */
+a:active {
+    color: blue;
+}
+Try it Yourself »
+
+</style>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+
+<div data-role="page" id="pageone">
+  <div data-role="header">
+    <h1>Ansible Lightbulb Workshop</h1>
+  </div>
+  <div data-role="main">
+    <h3>CONTACT: "{{ instructor_email }}"<br>
+
+
+GITHUB for Ansible Lightbulb: <a href="https://github.com/ansible/lightbulb" target="lightbulb">https://github.com/ansible/lightbulb</a><br><br>
+
+</h3>
+
+<h3><b><font color="gray">URLs for lab materials: </font></b></h3>
+
+
+<h4><a href="http://lightbulb.rhdemo.io/decks/ansible-essentials.html#/" target="new_1">DECK: Ansible Essentials</a><br></h4>
+<h4><a href="http://lightbulb.rhdemo.io/decks/intro-to-ansible-tower.html" target="new_2">DECK:  Intro To Tower</a><br></h4>
+<h4><a href="http://ansible.redhatgov.io/standard/core/index.html" target="new_main">LAB GUIDE</a><br><br></h4>
+
+<hr>
+
+
+<h3><a href="http://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-latest.tar.gz" target="new_main">Tower Download Link</a></h3>
+You may want to run these commands on your control node to download Ansible Tower directly with wget:
+<pre><h3>
+sudo yum -y install wget
+wget http://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-latest.tar.gz
+</h3></pre>
+
+
+<!-- <h3><a href="https://www.ansible.com/license" target="new_2">
+Request Licensing page (Pick the second option: non-Enterprise version for immediate download):</a><br><br></h3>-->
+
+
+<h3><a href="http://lightbulb.rhdemo.io/ansible_tower_license.txt" target="new_gd_license">4-Node NFR Lightbulb license is available here</a><br><br></h3>
+
+<hr>
+  </div>
+{% for user in users %}
+  <div data-role="main" class="ui-content">
+    <div data-role="collapsible">
+      <h1>{{ user.username }} - Click to see details!</h1>
+      <p>[all:vars]<br />
+ansible_user={{ user.username }}<br />
+ansible_ssh_pass={{ admin_password }}<br />
+{% if ssh_port is defined %}<br />
+ansible_port={{ ssh_port }}<br />
+{% endif %}
+<br />
+[web]<br />
+{% for grouper, list in instances.results|groupby('item') if grouper.item[0] == user %}
+{% for vm in list %}
+{% if 'control' not in vm.invocation.module_args.instance_tags.Name and 'haproxy' not in vm.invocation.module_args.instance_tags.Name%}
+{{ vm.invocation.module_args.instance_tags.Name | regex_replace('.*-(node)(\\d)', '\\1-\\2') }} ansible_host={{ vm.tagged_instances[0].public_ip }}<br />
+{% endif %}
+{% endfor %}
+{% endfor %}
+<br />
+[control]<br />
+{% for grouper, list in instances.results|groupby('item') if grouper.item[0] == user %}
+{% for vm in list %}
+{% if 'control' in vm.invocation.module_args.instance_tags.Name %}
+{{ vm.invocation.module_args.instance_tags.Name | regex_replace('.*-([\\w]*)', '\\1') }} ansible_host={{ vm.tagged_instances[0].public_ip }}<br />
+{% endif %}
+{% endfor %}
+{% endfor %}</p>
+    </div>
+  </div>
+{% endfor %}
+  <div data-role="footer">
+    <h1>Thanks for participating!</h1>
+  </div>
+</div>
+
+</body>
+</html>
