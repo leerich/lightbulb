@@ -1,0 +1,5 @@
+# Tower Admin Password
+towerpass: "mypassword"
+towerversion: 3.2.2
+pgpass: awx
+rabbitpass: tower
