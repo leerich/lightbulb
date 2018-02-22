@@ -9,7 +9,7 @@
 - name: start httpd
   service: name=httpd state=started
   become: true
-  
+
 - name: stop firewall
   service: name=firewalld state=stopped enabled=no
   become: true
@@ -30,18 +30,18 @@
     group: apache
 
 - name: copy license key
-  copy: 
+  copy:
     content: |
       {
-      "company_name": "Red Hat Workshop", 
-      "contact_email": "lrich@redhat.com", 
-      "contact_name": "Lee Rich", 
-      "hostname": "f850b465eaf44fff813056ee87b60173", 
-      "instance_count": 5, 
-      "license_date": 1518633658, 
-      "license_key": "719a29f1a71091a780b7b65fdc1256a757ca2776ea9b57c76b50b08369110eff", 
-      "license_type": "enterprise", 
-      "subscription_name": "Lightbulb Workshop", 
+      "company_name": "Red Hat",
+      "contact_email": "lrich@redhat.com",
+      "contact_name": "Lee Rich",
+      "hostname": "2ff02ae103e34242a0cce8cd639d73f0",
+      "instance_count": 5,
+      "license_date": 1527018462,
+      "license_key": "3a78e81d44b43c379dda429aeb1ebb1f760d92ab9e34f632e35a78289d83c33d",
+      "license_type": "enterprise",
+      "subscription_name": "Red Hat Ansible Tower, Standard (5 Managed Nodes) Trial",
       "trial": true
       }
     dest: /var/www/html/ansible_tower_license.txt
@@ -56,4 +56,3 @@
     name: "Update dns"
     minute: "0,10,20,30,40,50"
     job: "curl -k http://freedns.afraid.org/dynamic/update.php?U1dFODUwTVRTTUlBQVNzTnpWSToxNzExMTAwMw=="
-    
