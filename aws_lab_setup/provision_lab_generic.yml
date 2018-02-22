@@ -26,12 +26,12 @@
   roles:
     - domain-names
 
-- name: Configure common options on managed nodes and control nodes
-  hosts: "managed_nodes:control_nodes"
-  become: yes
-  roles:
-    - user_accounts
-    - common
+#- name: Configure common options on managed nodes and control nodes
+#  hosts: "managed_nodes:control_nodes"
+#  become: yes
+#  roles:
+#    - user_accounts
+#    - common
 
 #- name: Configure control node
 #  hosts: control_nodes

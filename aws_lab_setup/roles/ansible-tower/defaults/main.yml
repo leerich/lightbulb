@@ -17,3 +17,9 @@ ldap_search_base: "DC=example,DC=com"
 ldap_access_filter: "(&(objectClass=user)(memberOf=CN=LinuxServers,CN=Users,DC=example,DC=com))"
 #ldap_access_filter: "(&(objectClass=user)(|(memberOf=CN=OSunix,OU=UnixServers,DC=example,DC=com)(memberOf=CN=DBAunix,OU=UnixServers,DC=example,DC=com)))"
 #ldap_access_filter: "(&(objectClass=user)(|(sAMAccountName=john)(sAMAccountName=merry)))"
+
+# Tower Admin Password
+towerpass: "mypassword"
+towerversion: 3.2.2
+pgpass: awx
+rabbitpass: tower
