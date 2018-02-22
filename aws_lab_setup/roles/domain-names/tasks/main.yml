@@ -1,3 +1,7 @@
+- name: Print out variables
+  debug: msg="{{ item }}"
+  with_items: "{{ groups.control_nodes }}"
+
 - name: Create DNS name for each control node
   route53:
     state: present
