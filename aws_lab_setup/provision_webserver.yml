@@ -1,8 +1,20 @@
 ---
-#- hosts: localhost
-#  connection: local
-#  gather_facts: False
+- hosts: localhost
+  connection: local
+  gather_facts: False
 
+- name: Create DNS name for each web server
+  route53:
+    state: present
+    zone: "{{workshop_dns_zone}}"
+    #region: "{{ec2_region}}"
+    record: "lightbulb.{{workshop_dns_zone}}"
+    type: CNAME
+    overwrite: yes
+    value: "{{ host_addr }}"
+    type: A
+  #with_items: "{{ instances.results }}"
+  #when: "'control' in item.invocation.module_args.instance_tags.Name"
 #  roles:
 #  - web_instance
 #  tags:
