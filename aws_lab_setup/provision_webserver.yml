@@ -5,7 +5,7 @@
 
 - name: Create DNS name for each web server
   route53:
-    state: present
+    state: "{{ route53_state }}"
     zone: "{{workshop_dns_zone}}"
     #region: "{{ec2_region}}"
     record: "lightbulb.{{workshop_dns_zone}}"
