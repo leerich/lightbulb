@@ -24,7 +24,7 @@
         record: "{{ec2_name_prefix|lower}}-{{ item.item.item[0].username }}.{{workshop_dns_zone}}"
         type: CNAME
         overwrite: yes
-        value: "{{ item.tagged_instances[0].public_ip }}"
+        #value: "{{ item.tagged_instances[0].public_ip }}"
         type: A
       with_sequence: start="{{ student_count_start }}" end="{{ student_count_end }}"
       #when: "'control' in item.invocation.module_args.instance_tags.Name"
