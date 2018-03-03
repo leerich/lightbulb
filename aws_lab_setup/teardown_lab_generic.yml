@@ -15,8 +15,21 @@
   connection: local
   become: no
   gather_facts: no
-  roles:
-    - domain-names
+  tasks:
+    - name: Create DNS name for each control node
+      route53:
+        state: "{{ route53_state }}"
+        zone: "{{workshop_dns_zone}}"
+    #region: "{{ec2_region}}"
+        record: "{{ec2_name_prefix|lower}}-{{ item.item.item[0].username }}.{{workshop_dns_zone}}"
+        type: CNAME
+        overwrite: yes
+        value: "{{ item.tagged_instances[0].public_ip }}"
+        type: A
+      with_sequence: start="{{ student_count_start }}" end="{{ student_count_end }}"
+      #when: "'control' in item.invocation.module_args.instance_tags.Name"
+  
+  
 - name: Destroy lab instances in AWS
   hosts: localhost
   connection: local
