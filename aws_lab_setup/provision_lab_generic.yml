@@ -44,6 +44,7 @@
   become: yes
   roles:
     - ansible-tower
+  when: "{{ tower_install }}" == "True"
 
 - name: Email inventory to instructor
   hosts: localhost
