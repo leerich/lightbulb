@@ -42,9 +42,8 @@
 - name: Install Ansible tower
   hosts: control_nodes
   become: yes
-  include_role:
-    name: ansible-tower
-  when: tower_install == "true"
+  roles:
+    - { role: ansible-tower, when: tower_install == "true" }
 
 - name: Email inventory to instructor
   hosts: localhost
