@@ -26,6 +26,7 @@
     - wait for instance
   tags:
     - common
+  ignore_errors: yes
 
 - name: RHEL | Stop and disable firewall
   service:
@@ -33,3 +34,4 @@
     state: stopped
   tags:
     - common
+  ignore_errors: yes
