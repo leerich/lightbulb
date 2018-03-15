@@ -3,18 +3,18 @@
   tags:
     - always
 
-- name: RHEL | Install {{ firewall_name }} and libselinux-python
-  yum:
-    name:
-      - libselinux-python
-      - "{{ firewall_name }}"
-    state: present
-  register: install_packages
-  until: install_packages|success
-  delay: 3
-  retries: 5
-  tags:
-    - common
+#- name: RHEL | Install {{ firewall_name }} and libselinux-python
+#  yum:
+#    name:
+#      - libselinux-python
+#      - "{{ firewall_name }}"
+#    state: present
+#  register: install_packages
+#  until: install_packages|success
+#  delay: 3
+#  retries: 5
+#  tags:
+#    - common
 
 - name: RHEL | Disable SELinux
   selinux:
