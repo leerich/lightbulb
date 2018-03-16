@@ -1,5 +1,6 @@
 #ec2_name_prefix: TRAINING
-ec2_security_group: insecure_all
+#ec2_security_group: insecure_all
+ec2_security_group: lee-workshop
 #ec2_region: us-east-1
 #ec2_vpc_id: "{{ ec2_regions[ec2_region].vpc }}"
 #ec2_vpc_subnet_id: "{{ ec2_regions[ec2_region].subnet_id }}"
