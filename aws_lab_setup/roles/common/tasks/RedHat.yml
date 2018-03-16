@@ -16,22 +16,22 @@
 #  tags:
 #    - common
 
-- name: RHEL | Disable SELinux
-  selinux:
-    state: permissive
-    policy: targeted
-  register: selinux_disable
-  notify:
-    - reboot
-    - wait for instance
-  tags:
-    - common
-  ignore_errors: yes
+#- name: RHEL | Disable SELinux
+#  selinux:
+#    state: permissive
+#    policy: targeted
+#  register: selinux_disable
+#  notify:
+#    - reboot
+#    - wait for instance
+#  tags:
+#    - common
+#  ignore_errors: yes
 
-- name: RHEL | Stop and disable firewall
-  service:
-    name: "{{ firewall_name }}"
-    state: stopped
-  tags:
-    - common
-  ignore_errors: yes
+#- name: RHEL | Stop and disable firewall
+#  service:
+#    name: "{{ firewall_name }}"
+#    state: stopped
+#  tags:
+#    - common
+#  ignore_errors: yes
