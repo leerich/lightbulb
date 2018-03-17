@@ -1,0 +1,10 @@
+---
+- hosts: 54.161.39.163
+  become: no
+  gather_facts: no
+
+  vars:
+    username: student110
+
+  roles:
+    - cloudcmd
