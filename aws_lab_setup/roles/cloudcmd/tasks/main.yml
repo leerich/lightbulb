@@ -10,8 +10,20 @@
     global: yes
     state: present
 
-- name: Run Cloud Commander
-  shell: /usr/local/lib/npm/bin/cloudcmd -a -u "{{ username }}" -p r3dh4t --root /home/"{{ username }}" --one-panel-mode >/dev/null 2>&1 &
-  register: myoutput
-  become: true
-  become_user: "{{ username }}"
+# SYSTEMD
+- name: Template Systemd Service File for Cloudcmd
+  become: yes
+  template:
+    src:   "cloudcmd.service.j2"
+    dest:  "/etc/systemd/system/cloudcmd.service"
+    group: root
+    owner: root
+    mode:  0644
+  notify: cloudcmd
+
+- name: enable cloudcmd service
+  become: yes
+  service:
+    name: cloudcmd
+    enabled: yes
+    state: started
