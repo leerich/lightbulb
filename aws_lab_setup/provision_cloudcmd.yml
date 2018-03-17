@@ -1,10 +1,8 @@
 ---
-- hosts: 34.233.125.47
+- hosts: all
   become: no
   gather_facts: no
 
-  vars:
-    username: student108
 
   roles:
-    - cloudcmd
+    - { role: cloudcmd, when: '"control" in ec2_tag_Name' }
