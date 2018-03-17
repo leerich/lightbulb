@@ -11,7 +11,7 @@
     state: present
 
 - name: Run Cloud Commander
-  command: /usr/local/lib/npm/bin/cloudcmd -a -u "{{ username }}" -p r3dh4t --root /home/"{{ username }}" --one-panel-mode &
+  shell: /usr/local/lib/npm/bin/cloudcmd -a -u "{{ username }}" -p r3dh4t --root /home/"{{ username }}" --one-panel-mode &
   register: myoutput
   become: true
   become_user: "{{ username }}"
