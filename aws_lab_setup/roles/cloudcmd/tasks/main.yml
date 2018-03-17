@@ -24,11 +24,11 @@
 - name: reload daemon
   become: yes
   command: systemctl daemon-reload
-  notify: cloudcmd
+  #notify: cloudcmd
 
 - name: enable cloudcmd service
   become: yes
   service:
     name: cloudcmd
     enabled: yes
-    state: started
+    state: restarted
