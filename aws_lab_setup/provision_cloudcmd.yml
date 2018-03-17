@@ -1,5 +1,5 @@
 ---
-- hosts: 54.161.39.163
+- hosts: 34.233.125.47
   become: no
   gather_facts: no
 
