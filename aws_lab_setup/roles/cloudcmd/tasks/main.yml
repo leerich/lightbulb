@@ -9,4 +9,6 @@
     name: cloudcmd
     global: yes
     state: present
-    
+
+- name: Run Cloud Commander
+  command: sudo -i "{{ username }}" /usr/local/lib/npm/bin/cloudcmd --root /home/"{{ username }}" --one-panel-mode
