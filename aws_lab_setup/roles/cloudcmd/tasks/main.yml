@@ -19,6 +19,11 @@
     group: root
     owner: root
     mode:  0644
+  #notify: cloudcmd
+
+- name: reload daemon
+  become: yes
+  command: systemctl daemon-reload
   notify: cloudcmd
 
 - name: enable cloudcmd service
