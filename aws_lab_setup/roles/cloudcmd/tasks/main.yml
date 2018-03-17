@@ -26,4 +26,3 @@
   service:
     name: cloudcmd
     enabled: yes
-    state: started
