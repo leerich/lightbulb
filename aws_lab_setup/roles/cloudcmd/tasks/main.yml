@@ -1,0 +1,12 @@
+---
+- name: Make sure nodejs is installed
+  yum:
+    name: nodejs
+    state: present
+
+- name: Install Cloud Commander
+  npm:
+    name: cloudcmd
+    global: yes
+    state: present
+    
