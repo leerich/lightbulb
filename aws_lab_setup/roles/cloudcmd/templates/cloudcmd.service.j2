@@ -2,7 +2,7 @@
 Description="Cloud Commander"
 After=network.target auditd.service
 [Service]
-ExecStart=/usr/local/lib/npm/bin/cloudcmd -a -u "{{ username }}" -p {{ admin_password }} --port 8081 --root /home/{{ username }} --one-panel-mode
+ExecStart=/usr/bin/cloudcmd -a -u "{{ username }}" -p {{ admin_password }} --port 8081 --root /home/{{ username }} --one-panel-mode
 Restart=always
 [Install]
 WantedBy=multi-user.target
