@@ -29,19 +29,26 @@
     owner: apache
     group: apache
 
+- name: transfer notes
+  copy:
+    src: files/usefulnotes.html
+    dest: /var/www/html
+    owner: apache
+    group: apache
+    
 - name: copy license key
   copy:
     content: |
       {
-      "company_name": "Red Hat", 
-      "contact_email": "lrich@redhat.com", 
-      "contact_name": "Lee Rich", 
-      "hostname": "6eb115b6119a423d8d6a009ce1c18ccc", 
-      "instance_count": 5, 
-      "license_date": 1528906205, 
-      "license_key": "cb99606081e80593b7c8af1bcc23cb4c9631bf92c19ba2433deb47aaddcab244", 
-      "license_type": "enterprise", 
-      "subscription_name": "Ansible Lightbulb Workshop", 
+      "company_name": "Red Hat",
+      "contact_email": "lrich@redhat.com",
+      "contact_name": "Lee Rich",
+      "hostname": "6eb115b6119a423d8d6a009ce1c18ccc",
+      "instance_count": 5,
+      "license_date": 1528906205,
+      "license_key": "cb99606081e80593b7c8af1bcc23cb4c9631bf92c19ba2433deb47aaddcab244",
+      "license_type": "enterprise",
+      "subscription_name": "Ansible Lightbulb Workshop",
       "trial": true
       }
     dest: /var/www/html/ansible_tower_license.txt
