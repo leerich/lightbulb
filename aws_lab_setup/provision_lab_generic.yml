@@ -45,10 +45,16 @@
   roles:
     - { role: ansible-tower, when: tower_install == "true" }
 
-- name: Email inventory to instructor
-  hosts: localhost
-  connection: local
-  become: no
-  gather_facts: no
+- name: Install Cloud Commander
+  hosts: control_nodes
+  become: yes
   roles:
-    - email-instructor
+    - cloudcmd
+    
+#- name: Email inventory to instructor
+#  hosts: localhost
+#  connection: local
+#  become: no
+#  gather_facts: no
+#  roles:
+#    - email-instructor
