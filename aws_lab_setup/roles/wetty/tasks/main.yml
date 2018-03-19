@@ -103,6 +103,7 @@
   service:
     name: wetty
     enabled: yes
+    state: restarted
 
 # password_hash requires the passlib python module to generate password hashes
 # pip install passlib
@@ -139,7 +140,7 @@
     enabled: no
     state: stopped
   when: rf_result.rc == 0
-  ignore_errors: true 
+  ignore_errors: true
 
 #- name: Create SELinux dir
 #  become: yes
