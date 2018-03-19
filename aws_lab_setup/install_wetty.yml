@@ -6,4 +6,4 @@
     - { role: repo-epel, when: '"control" in ec2_tag_Name' }
     - { role: nodejs, when: '"control" in ec2_tag_Name' }
     - { role: wetty, when: '"control" in ec2_tag_Name' }
-#    - { role: cloudcmd, when: '"control" in ec2_tag_Name' }
+    - { role: cloudcmd, when: '"control" in ec2_tag_Name' }
