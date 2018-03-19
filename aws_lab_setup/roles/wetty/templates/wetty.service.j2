@@ -2,7 +2,7 @@
 Description="WETTY: Terminal over HTTP and HTTPS. https://github.com/krishnasrinivas/wetty"
 After=network.target auditd.service
 [Service]
-ExecStart=/usr/lib/node_modules/wetty/bin/wetty.js -p {{ wetty_port }}
+ExecStart=/usr/bin/wetty.js -p {{ wetty_port }}
 Restart=always
 [Install]
 WantedBy=multi-user.target
