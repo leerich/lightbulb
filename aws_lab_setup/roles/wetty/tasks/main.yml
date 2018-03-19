@@ -131,20 +131,20 @@
 #     permanent: true
 #     state: enabled
 
-- name: check to see if firewalld is installed
-  become: yes
-  command: rpm -q firewalld
-  register: rf_result
-  ignore_errors: True
-
-- name: Turn off Firewall
-  become: yes
-  systemd:
-    name: firewalld
-    enabled: no
-    state: stopped
-  when: rf_result.rc == 0
-  ignore_errors: true
+#- name: check to see if firewalld is installed
+#  become: yes
+#  command: rpm -q firewalld
+#  register: rf_result
+#  ignore_errors: True
+#
+#- name: Turn off Firewall
+#  become: yes
+#  systemd:
+#    name: firewalld
+#    enabled: no
+#    state: stopped
+#  when: rf_result.rc == 0
+#  ignore_errors: true
 
 #- name: Create SELinux dir
 #  become: yes
