@@ -45,15 +45,6 @@
   roles:
     - { role: ansible-tower, when: tower_install == "true" }
 
-- name: Install WETTY
-  hosts: all
-  gather_facts: true
-
-  roles:
-    - { role: repo-epel, when: '"control" in ec2_tag_Name' }
-    - { role: nodejs, when: '"control" in ec2_tag_Name' }
-    - { role: wetty, when: '"control" in ec2_tag_Name' }
-    - { role: cloudcmd, when: '"control" in ec2_tag_Name' }
 
 - name: Install Cloud Commander
   hosts: control_nodes
@@ -63,6 +54,15 @@
   roles:
     - cloudcmd
 
+- name: Install WETTY
+  hosts: all
+  gather_facts: true
+
+  roles:
+    - { role: repo-epel, when: '"control" in ec2_tag_Name' }
+    #- { role: nodejs, when: '"control" in ec2_tag_Name' }
+    - { role: wetty, when: '"control" in ec2_tag_Name' }
+    - { role: cloudcmd, when: '"control" in ec2_tag_Name' }
 #- name: Email inventory to instructor
 #  hosts: localhost
 #  connection: local
