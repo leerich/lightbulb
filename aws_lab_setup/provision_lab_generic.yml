@@ -46,7 +46,7 @@
     - { role: ansible-tower, when: tower_install == "true" }
 
 #- name: Install WETTY
-#  hosts: all 
+#  hosts: all
 #  gather_facts: true
 #
 #  roles:
@@ -61,7 +61,8 @@
   gather_facts: no
 
   roles:
-    - { role: cloudcmd, when: '"control" in ec2_tag_Name' }
+    - cloudcmd
+    
 #- name: Email inventory to instructor
 #  hosts: localhost
 #  connection: local
