@@ -57,12 +57,12 @@
 
 - name: Install Cloud Commander
   hosts: control_nodes
-  become: no
+  become: yes 
   gather_facts: no
 
   roles:
     - cloudcmd
-    
+
 #- name: Email inventory to instructor
 #  hosts: localhost
 #  connection: local
