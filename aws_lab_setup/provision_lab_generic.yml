@@ -46,7 +46,7 @@
     - { role: ansible-tower, when: tower_install == "true" }
 
 - name: Install WETTY
-  hosts: control_nodes
+  hosts: all 
   gather_facts: true
 
   roles:
