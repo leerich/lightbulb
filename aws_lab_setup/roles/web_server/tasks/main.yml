@@ -23,12 +23,12 @@
     owner: apache
     group: apache
 
-- name: transfer slide deck
-  copy:
-    src: files/decks/
-    dest: /var/www/html/decks
-    owner: apache
-    group: apache
+#- name: transfer slide deck
+#  copy:
+#    src: files/decks/
+#    dest: /var/www/html/decks
+#    owner: apache
+#    group: apache
 
 - name: transfer notes
   copy:
@@ -36,7 +36,7 @@
     dest: /var/www/html
     owner: apache
     group: apache
-    
+
 - name: copy license key
   vars:
     license_key: !vault |
