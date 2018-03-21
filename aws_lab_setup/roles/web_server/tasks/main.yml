@@ -2,6 +2,7 @@
 #- name: wait for webserver to come up
 #  wait_for: 'host{{ inventory_hostname }} port=22 state=started timeout=80'
 
+
 - name: install httpd
   package: name=httpd state=latest
   become: true
@@ -37,9 +38,8 @@
     group: apache
     
 - name: copy license key
-  copy:
-    content: |
-      license_key: !vault |
+  vars:
+    license_key: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           62373130336534393933643231333539653563646136343261376165393531333661636666306536
           3263366262333838306530396233636261616364616332310a633731613739323366376166643963
@@ -66,6 +66,9 @@
           34396632373836613630323766643338396464353261316365323533363538666565663765663064
           37323136663331653836313764366264346465663737363631643465303630306261326336393337
           6366
+  copy:
+    content: |
+      "{{ license_key }}"
     dest: /var/www/html/ansible_tower_license.txt
 
 - name: register with dynamic dns
