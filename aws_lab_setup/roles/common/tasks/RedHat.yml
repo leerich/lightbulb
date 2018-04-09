@@ -28,10 +28,10 @@
     - common
   ignore_errors: yes
 
-- name: RHEL | Stop and disable firewall
-  service:
-    name: "{{ firewall_name }}"
-    state: stopped
-  tags:
-    - common
-  ignore_errors: yes
+#- name: RHEL | Stop and disable firewall
+#  service:
+#    name: "{{ firewall_name }}"
+#    state: stopped
+#  tags:
+#    - common
+#  ignore_errors: yes
