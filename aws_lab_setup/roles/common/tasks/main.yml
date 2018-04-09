@@ -3,10 +3,10 @@
   static: no
   when: ansible_os_family == 'RedHat'
 
-- name: Include Ubuntu tasks
-  include: "{{ ansible_distribution }}.yml"
-  static: no
-  when: ansible_distribution == 'Ubuntu'
+#- name: Include Ubuntu tasks
+#  include: "{{ ansible_distribution }}.yml"
+#  static: no
+#  when: ansible_distribution == 'Ubuntu'
 
 - name: Configure sshd and sudoers
   lineinfile:
