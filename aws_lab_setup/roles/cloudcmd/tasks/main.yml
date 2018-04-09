@@ -11,6 +11,7 @@
     state: present
 
 - name: Install Cloud Commander
+  become: yes
   npm:
     name: cloudcmd
     global: yes
