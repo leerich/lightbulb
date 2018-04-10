@@ -13,7 +13,7 @@
 
 
 - name: Install Cloud Commander
-  hosts: control_nodes
+  hosts: all
   become: yes
   gather_facts: no
   roles:
