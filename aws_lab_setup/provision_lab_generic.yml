@@ -46,13 +46,13 @@
     - { role: ansible-tower, when: tower_install == "true" }
 
 
-#- name: Install Cloud Commander
-#  hosts: control_nodes
-#  become: yes
-#  gather_facts: no
-#
-#  roles:
-#    - cloudcmd
+- name: Install Cloud Commander
+  hosts: control_nodes
+  become: yes
+  gather_facts: no
+
+  roles:
+    - cloudcmd
 
 #- name: Install WETTY
 #  hosts: all
