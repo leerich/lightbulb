@@ -21,7 +21,7 @@
     groups: lab_hosts,control_nodes
   with_items: "{{ instances.results }}"
   when: "'control' in item.invocation.module_args.instance_tags.Name"
-  changed_when: no
+  #changed_when: no
   tags:
     - always
     - provision
