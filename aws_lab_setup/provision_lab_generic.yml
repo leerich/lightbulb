@@ -39,11 +39,11 @@
   roles:
     - control_node
 
-- name: Install Ansible tower
-  hosts: control_nodes
-  become: yes
-  roles:
-    - { role: ansible-tower, when: tower_install == "true" }
+#- name: Install Ansible tower
+#  hosts: control_nodes
+#  become: yes
+#  roles:
+#    - { role: ansible-tower, when: tower_install == "true" }
 
 
 - name: Install Cloud Commander
