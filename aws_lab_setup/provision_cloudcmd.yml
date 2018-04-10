@@ -3,6 +3,12 @@
   become: yes
   gather_facts: no
 
+  tasks:
+    - name: generate users list
+      set_fact:
+        users: "{{ users|default([]) + [ {'name': 'student' + item, 'username': 'student' + item, 'email': 'student' + item + '@example.com'} ] }}"
+      with_sequence: start="{{ student_count_start }}" end="{{ student_count_end }}"
 
+- name: Provision Cloud Commander
   roles:
     - { role: cloudcmd, when: '"control" in ec2_tag_Name' }
