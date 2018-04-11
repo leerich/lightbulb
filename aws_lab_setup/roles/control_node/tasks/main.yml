@@ -14,7 +14,7 @@
   file:
     path: /etc/yum.repos.d/CentOS-Base.repo
     state: absent
-    
+
 #- name: Install Base Repo
 #  yum_repository:
 #    name: "rhui-REGION-rhel-server-extras"
@@ -50,8 +50,9 @@
   yum:
     name:
       - sshpass
-      - ansible
+      - ansible-2.4.2.0-2.el7
     state: latest
+    allow_downgrade: yes
     enablerepo: rhui-REGION-rhel-server-extras
   register: install_ansible
   until: install_ansible|success
@@ -124,4 +125,3 @@
   tags:
     - control_node
     - control
-
