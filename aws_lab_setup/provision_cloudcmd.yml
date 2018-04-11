@@ -27,3 +27,4 @@
   gather_facts: no
   roles:
     - { role: cloudcmd, when: '"control" in ec2_tag_Name' }
+ 
