@@ -27,28 +27,15 @@
       owner: root
       group: tomcat
       mode: 0755
-    #notify: restart_guacamole
+    notify: restart_guacamole
 
   - name: Copy nginx configuration file
     copy:
       src: files/nginx.conf
       dest: /etc/nginx/
       mode: 0644
-    #notify: restart nginx
-  - name: restart_guacamole
-    service:
-      name: "{{ item }}"
-      state: restarted
-    with_items:
-      - guacd
-      - tomcat
+    notify: restart nginx
 
-  - name: restart nginx
-    systemd:
-      name: nginx
-      state: restarted
-      enabled: yes
-      
   - name: install firewalld
     yum:
       name: firewalld
@@ -88,4 +75,19 @@
       enabled: yes
       state: restarted
     ignore_errors: yes
+
+  handlers:
+    - name: restart_guacamole
+      service:
+        name: "{{ item }}"
+        state: restarted
+      with_items:
+        - guacd
+        - tomcat
+
+    - name: restart nginx
+      systemd:
+        name: nginx
+        state: restarted
+        enabled: yes
 ...
