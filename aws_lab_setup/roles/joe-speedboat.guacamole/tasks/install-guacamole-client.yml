@@ -1,0 +1,98 @@
+---
+# tasks file for joe-speedboat.guacamole
+
+- name: Check if guacamole client is installed
+  stat:
+    path: /var/lib/tomcat/webapps/guacamole.war
+  register: client_is_installed
+
+- name: Git clone guacamole client
+  git:
+    repo: https://github.com/apache/incubator-guacamole-client.git
+    dest: '{{ guacamole_temp_path }}/client'
+    clone: yes
+    version: 'tags/{{ guacamole_version }}'
+  when: not client_is_installed.stat.exists
+
+- name: Build from source
+  shell: '{{ item }}'
+  args:
+    chdir: '{{ guacamole_temp_path }}/client'
+    creates: /var/lib/tomcat/webapps/guacamole.war
+  register: client_installed
+  with_items: ["mvn package", "mkdir -p /usr/share/tomcat/.guacamole/{extensions,lib}", "mkdir -p /etc/guacamole/", "cp guacamole/target/guacamole-{{ guacamole_version }}.war /var/lib/tomcat/webapps/guacamole.war" ]
+  when: not client_is_installed.stat.exists
+
+- name: Check if guacamole-auth-jdbc-mysql is installed
+  stat:
+    path: /usr/share/tomcat/.guacamole/extensions/guacamole-auth-jdbc-mysql-{{ guacamole_version }}.jar
+  register: auth_jdbc_is_installed
+
+- name: Download guacamole-auth-jdbc-{{ guacamole_version }}.tar.gz
+  get_url:
+    url: 'http://mirror.switch.ch/mirror/apache/dist/guacamole/{{ guacamole_version }}/binary/guacamole-auth-jdbc-{{ guacamole_version }}.tar.gz'
+    dest: '{{ guacamole_temp_path }}'
+    timeout: 120
+  when: not auth_jdbc_is_installed.stat.exists
+
+- name: Unarchive guacamole-auth-jdbc-mysql
+  unarchive:
+    src: '{{ guacamole_temp_path }}/guacamole-auth-jdbc-{{ guacamole_version }}.tar.gz'
+    remote_src: yes
+    dest: '{{ guacamole_temp_path }}'
+    creates: '{{ guacamole_temp_path }}/guacamole-auth-jdbc-{{ guacamole_version }}/mysql/guacamole-auth-jdbc-mysql-{{ guacamole_version }}.jar'
+  when: not auth_jdbc_is_installed.stat.exists
+
+- name: Install guacamole-auth-jdbc-mysql
+  copy:
+    src: '{{ guacamole_temp_path }}/guacamole-auth-jdbc-{{ guacamole_version }}/mysql/guacamole-auth-jdbc-mysql-{{ guacamole_version }}.jar'
+    dest: /usr/share/tomcat/.guacamole/extensions/guacamole-auth-jdbc-mysql-{{ guacamole_version }}.jar
+    owner: root
+    group: tomcat
+    mode: 0440
+    remote_src: True
+  when: not auth_jdbc_is_installed.stat.exists
+
+- name: Check if mysql-connector-java is installed
+  stat:
+    path: /usr/share/tomcat/.guacamole/lib/mysql-connector-java-5.1.42-bin.jar
+  register: mysql_connector_is_installed
+
+- name: Download mysql-connector-java
+  get_url:
+    url: 'https://cdn.mysql.com//Downloads/Connector-J/mysql-connector-java-5.1.46.tar.gz'
+    dest: '{{ guacamole_temp_path }}'
+    timeout: 120
+  when: not mysql_connector_is_installed.stat.exists
+
+- name: Unarchive mysql-connector-java
+  unarchive:
+    src: '{{ guacamole_temp_path }}/mysql-connector-java-5.1.46.tar.gz'
+    remote_src: yes
+    dest: '{{ guacamole_temp_path }}'
+    creates: '{{ guacamole_temp_path }}/mysql-connector-java-5.1.46/mysql-connector-java-5.1.46-bin.jar'
+  when: not mysql_connector_is_installed.stat.exists
+
+- name: Install mysql-connector-java
+  copy:
+    src: '{{ guacamole_temp_path }}/mysql-connector-java-5.1.46/mysql-connector-java-5.1.46-bin.jar'
+    dest: /usr/share/tomcat/.guacamole/lib/mysql-connector-java-5.1.42-bin.jar
+    owner: root
+    group: tomcat
+    mode: 0440
+    remote_src: True
+  when: not mysql_connector_is_installed.stat.exists
+
+- name: set JAVA_OPTS for tomcat
+  lineinfile:
+    dest: "{{ tomcat_conf }}"
+    regexp: '^#JAVA_OPTS=.*'
+    line: 'JAVA_OPTS="-Djava.security.egd=file:/dev/./urandom"'
+  changed_when: false
+    
+
+- name: configure JAVA_OPTS for tomcat
+  replace:
+    dest: "{{ tomcat_conf }}"
+    regexp: '^JAVA_OPTS=.*'
+    replace: 'JAVA_OPTS="-Djava.security.egd=file:/dev/./urandom"'

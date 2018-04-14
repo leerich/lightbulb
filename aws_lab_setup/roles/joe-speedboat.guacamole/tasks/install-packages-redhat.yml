@@ -1,0 +1,42 @@
+---
+# tasks file for joe-speedboat.guacamole
+
+#- name: Install epel repository
+#  yum:
+#    name: epel-release
+#    state: present
+
+- name: Install EPEL
+  yum:
+    name: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
+    state: present
+  register: install_epel
+  until: install_epel|success
+  delay: 3
+  retries: 5
+
+- name: Add necessary repository
+  yum:
+    name: http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
+    state: present
+
+- name: Add nux desktop repository signing key
+  rpm_key:
+    key: /etc/pki/rpm-gpg/RPM-GPG-KEY-nux.ro
+
+- name: Enable rhui-REGION-rhel-server-optional repository
+  command: yum-config-manager --enable rhui-REGION-rhel-server-optional
+#- name: Install rpmfusion repository
+#  yum:
+#    name: "{{ item }}"
+#    validate_certs: no
+#    disable_gpg_check: yes
+#  with_items:
+#    - https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm
+#    - https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-7.noarch.rpm
+
+- name: Install necessary packages
+  yum:
+    name: '{{ item.package }}'
+    state: present
+  with_items: "{{ guacamole_packages_EL }}"

@@ -1,0 +1,29 @@
+---
+# file: test/playbook_mariadb.yml
+- name: Install and configure MariaDB Server
+  hosts: vm01
+  roles:
+    - role: joe-speedboat.mariadb
+      mariadb_secure_installation: yes
+      mariadb_root_password: 'nevermind!'
+      mariadb_databases:
+        - name: db_test
+          state: absent
+        - name: db1
+          state: present
+          collation: utf8_general_ci
+          encoding: utf8
+      mariadb_users_create:
+        - name: user1
+          password: krypt0n
+          hosts:
+            - "web1"
+            - "localhost"
+          privs:
+            - "*.*:SELECT"
+            - "db1.*:INSERT"
+          append_privs: no
+      mariadb_users_remove:
+        - name: user2
+          host_all: yes
+...

@@ -1,0 +1,26 @@
+---
+- name: Install mariadb-server
+  yum:
+    name: mariadb-server
+    state: installed
+
+- name: update custom mariadb server configuration
+  template: 
+    src: custom.cnf.j2
+    dest: /etc/my.cnf.d/custom.cnf
+    owner: root 
+    group: root 
+    mode: 0644
+
+- name: Enable and start mariadb-server
+  service:
+    name: mariadb
+    state: started
+    enabled: yes
+
+- name: Install MySQL-python
+  yum:
+    name: MySQL-python
+    state: installed
+  when: mariadb_root_password is defined
+
