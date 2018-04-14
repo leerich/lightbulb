@@ -84,7 +84,7 @@
 - name: assemble guacamole user-mapping.xml file
   assemble:
     src: ./guacamole/
-    dest: ./guacamole/user-mapping.xml
+    dest: ./user-mapping.xml
     backup: yes
 
 - name: create header for user-mapping.xml file
