@@ -86,8 +86,8 @@
 
 - name: Copy user-mapping.xml file to guacamole directory
   copy:
-    src: ./guacamole/user-mapping.xml 
-    dest: /etc/guacamole
+    src: ./guacamole/user-mapping.xml
+    dest: /usr/share/tomcat/.guacamole
     owner: root
     group: root
-    mode: 0644
+    mode: 0755
