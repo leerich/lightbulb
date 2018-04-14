@@ -22,7 +22,7 @@
 
   - name: Copy user-mapping.xml file to guacamole directory
     copy:
-      src: user-mapping.xml
+      src: ./user-mapping.xml
       dest: /usr/share/tomcat/.guacamole
       owner: root
       group: tomcat
