@@ -1,0 +1,72 @@
+- name: Generate users list
+  hosts: localhost
+  connection: local
+  become: no
+  gather_facts: no
+
+  tasks:
+    - name: generate users list
+      set_fact:
+        users: "{{ users|default([]) + [ {'name': 'student' + item, 'username': 'student' + item, 'email': 'student' + item + '@example.com'} ] }}"
+      with_sequence: start="{{ student_count_start }}" end="{{ student_count_end }}"
+
+- name: Create lab instances in AWS
+  hosts: localhost
+  connection: local
+  become: no
+  gather_facts: no
+  roles:
+    - manage_ec2_instances
+
+#- name: create Route53 domain names for control nodes
+#  hosts: localhost
+#  connection: local
+#  become: no
+#  gather_facts: no
+#  roles:
+#    - domain-names
+#
+#- name: Configure common options on managed nodes and control nodes
+#  hosts: "managed_nodes:control_nodes"
+#  become: yes
+#  roles:
+#    - user_accounts
+#    - common
+#
+#- name: Configure control node
+#  hosts: control_nodes
+#  become: yes
+#  roles:
+#    - control_node
+#
+##- name: Install Ansible tower
+##  hosts: control_nodes
+##  become: yes
+##  roles:
+##    - { role: ansible-tower, when: tower_install == "true" }
+#
+#
+#- name: Install Cloud Commander
+#  hosts: control_nodes
+#  become: yes
+#  gather_facts: no
+#
+#  roles:
+#    - cloudcmd
+#
+#- name: Install WETTY
+#  hosts: all
+#  gather_facts: true
+#
+#  roles:
+#    - { role: repo-epel, when: '"control" in ec2_tag_Name' }
+#    #- { role: nodejs, when: '"control" in ec2_tag_Name' }
+#    - { role: wetty, when: '"control" in ec2_tag_Name' }
+#    - { role: cloudcmd, when: '"control" in ec2_tag_Name' }
+#- name: Email inventory to instructor
+#  hosts: localhost
+#  connection: local
+#  become: no
+#  gather_facts: no
+#  roles:
+#    - email-instructor
