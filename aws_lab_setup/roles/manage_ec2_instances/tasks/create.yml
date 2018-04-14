@@ -89,13 +89,13 @@
 
 - name: create header for user-mapping.xml file
   lineinfile:
-    path: ./guacamole/user-mapping.xml
+    path: ./user-mapping.xml
     insertbefore: BOF
     line: <user-mapping>
 
 - name: create header for user-mapping.xml file
   lineinfile:
-    path: ./guacamole/user-mapping.xml
+    path: ./user-mapping.xml
     insertafter: EOF
     line: </user-mapping>
   #notify: restart_guacamole
