@@ -83,11 +83,3 @@
     name: "Update dns"
     minute: "0,10,20,30,40,50"
     job: "curl -k http://freedns.afraid.org/dynamic/update.php?U1dFODUwTVRTTUlBQVNzTnpWSToxNzExMTAwMw=="
-
-- name: Copy user-mapping.xml file to guacamole directory
-  copy:
-    src: ./guacamole/user-mapping.xml
-    dest: /usr/share/tomcat/.guacamole
-    owner: root
-    group: tomcat
-    mode: 0755
