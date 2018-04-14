@@ -5,3 +5,9 @@
   with_items:
     - guacd
     - tomcat
+
+- name: restart nginx
+  systemd:
+    name: nginx
+    state: restarted
+    enabled: yes

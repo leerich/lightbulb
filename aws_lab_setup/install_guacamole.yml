@@ -29,6 +29,13 @@
       mode: 0755
     notify: restart_guacamole
 
+  - name: Copy nginx configuration file
+    copy:
+      src: files/nginx.conf
+      dest: /etc/nginx/
+      mode: 0644
+    notify: restart nginx 
+
   - name: install firewalld
     yum:
       name: firewalld
