@@ -20,6 +20,15 @@
       - common
     ignore_errors: yes
 
+  - name: Copy user-mapping.xml file to guacamole directory
+    copy:
+      src: user-mapping.xml
+      dest: /usr/share/tomcat/.guacamole
+      owner: root
+      group: tomcat
+      mode: 0755
+    notify: restart_guacamole
+
   - name: install firewalld
     yum:
       name: firewalld
