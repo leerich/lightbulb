@@ -71,6 +71,35 @@
     - users
     - user_accounts
 
+- name: Generate guacamole user-mapping.xml file
+  template:
+    src: user-mapping.xml.j2
+    dest: ./guacamole/{{ item.username }}-mapping.xml
+  with_items: "{{ users }}"
+  tags:
+    - inventory
+    - users
+    - user_accounts
+
+- name: assemble guacamole user-mapping.xml file
+  assemble:
+    src: ./guacamole/
+    dest: /etc/guacamole/user-mapping.xml
+    backup: yes
+
+- name: create header for user-mapping.xml file
+  lineinfile:
+    path: /etc/guacamole/user-mapping.xml
+    insertbefore: BOF
+    line: <user-mapping>
+
+- name: create header for user-mapping.xml file
+  lineinfile:
+    path: /etc/guacamole/user-mapping.xml
+    insertafter: EOF
+    line: </user-mapping>
+  #notify: restart_guacamole 
+
 - name: Generate html page with student details
   template:
     src: index.html.j2
