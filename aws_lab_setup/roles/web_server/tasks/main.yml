@@ -89,5 +89,5 @@
     src: ./guacamole/user-mapping.xml
     dest: /usr/share/tomcat/.guacamole
     owner: root
-    group: root
+    group: tomcat
     mode: 0755
