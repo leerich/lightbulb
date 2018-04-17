@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: "{{ host_addr }}"
   roles:
   - role: joe-speedboat.guacamole
     mariadb_db_host: 'localhost'
