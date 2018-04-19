@@ -1,4 +1,4 @@
-These playbooks are run from Ansible Tower. 
+/These playbooks are run from Ansible Tower. 
 
 I have the following variables defined in my job template for the provision_lab_generic.yml playbook.
 
@@ -47,4 +47,4 @@ host_addr: 54.147.16.75
 workshop_dns_zone: rhdemo.io
 route53_state: present
 
-
+/
