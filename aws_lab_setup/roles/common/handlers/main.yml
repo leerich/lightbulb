@@ -16,4 +16,4 @@
     host: "{{ ansible_host }}"
     search_regex: OpenSSH
     timeout: 500
-    delay: 40
+    delay: 30
