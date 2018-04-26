@@ -13,7 +13,8 @@
   become: no
   wait_for:
     port: "{{ ssh_port }}"
-    host: "{{ ansible_host }}"
+    #host: "{{ ansible_host }}"
+    host: "{{ item.tagged_instances[0].public_ip }}"
     search_regex: OpenSSH
     timeout: 300
     delay: 20
