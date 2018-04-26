@@ -17,4 +17,4 @@
     search_regex: OpenSSH
     timeout: 300
     sleep: 2
-    delay: 30
+    delay: 20
