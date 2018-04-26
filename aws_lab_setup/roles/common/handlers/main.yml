@@ -8,13 +8,16 @@
   async: 30
   poll: 0
 
-- name: wait for instance
-  delegate_to: localhost
+- name: wait for SSH on instances
+  #delegate_to: localhost
   become: no
-  wait_for:
-    port: "{{ ssh_port }}"
-    #host: "{{ ansible_host }}"
-    host: "{{ item.tagged_instances[0].public_ip }}"
-    search_regex: OpenSSH
-    timeout: 300
+  wait_for_connection:
     delay: 20
+    timeout: 300
+  #wait_for:
+  #  port: "{{ ssh_port }}"
+  #  #host: "{{ ansible_host }}"
+  #  host: "{{ item.tagged_instances[0].public_ip }}"
+  #  search_regex: OpenSSH
+  #  timeout: 300
+  #  delay: 20
