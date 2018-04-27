@@ -5,6 +5,10 @@ For Tower put this custom AWS inventory script in
 
 /var/lib/awx/venv/awx/lib/python2.7/site-packages/awx/plugins/inventory
 
+This script allows you add multiple conditionals in your inventory instance filters like so:
+instance-type=t2.medium&key-name=lrich-key
+
+
 EC2 external inventory script
 =================================
 
