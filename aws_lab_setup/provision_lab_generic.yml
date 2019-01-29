@@ -43,7 +43,8 @@
   hosts: control_nodes
   become: yes
   roles:
-    - { role: ansible-tower, when: tower_install == "true" }
+    - ansible-tower
+  #  - { role: ansible-tower, when: tower_install == "true" }
 
 
 
