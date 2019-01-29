@@ -1,42 +1,42 @@
 ---
-#- name: check if we need to do installer things
-#  uri:
-#    url: https://localhost/api/v1/ping/
-#    method: GET
-#    user: admin
-#    password: "{{ towerpass }}"
-#    validate_certs: False
-#  register: checkout
-#  ignore_errors: True
+- name: check if we need to do installer things
+  uri:
+    url: https://localhost/api/v1/ping/
+    method: GET
+    user: admin
+    password: "{{ towerpass }}"
+    validate_certs: False
+  register: checkout
+  ignore_errors: True
 
-#- name: set condtional if the above didn't error
-#  set_fact:
-#    towerchk: "{{ checkout.json.version }}"
-#  when: checkout.json is defined
+- name: set condtional if the above didn't error
+  set_fact:
+    towerchk: "{{ checkout.json.version }}"
+  when: checkout.json is defined
 
 - name: download tower installer
   get_url:
     url: https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-{{ towerversion }}.tar.gz
     dest: /tmp/ansible-tower-setup-{{ towerversion }}.tar.gz
     mode: 0640
-  #when: towerchk != towerversion
+  when: towerchk != towerversion
 
 - name: extract installer
   unarchive:
     src: /tmp/ansible-tower-setup-{{ towerversion }}.tar.gz
     dest: /tmp/
     remote_src: True
-#  when: towerchk != towerversion
+  when: towerchk != towerversion
 
 - name: template inventory file
   template:
     src: inventory
     dest: /tmp/ansible-tower-setup-{{ towerversion }}/inventory
-  #when: towerchk != towerversion
+  when: towerchk != towerversion
 
 - name: run the tower installer
   shell: ./setup.sh chdir=/tmp/ansible-tower-setup-{{ towerversion }}
-  #when: towerchk != towerversion
+  when: towerchk != towerversion
 
 #- name: wait for tower to be up
 #  uri:
