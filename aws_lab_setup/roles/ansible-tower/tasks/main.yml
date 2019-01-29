@@ -38,29 +38,29 @@
   shell: ./setup.sh chdir=/tmp/ansible-tower-setup-{{ towerversion }}
   #when: towerchk != towerversion
 
-- name: wait for tower to be up
-  uri:
-    url: https://localhost/api/v1/ping/
-    method: GET
-    user: admin
-    password: "{{ towerpass }}"
-    validate_certs: False
-  register: check2
-  until: check2.json is defined and check2.json.version == towerversion
-  retries: 10
-  delay: 30
+#- name: wait for tower to be up
+#  uri:
+#    url: https://localhost/api/v1/ping/
+#    method: GET
+#    user: admin
+#    password: "{{ towerpass }}"
+#    validate_certs: False
+#  register: check2
+#  until: check2.json is defined and check2.json.version == towerversion
+#  retries: 10
+#  delay: 30
   #when: towerchk != towerversion
 
-- name: Post license key
-  uri:
-    url: https://localhost/api/v1/config/
-    method: POST
-    user: admin
-    password: "{{ towerpass }}"
-    body: "{{ lookup('file','tower_license.json') }}"
-    body_format: json
-    validate_certs: False
-  ignore_errors: True
+#- name: Post license key
+#  uri:
+#    url: https://localhost/api/v1/config/
+#    method: POST
+#    user: admin
+#    password: "{{ towerpass }}"
+#    body: "{{ lookup('file','tower_license.json') }}"
+#    body_format: json
+#    validate_certs: False
+#  ignore_errors: True
 
 #- name: create project
 #  uri:
