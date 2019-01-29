@@ -44,6 +44,8 @@
   become: yes
   roles:
     - { role: ansible-tower, when: tower_install == "true" }
+  tags:
+    - tower
 
 
 - name: Install Cloud Commander
