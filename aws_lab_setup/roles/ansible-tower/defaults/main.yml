@@ -22,6 +22,6 @@ towerchk: undefined
 
 # Tower Admin Password
 towerpass: "mypassword"
-towerversion: 3.2.2
+towerversion: 3.4.1-1
 pgpass: awx
 rabbitpass: tower
