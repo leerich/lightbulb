@@ -1,13 +1,13 @@
 ---
-- name: check if we need to do installer things
-  uri:
-    url: https://localhost/api/v1/ping/
-    method: GET
-    user: admin
-    password: "{{ towerpass }}"
-    validate_certs: False
-  register: checkout
-  ignore_errors: True
+#- name: check if we need to do installer things
+#  uri:
+#    url: https://localhost/api/v1/ping/
+#    method: GET
+#    user: admin
+#    password: "{{ towerpass }}"
+#    validate_certs: False
+#  register: checkout
+#  ignore_errors: True
 
 #- name: set condtional if the above didn't error
 #  set_fact:
