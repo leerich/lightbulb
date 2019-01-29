@@ -26,7 +26,7 @@
     src: /tmp/ansible-tower-setup-{{ towerversion }}.tar.gz
     dest: /tmp/
     remote_src: True
-  #when: towerchk != towerversion
+  when: towerchk != towerversion
 
 - name: template inventory file
   template:
