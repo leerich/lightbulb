@@ -25,7 +25,7 @@
   with_items: "{{ instances.results }}"
   when: "'node1' in item.invocation.module_args.instance_tags.Name"
   
-- name: Create DNS name for each control node 2
+- name: Create DNS name for each node 2
   route53:
     state: "{{ route53_state }}"
     zone: "{{workshop_dns_zone}}"
@@ -37,3 +37,16 @@
     type: A
   with_items: "{{ instances.results }}"
   when: "'node2' in item.invocation.module_args.instance_tags.Name"
+
+- name: Create DNS name for each node 3
+  route53:
+    state: "{{ route53_state }}"
+    zone: "{{workshop_dns_zone}}"
+    #region: "{{ec2_region}}"
+    record: "{{ec2_name_prefix|lower}}-{{ item.item.item[0].username }}-node3.{{workshop_dns_zone}}"
+    type: CNAME
+    overwrite: yes
+    value: "{{ item.tagged_instances[0].public_ip }}"
+    type: A
+  with_items: "{{ instances.results }}"
+  when: "'node3' in item.invocation.module_args.instance_tags.Name"
