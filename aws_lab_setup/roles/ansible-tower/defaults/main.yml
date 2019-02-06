@@ -21,7 +21,7 @@ ldap_access_filter: "(&(objectClass=user)(memberOf=CN=LinuxServers,CN=Users,DC=e
 towerchk: undefined
 
 # Tower Admin Password
-towerpass: "mypassword"
+towerpass: "r3dh4t"
 towerversion: 3.4.1-1
 pgpass: awx
 rabbitpass: tower
