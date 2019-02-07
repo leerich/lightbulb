@@ -42,7 +42,7 @@ ec2_instance_types:
   # Look for owner 309956199498 to find official Red Hat AMIs
   rhel7:
     ami_id: "{{ ec2_regions[ec2_region].amis.rhel7 }}"
-    size: t2.small
+    size: t2.micro
     os_type: linux
     disk_space: 10
 
