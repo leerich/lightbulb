@@ -5,6 +5,7 @@
 - name: Stop Ansible Tower if Installed
   command: /usr/bin/ansible-tower-service stop
   become: true
+  ignore_errors: true
   
   
 - name: install httpd
