@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+  <div data-role="page" id="pageone">
+  <div data-role="header">
+  <h1 style="padding-left: 30px;"><h1>Ansible Lightbulb Workshop</h1>
+  </div>
+  <div data-role="main">
+  <h1 style="padding-left: 30px; text-align: center;"><span style="color: #3366ff;">http://</span><span style="color: #ff0000;">lightbulb.rhdemo.io</span></h1>
+  <h3 style="padding-left: 30px;">&nbsp;</h3>
+  <h2 style="padding-left: 30px;"><span style="color: #ff0000;"><strong>Links to lab materials:</strong></span></h2>
+  <h2 style="padding-left: 30px;"><a href="http://lightbulb.rhdemo.io/decks/ansible-essentials.html#/" target="_blank" rel="noopener"><strong>DECK: Ansible Essentials</strong></a></h2>
+  <h2 style="padding-left: 30px;"><a href="http://lightbulb.rhdemo.io/decks/intro-to-ansible-tower.html#/" target="_blank" rel="noopener"><strong>DECK: Intro to Tower</strong></a></h2>
+  <h2 style="padding-left: 30px;"><a href="http://ansible.redhatgov.io/standard/core/exercise1.1.html" target="_blank" rel="noopener"><strong>Ansible Hands-on Exercises</strong></a></h2>
+  <h2 style="padding-left: 30px;"><a href="http://ansible.redhatgov.io/standard/tower/exercise1.1.html" target="_blank" rel="noopener"><strong>Ansible Tower Hands-on Exercises</strong></a></h2>
+  <h2 style="padding-left: 30px;"><strong>-----------------------------------------------</strong></h2>
+  <h2 style="padding-left: 30px;"><a href="http://lightbulb.rhdemo.io/ansible_tower_license.txt" target="_blank" rel="noopener"><strong>5-Node NFR Lightbulb License is available here.</strong></a></h2>
+  <h3 style="padding-left: 30px;"><span style="color: #ff0000;">Right click and save the file above to your desktop</span></h3>
+  <h2 style="padding-left: 30px;"><strong>Access your control nodes using the following methods:</strong></h2>
+  <h2 style="padding-left: 30px;"><strong>SSH on port <span style="color: #ff0000;">22</span></strong></h2>
+  <h3 style="padding-left: 30px;"><span style="color: #ff0000;"><strong><span style="color: #0000ff;">ssh student</span>&lt;your student #&gt;<span style="color: #0000ff;">@{{ ec2_name_prefix }}-student</span>&lt;your student #&gt;<span style="color: #0000ff;">.rhdemo.io</span></strong></span></h3>
+  <h2 style="padding-left: 30px;"><strong>or Web browser:</strong></h2>
+  <h2 style="padding-left: 30px;"><strong><a href="https://lightbulb.rhdemo.io/ssh">https://lightbulb.rhdemo.io/ssh</a></strong></h2>
+  <p style="padding-left: 30px;"><strong>Username: <span style="color: #ff0000;">student&lt;your student #&gt;</span></strong></p>
+  <p style="padding-left: 30px;"><strong>Password: <span style="color: #ff0000;">r3dh4t</span></strong></p>
+  <p style="padding-left: 30px;"><strong>File Manager and Web Editor:</strong></p>
+  <p style="padding-left: 30px;"><strong><a href="http://FSI-student&lt;you">http://{{ ec2_name_prefix }}-student&lt;your student #&gt;.rhdemo.io:8081</a></strong></p>
+  <p style="padding-left: 30px;">&nbsp;</p>
+  <h2 style="padding-left: 30px;"><a href="http://lightbulb.rhdemo.io/usefulnotes.html" target="_blank" rel="noopener"><strong>Click here for some notes.</strong></a></h2>
+<hr>
+  </div>
+{% for user in users %}
+  <div data-role="main" class="ui-content">
+    <div data-role="collapsible">
+      <h1>{{ ec2_name_prefix }}-{{ user.username }}.{{ workshop_dns_zone }} - Click to see details!</h1>
+      <p>[all:vars]<br />
+ansible_user={{ user.username }}<br />
+ansible_ssh_pass={{ admin_password }}<br />
+{% if ssh_port is defined %}<br />
+ansible_port={{ ssh_port }}<br />
+{% endif %}
+<br />
+[web]<br />
+{% for grouper, list in instances.results|groupby('item') if grouper.item[0] == user %}
+{% for vm in list %}
+{% if 'control' not in vm.invocation.module_args.instance_tags.Name and 'haproxy' not in vm.invocation.module_args.instance_tags.Name%}
+{{ vm.invocation.module_args.instance_tags.Name | regex_replace('.*-(node)(\\d)', '\\1-\\2') }} ansible_host={{ vm.tagged_instances[0].public_ip }}<br />
+{% endif %}
+{% endfor %}
+{% endfor %}
+<br />
+[control]<br />
+{% for grouper, list in instances.results|groupby('item') if grouper.item[0] == user %}
+{% for vm in list %}
+{% if 'control' in vm.invocation.module_args.instance_tags.Name %}
+{{ vm.invocation.module_args.instance_tags.Name | regex_replace('.*-([\\w]*)', '\\1') }} ansible_host={{ vm.tagged_instances[0].public_ip }}<br />
+{% endif %}
+{% endfor %}
+{% endfor %}</p>
+    </div>
+  </div>
+{% endfor %}
+  <div data-role="footer">
+    <h1>Thanks for participating!</h1>
+  </div>
+</div>
+
+</body>
+</html>

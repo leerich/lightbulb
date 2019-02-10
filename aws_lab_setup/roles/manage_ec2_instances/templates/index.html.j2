@@ -1,39 +1,345 @@
 <!DOCTYPE html>
+<html>
+<font face="verdana,sans,arial">
+<style>
+pre {
+  background: black;
+  color: #fff !important;
+  width: 100%;
+  padding: 5px;
+  max-width: 500px;
+
+}
+
+.content{
+         display:none;
+         margin: 10px;
+}
+
+.header{
+  border-bottom: 1px solid #494a5a;
+  padding-bottom: 20px;
+}
+
+.student_logins {
+    width:100%;
+    border:1px solid #d3d3d3;
+}
+.student_logins div {
+    width:100%;
+}
+.student_logins .header {
+    background-color:#d3d3d3;
+    padding: 2px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.student_logins .studentx {
+    display: none;
+    padding : 5px;
+}
+
+.linklightfooter {
+    background-color: #212121;
+    padding: 80px 0px;
+    font-size: 0.7em;
+    color: #fff;
+    font-weight: 300;
+}
+
+section {
+    padding: 40px 0px;
+}
+
+body {
+  line-height: 1.5;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.theme-dark,
+.theme-dark *{
+    color: #fff;
+}
+
+.theme-bg-gray{
+    background-color: #cac8c8;
+}
+
+.theme-bg-darkgray{
+    background-color: #a2a1a1;
+}
+
+.btn {
+    border-radius: 0px;
+    text-align: center;
+    padding: 10px 20px;
+    margin-bottom: 0px;
+}
+
+.btn.btn-block {
+    display: block;
+}
+
+.btn.btn-primary,
+.btn.btn-secondary {
+    background-color: #a2a1a1;
+    color: #fff;
+    padding: 30px;
+}
+
+.btn.btn-secondary {
+    background-color: #cac8c8;
+}
+
+.btn.btn-ghost{
+    border: 1px solid #fff;
+    color: #fff;
+    background: transparent;
+}
+
+
+.page-header {
+    background: #c00;
+    color: #fff;
+    text-align: center;
+}
+
+.page-header h1 {
+    font-size: 21px;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.page-header h2 {
+    font-size: 1em;
+    font-weight: 300;
+}
+
+
+.main-content h1{
+    color: #333;
+}
+
+.main-content h2{
+    color: #cc0000;
+}
+
+.main-content h3, .main-content h4, .main-content h5, .main-content h6 {
+    color: #c00;
+}
+
+
+footer.site-footer{
+    background-color: #212121;
+    padding: 80px 0px;
+    font-size: 0.7em;
+    color: #fff;
+    font-weight: 300;
+}
+
+
+
+@media screen and (min-width: 768px){
+
+    .page-header h1 {
+        font-size: 24px;
+    }
+
+    .main-content {
+        font-size: 1.125rem;
+    }
+}
+
+
+
+/* theme overrides */
+
+@media screen and (max-width: 42em){
+    .main-content {
+        padding: 2rem 0px;
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 64em) and (min-width: 42em){
+    .main-content {
+        padding: 2rem 0px;
+        font-size: 1rem;
+    }
+}
+
+@media screen and (min-width: 64em){
+    .main-content {
+        max-width: none;
+        font-size: 1.1rem;
+    }
+}
+
+a {
+  test-decoration: none;
+}
+
+</style>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<link href=“https://fonts.googleapis.com/css?family=Overpass:300,400,700” rel=“stylesheet”>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+$("document").ready(function(){
+  $click =  $('.studentinfo');   // Click selector
+
+
+  $click.click(function () {
+
+    $clicked = $(this);
+    $expand = $(this).parent('.header').next();  // Expand and collapse content selector
+
+        //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+        $expand.slideToggle(500, function () {
+            //execute this after slideToggle is done
+            //change text of header based on visibility of content div
+        });
+
+    });
+});
+</script>
+
 </head>
+
 <body>
-  <div data-role="page" id="pageone">
-  <div data-role="header">
-  <h1 style="padding-left: 30px;"><h1>Ansible Lightbulb Workshop</h1>
-  </div>
-  <div data-role="main">
-  <h1 style="padding-left: 30px; text-align: center;"><span style="color: #3366ff;">http://</span><span style="color: #ff0000;">lightbulb.rhdemo.io</span></h1>
-  <h3 style="padding-left: 30px;">&nbsp;</h3>
-  <h2 style="padding-left: 30px;"><span style="color: #ff0000;"><strong>Links to lab materials:</strong></span></h2>
-  <h2 style="padding-left: 30px;"><a href="http://lightbulb.rhdemo.io/decks/ansible-essentials.html#/" target="_blank" rel="noopener"><strong>DECK: Ansible Essentials</strong></a></h2>
-  <h2 style="padding-left: 30px;"><a href="http://lightbulb.rhdemo.io/decks/intro-to-ansible-tower.html#/" target="_blank" rel="noopener"><strong>DECK: Intro to Tower</strong></a></h2>
-  <h2 style="padding-left: 30px;"><a href="http://ansible.redhatgov.io/standard/core/exercise1.1.html" target="_blank" rel="noopener"><strong>Ansible Hands-on Exercises</strong></a></h2>
-  <h2 style="padding-left: 30px;"><a href="http://ansible.redhatgov.io/standard/tower/exercise1.1.html" target="_blank" rel="noopener"><strong>Ansible Tower Hands-on Exercises</strong></a></h2>
-  <h2 style="padding-left: 30px;"><strong>-----------------------------------------------</strong></h2>
-  <h2 style="padding-left: 30px;"><a href="http://lightbulb.rhdemo.io/ansible_tower_license.txt" target="_blank" rel="noopener"><strong>5-Node NFR Lightbulb License is available here.</strong></a></h2>
-  <h3 style="padding-left: 30px;"><span style="color: #ff0000;">Right click and save the file above to your desktop</span></h3>
-  <h2 style="padding-left: 30px;"><strong>Access your control nodes using the following methods:</strong></h2>
-  <h2 style="padding-left: 30px;"><strong>SSH on port <span style="color: #ff0000;">22</span></strong></h2>
-  <h3 style="padding-left: 30px;"><span style="color: #ff0000;"><strong><span style="color: #0000ff;">ssh student</span>&lt;your student #&gt;<span style="color: #0000ff;">@{{ ec2_name_prefix }}-student</span>&lt;your student #&gt;<span style="color: #0000ff;">.rhdemo.io</span></strong></span></h3>
-  <h2 style="padding-left: 30px;"><strong>or Web browser:</strong></h2>
-  <h2 style="padding-left: 30px;"><strong><a href="https://lightbulb.rhdemo.io/ssh">https://lightbulb.rhdemo.io/ssh</a></strong></h2>
-  <p style="padding-left: 30px;"><strong>Username: <span style="color: #ff0000;">student&lt;your student #&gt;</span></strong></p>
-  <p style="padding-left: 30px;"><strong>Password: <span style="color: #ff0000;">r3dh4t</span></strong></p>
-  <p style="padding-left: 30px;"><strong>File Manager and Web Editor:</strong></p>
-  <p style="padding-left: 30px;"><strong><a href="http://FSI-student&lt;you">http://{{ ec2_name_prefix }}-student&lt;your student #&gt;.rhdemo.io:8081</a></strong></p>
-  <p style="padding-left: 30px;">&nbsp;</p>
-  <h2 style="padding-left: 30px;"><a href="http://lightbulb.rhdemo.io/usefulnotes.html" target="_blank" rel="noopener"><strong>Click here for some notes.</strong></a></h2>
+
+
+    <section class="page-header">
+      <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+              <h1 class="project-name">Red Hat Ansible Automation <br/><strong class="text-nowrap">Technical Workshops</strong></h1>
+              <h2>The Ansible Networking Linklight project is intended for effectively demonstrating Ansible's capabilities through instructor-led workshops or self-paced exercises.</h2>
+
+                <a href="https://github.com/network-automation/linklight" class="btn btn-ghost">View on GitHub</a><br><br>
+
+              <h1>Workshop Name: {{ec2_name_prefix}}</h1>
+
+            </div>
+        </div>
+      </div>
+    </section>
+
+<section class="main-content">
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                {% if networking or f5workshop %}
+                <h2>Network Automation Workshops</h2>
+                <p>These workshops are focused on networking platforms like Arista, Cisco, Juniper and F5.</p>
+                {% else %}
+                <h2>Server Automation Workshops</h2>
+                <p>These workshops are focused on automating Linux platforms like RHEL (Red Hat Enterprise Linux)</p>
+                {% endif %}
+            </div>
+        </div>
+        {% if networking %}
+        <div class="row">
+          <div class="col-sm-4">
+              <a class="btn btn-secondary btn-block" href="https://network-automation.github.io/linklight/exercises/networking_v2/">Ansible Networking v2 Exercises</a>
+          </div>
+
+          <div class="col-sm-4">
+              <a class="btn btn-secondary btn-block" href="https://network-automation.github.io/linklight/decks/ansible_network.pdf">Ansible Network Deck</a>
+          </div>
+
+        </div>
+        {% elif f5workshop %}
+        <div class="row">
+          <div class="col-sm-4">
+              <a class="btn btn-secondary btn-block" href="https://network-automation.github.io/linklight/exercises/ansible_f5/">Ansible F5 Exercises</a>
+          </div>
+
+          <div class="col-sm-4">
+              <a class="btn btn-secondary btn-block" href="https://network-automation.github.io/linklight/decks/ansible_f5.pdf">Ansible F5 Deck</a>
+          </div>
+
+        </div>
+        {% else %}
+         <div class="row">
+            <div class="col-sm-4">
+                <a class="btn btn-secondary btn-block" href="https://network-automation.github.io/linklight/exercises/ansible_engine/">Ansible Server Exercises</a>
+            </div>
+          <div class="col-sm-4">
+              <a class="btn btn-secondary btn-block" href="https://network-automation.github.io/linklight/decks/ansible-essentials.html#/">Ansible Essentials Deck</a>
+          </div>
+            <div class="col-sm-4">
+                <a class="btn btn-secondary btn-block" href="https://network-automation.github.io/linklight/exercises/ansible_tower/">Ansible Tower Exercises</a>
+            </div>
+
+        </div>
+        {% endif %}
+<br><br>
+
+    </div>
+</section>
+
 <hr>
-  </div>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <h2>Workshop Resources</h2>
+                <p>Links and materials to help complete the exercises.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <a class="btn btn-secondary btn-block" href="https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe">Download: PuTTY for Windows</a>
+            </div>
+
+            <div class="col-sm-4">
+                <a class="btn btn-secondary btn-block" href="https://www.ansible.com/workshop-license">Ansible Tower Workshop License</a>
+            </div>
+
+            <div class="col-sm-4">
+                <a class="btn btn-secondary btn-block" href="https://ansible.sivel.net/test/">Ansible Template Tester</a>
+            </div>
+        </div>
+<br>
+        <div class="row">
+            <div class="col-sm-4">
+                <a class="btn btn-secondary btn-block" href="https://docs.ansible.com/ansible/latest/network/index.html">Documentation Network Automation </a>
+            </div>
+
+            <div class="col-sm-4">
+                <a class="btn btn-secondary btn-block" href="https://docs.ansible.com/ansible/latest/modules/list_of_network_modules.html">Ansible Network Modules</a>
+            </div>
+
+            <div class="col-sm-4">
+                <a class="btn btn-secondary btn-block" href="https://pythex.org/">Real-time regular expression editor</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <h2>Workbench Information</h2>
+                <p>Click your student number for login information</p>
+            </div>
+        </div>
+
+        <div class="row">
+{% for number in range(1,student_total + 1) %}
+  <div class="student_logins">
+    <div class="header">
+
+      <p class="studentinfo">student{{number}} - Click to see login details</p>
+    </div>
+    <div class="content">
 {% for user in users %}
   <div data-role="main" class="ui-content">
     <div data-role="collapsible">
