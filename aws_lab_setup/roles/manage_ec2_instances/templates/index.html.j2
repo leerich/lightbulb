@@ -359,7 +359,7 @@ ansible_port={{ ssh_port }}<br />
 {% endfor %}
 {% endfor %}
 <br />
-[control]<br />
+[ansible]<br />
 {% for grouper, list in instances.results|groupby('item') if grouper.item[0] == user %}
 {% for vm in list %}
 {% if 'control' in vm.invocation.module_args.instance_tags.Name %}
