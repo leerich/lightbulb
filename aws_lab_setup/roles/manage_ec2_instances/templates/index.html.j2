@@ -341,8 +341,8 @@ $("document").ready(function(){
     </div>
     <div class="content">
       To login to the <code>ansible</code> control node use the following for SSH access:<br>
-ansible_user={{ user.username }}<br />
-ansible_ssh_pass={{ admin_password }}<br />
+username={{ user.username }}<br />
+password={{ admin_password }}<br />
 
 DNS: {{ ec2_name_prefix }}-{{user.username}}.{{workshop_dns_zone}}<br>
 <pre><code>ssh {{user.username}}@{{ ec2_name_prefix }}-{{user.username}}.{{workshop_dns_zone}}</code></pre>
