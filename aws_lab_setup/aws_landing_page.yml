@@ -1,0 +1,6 @@
+---
+- name: Create AWS Landing page
+  hosts: local
+  
+  roles:
+    - aws_workshop_login_page
