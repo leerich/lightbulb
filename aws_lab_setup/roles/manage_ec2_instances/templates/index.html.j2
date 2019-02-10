@@ -340,7 +340,7 @@ $("document").ready(function(){
       <p class="studentinfo">{{ ec2_name_prefix }}-{{ user.username }}.{{ workshop_dns_zone }} - Click to see details!</p>
     </div>
     <div class="content">
-      <p>[all:vars]<br />
+      To login to the <code>ansible</code> control node use the following for SSH access:<br>
 ansible_user={{ user.username }}<br />
 ansible_ssh_pass={{ admin_password }}<br />
 {% if ssh_port is defined %}<br />
@@ -361,6 +361,7 @@ ansible_port={{ ssh_port }}<br />
 {% for vm in list %}
 {% if 'control' in vm.invocation.module_args.instance_tags.Name %}
 {{ vm.invocation.module_args.instance_tags.Name | regex_replace('.*-([\\w]*)', '\\1') }} ansible_host={{ vm.tagged_instances[0].public_ip }}<br />
+<a href="https://{{ec2_name_prefix}}-{{user.username}}.{{workshop_dns_zone}}">https://{{ec2_name_prefix}}-{{user.username}}.{{workshop_dns_zone}}</a><br>
 {% endif %}
 {% endfor %}
 {% endfor %}</p>
@@ -369,7 +370,7 @@ ansible_port={{ ssh_port }}<br />
 {% endfor %}
         </div>
       </div>
-      
+
 </section>
 
 </section>
