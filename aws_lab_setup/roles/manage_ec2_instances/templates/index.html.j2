@@ -348,6 +348,10 @@ password={{ admin_password }}<br />
 DNS: {{ ec2_name_prefix }}-{{user.username}}.{{workshop_dns_zone}}<br>
 <pre><code>ssh {{user.username}}@{{ ec2_name_prefix }}-{{user.username}}.{{workshop_dns_zone}}</code></pre>
 <br />
+Or use Guacamole with a web browser:<br>
+<pre><code>https://lightbulb.rhdemo.io/ssh</code></pre>
+<br />
+
 [web]<br />
 {% for grouper, list in instances.results|groupby('item') if grouper.item[0] == user %}
 {% for vm in list %}
