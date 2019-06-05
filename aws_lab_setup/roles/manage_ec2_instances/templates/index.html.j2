@@ -353,7 +353,13 @@ DNS: {{ ec2_name_prefix }}-{{user.username}}.{{workshop_dns_zone}}<br>
 Or use Guacamole with a web browser:<br>
 <pre><code>https://lightbulb.rhdemo.io/ssh</code></pre>
 <br />
+Your Ansible Nodes:
+Ansible Tower: {{ ec2_name_prefix }}-{{user.username}}.{{workshop_dns_zone}}
+Node1: {{ ec2_name_prefix }}-{{user.username}}-node1.{{workshop_dns_zone}}
+Node2: {{ ec2_name_prefix }}-{{user.username}}-node2.{{workshop_dns_zone}}
+Node3: {{ ec2_name_prefix }}-{{user.username}}-node3.{{workshop_dns_zone}}
 
+Your Ansible Inventory File:
 [web]<br />
 {% for grouper, list in instances.results|groupby('item') if grouper.item[0] == user %}
 {% for vm in list %}
