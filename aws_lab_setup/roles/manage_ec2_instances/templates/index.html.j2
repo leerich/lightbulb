@@ -361,7 +361,7 @@ Node2: {{ ec2_name_prefix }}-{{user.username}}-node2.{{workshop_dns_zone}}
 Node3: {{ ec2_name_prefix }}-{{user.username}}-node3.{{workshop_dns_zone}}
 </pre>
 <br>Your Ansible Inventory File:<br>
-[web]<br />
+<br>[web]<br />
 {% for grouper, list in instances.results|groupby('item') if grouper.item[0] == user %}
 {% for vm in list %}
 {% if 'control' not in vm.invocation.module_args.instance_tags.Name and 'haproxy' not in vm.invocation.module_args.instance_tags.Name%}
