@@ -9,7 +9,7 @@
   register: checkout
   ignore_errors: True
 
-- name: set condtional if the above didn't error
+- name: set conditional if the above didn't error
   set_fact:
     towerchk: "{{ checkout.json.version }}"
   when: checkout.json is defined
