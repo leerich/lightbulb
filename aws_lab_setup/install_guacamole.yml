@@ -42,7 +42,7 @@
     notify: restart nginx
     
   -  debug: msg="trigger nginx-restart"
-     notify: nginx-restart
+     notify: restart nginx
      changed_when: true
 
   - name: install firewalld
