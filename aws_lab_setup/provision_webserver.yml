@@ -26,7 +26,9 @@
             volume_type: gp2
             volume_size: "{{ ec2_instance_types[item.1.type].disk_space }}"
             delete_on_termination: true
-            
+      with_items:
+        - "{{ ec2_lab_node_types }}"
+
     - name: Create DNS name for each web server
       route53:
         state: "{{ route53_state }}"
