@@ -5,27 +5,27 @@
   become: false
 
   tasks:
-    - name: Remove Instance for Webserver and Guacamole
-      ec2:
-        assign_public_ip: yes
-        key_name: "{{ ec2_key_name }}"
-        group: "{{ ec2_security_group }}"
-        instance_type: "t2.medium"
-        image: "ami-877b9e91"
-        region: "{{ ec2_region }}"
-        #zone: "{{ ec2_zone }}"
-        exact_count: 0
-        count_tag:
-          Name: "{{ ec2_name_prefix }}-workshop-webserver"
-        instance_tags:
-          Name: "{{ ec2_name_prefix }}-workshop-webserver"
-        wait: true
-        vpc_subnet_id: "{{ ec2_vpc_subnet_id | default(omit) }}"
-        volumes:
-          - device_name: /dev/sda1
-            volume_type: gp2
-            volume_size: 20
-            delete_on_termination: true
+    #- name: Remove Instance for Webserver and Guacamole
+    #  ec2:
+    #    assign_public_ip: yes
+    #    key_name: "{{ ec2_key_name }}"
+    #    group: "{{ ec2_security_group }}"
+    #    instance_type: "t2.medium"
+    #    image: "ami-877b9e91"
+    #    region: "{{ ec2_region }}"
+    #    #zone: "{{ ec2_zone }}"
+    #    exact_count: 0
+    #    count_tag:
+    #      Name: "{{ ec2_name_prefix }}-workshop-webserver"
+    #    instance_tags:
+    #      Name: "{{ ec2_name_prefix }}-workshop-webserver"
+    #    wait: true
+    #    vpc_subnet_id: "{{ ec2_vpc_subnet_id | default(omit) }}"
+    #    volumes:
+    #      - device_name: /dev/sda1
+    #        volume_type: gp2
+    #        volume_size: 20
+    #        delete_on_termination: true
 
     - name: Provision Instance for Webserver and Guacamole
       ec2:
