@@ -45,7 +45,7 @@
 
     - name: Get Public IP
       set_fact:
-        host_addr: ""{{ item.tagged_instances[0].public_ip }}"
+        host_addr: "{{ item.tagged_instances[0].public_ip }}"
       with_items:  "{{ instances.results }}"
 
     - name: Create DNS name for each web server
