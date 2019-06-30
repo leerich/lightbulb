@@ -26,7 +26,26 @@
             volume_type: gp2
             volume_size: 20
             delete_on_termination: true
+      register: ec2_jobs
+      async: 7200
+      poll: 0
 
+    - name: Wait for instances to finish initializing
+      pause:
+        seconds: 90
+      when: instances | changed
+      tags:
+        - always
+        - provision
+
+    - name: Waiting for servers to come online
+      wait_for: host="{{ item.tagged_instances[0].public_ip }}" port="{{ ssh_port }}" search_regex=OpenSSH
+      with_items: "{{ instances.results }}"
+      when: instances | changed
+
+    - name: Get Public IP
+      set_fact:
+        host_addr: {{ item.tagged_instances[0].public_ip }}"
 
     - name: Create DNS name for each web server
       route53:
