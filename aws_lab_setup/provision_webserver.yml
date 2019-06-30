@@ -63,6 +63,9 @@
         host_addr: "{{ item.public_ip }}"
       with_items:  "{{ ec2.instances }}"
 
+    - debug:
+        var: "{{ host_addr }}"
+
     - name: Create DNS name for each web server
       route53:
         state: "{{ route53_state }}"
