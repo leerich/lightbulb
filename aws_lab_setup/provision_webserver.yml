@@ -74,9 +74,9 @@
         record: "lightbulb.{{workshop_dns_zone}}"
         type: CNAME
         overwrite: yes
-        value: "{{ host_addr }}"
+        value: "{{ item.public_ip }}"
         type: A
-      #with_items: "{{ instances.results }}"
+      loop: "{{ ec2.instances }}"
       #when: "'control' in item.invocation.module_args.instance_tags.Name"
 #  roles:
 #  - web_instance
