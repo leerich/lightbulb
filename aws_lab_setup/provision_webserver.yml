@@ -58,13 +58,18 @@
         timeout: 320
       loop: "{{ ec2.instances }}"
 
-    - name: Get Public IP
-      set_fact:
-        host_addr: "{{ item.public_ip }}"
-      with_items:  "{{ ec2.instances }}"
+    #- name: Get Public IP
+    #  set_fact:
+    #    host_addr: "{{ item.public_ip }}"
+    #  with_items:  "{{ ec2.instances }}"
 
-    - debug:
-        var: "{{ host_addr }}"
+    #- debug:
+    #    var: "{{ host_addr }}"
+
+    - name: Add instance to host group
+        hostname: "{{ item.public_ip }}"
+        groupname: web_server
+      loop: "{{ ec2.instances }}"
 
     - name: Create DNS name for each web server
       route53:
@@ -83,6 +88,6 @@
 #  tags:
 #    - skip
 
-- hosts: "{{ host_addr }}"
+- hosts: web_server
   roles:
   - web_server
