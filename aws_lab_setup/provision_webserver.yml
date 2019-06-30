@@ -33,7 +33,7 @@
         key_name: "{{ ec2_key_name }}"
         group: "{{ ec2_security_group }}"
         instance_type: "t2.medium"
-        image: "ami-877b9e91"
+        image: "ami-011b3ccf1bd6db744"
         region: "{{ ec2_region }}"
         #zone: "{{ ec2_zone }}"
         exact_count: "{{ ec2_exact_count }}"
