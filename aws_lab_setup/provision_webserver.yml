@@ -36,8 +36,8 @@
       until: instances.finished
       retries: 300
       with_items: "{{ ec2_jobs.results }}"
-      ignore_errors: yes
-      
+      ignore_errors: no
+
     - name: Wait for instances to finish initializing
       pause:
         seconds: 90
