@@ -67,6 +67,7 @@
     #    var: "{{ host_addr }}"
 
     - name: Add instance to host group
+      add_host:
         hostname: "{{ item.public_ip }}"
         groupname: web_server
       loop: "{{ ec2.instances }}"
