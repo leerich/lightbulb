@@ -56,7 +56,7 @@
 
 - name: Include tasks only needed when creating instances
   include_tasks: create.yml
-  static: no
+  #static: no
   when: ec2_exact_count >= 1
   tags:
     - provision
