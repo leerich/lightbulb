@@ -1,0 +1,30 @@
+---
+- name: Generate users list
+  hosts: localhost
+  connection: local
+  become: no
+  gather_facts: no
+
+  tasks:
+    - name: generate users list
+      set_fact:
+        users: "{{ users|default([]) + [ {'name': 'student' + item, 'username': 'student' + item, 'email': 'student' + item + '@example.com'} ] }}"
+      with_sequence: start="{{ student_count_start }}" end="{{ student_count_end }}"
+
+
+- name: Create lab instances in AWS
+  hosts: localhost
+  connection: local
+  become: no
+  gather_facts: no
+  roles:
+    - manage_ec2_instances
+
+
+- name: Install Cloud Commander
+  hosts: all
+  become: yes
+  gather_facts: no
+  roles:
+    - { role: cloudcmd, when: '"control" in ec2_tag_Name' }
+ 
