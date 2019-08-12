@@ -1,11 +1,16 @@
 ---
 
+- name: Create workspace template
+  template:
+    src: workspace.j2
+    dest: ./workspace.txt
+
 - name: Login to OnTap Instance
   uri:
     url:  http://107.20.112.232:80/occm/api/auth/login
     method: POST
     body_format: json
-    body: 
+    body:
     status_code: 204
   register: login
 
@@ -14,7 +19,7 @@
     url: http://107.20.112.232:80/occm/api/vsa/working-environments
     method: POST
     body_format: json
-    body: "{{ lookup('file','body_json') }}"
+    body: "{{ lookup('file','workspace.txt') }}"
     headers:
       Cookie: "{{ login.set_cookie }}"
     status_code: 204
