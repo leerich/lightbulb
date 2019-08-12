@@ -28,7 +28,7 @@
     msg: "{{ cloud_cred }}"
 
 - set_fact:
-    cloud_cred: "{{ (cloud_cred|from_json).json.awsAccounts.accountType }}"
+    cloud_cred: "{{ (cloud_cred|from_json).json.awsAccounts.publicId }}"
 
 
 - name: Create AWS Account Credential
