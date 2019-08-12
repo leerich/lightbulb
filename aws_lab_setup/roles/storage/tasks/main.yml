@@ -25,6 +25,7 @@
     method: POST
     body_format: json
     body: "{{ lookup('file','aws-account.txt') }}"
+    validate_certs: no
     status_code: 204
 
 - name: Create new working environment
