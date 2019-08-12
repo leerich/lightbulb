@@ -10,8 +10,7 @@
     url:  http://{{ cloud_mgr }}:80/occm/api/auth/login
     method: POST
     body_format: json
-    body: { "email": "{{ email_addr }}", "password": "{{ cloud_mgr_password }}"
-}
+    body: { "email": "{{ email_addr }}", "password": "{{ cloud_mgr_password }}" }
     status_code: 204
   register: login
 
