@@ -39,7 +39,7 @@
     msg: "{{ (cloud_cred_json.json.awsAccounts | map(attribute='publicId') }}"
 
 - set_fact:
-    cloud_cred: "{{ (cloud_cred_raw | from_json }}"
+    cloud_cred: "{{ (cloud_cred_raw.publicId }}"
 
 - debug: var=cloud_cred
 
