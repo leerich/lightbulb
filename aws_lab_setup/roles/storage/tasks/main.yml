@@ -7,7 +7,7 @@
 
 - name: Login to OnTap Instance
   uri:
-    url:  http://107.20.112.232:80/occm/api/auth/login
+    url:  http://{{ cloud_mgr }}:80/occm/api/auth/login
     method: POST
     body_format: json
     body:
@@ -16,7 +16,7 @@
 
 - name: Create new working environment
   uri:
-    url: http://107.20.112.232:80/occm/api/vsa/working-environments
+    url: http://{{ cloud_mgr }}:80/occm/api/vsa/working-environments
     method: POST
     body_format: json
     body: "{{ lookup('file','workspace.txt') }}"
