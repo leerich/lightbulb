@@ -29,7 +29,8 @@
     status_code: 200
     headers:
       Cookie: "{{ login.set_cookie }}"
-
+  ignore_errors: yes
+  
 - name: Create new working environment
   uri:
     url: http://{{ cloud_mgr }}:80/occm/api/vsa/working-environments
