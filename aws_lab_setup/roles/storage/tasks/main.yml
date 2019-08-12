@@ -19,7 +19,13 @@
     status_code: 204
   register: login
 
-
+- name: Create AWS Account Credential
+  uri:
+    url:  https://{{ cloud_mgr }}:443/occm/api/accounts/aws
+    method: POST
+    body_format: json
+    body: "{{ lookup('file','aws-account.txt') }}"
+    status_code: 204
 
 - name: Create new working environment
   uri:
