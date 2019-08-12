@@ -19,6 +19,16 @@
     status_code: 204
   register: login
 
+- name: See if Cloud Credential Already Exists
+  uri:
+    url:  https://{{ cloud_mgr }}:443/occm/api/accounts
+    method: GET
+    validate_certs: no
+    status_code: 200
+    headers:
+      Cookie: "{{ login.set_cookie }}"
+  register: cloud_cred
+
 - name: Create AWS Account Credential
   uri:
     url:  https://{{ cloud_mgr }}:443/occm/api/accounts/aws
@@ -30,7 +40,8 @@
     headers:
       Cookie: "{{ login.set_cookie }}"
   ignore_errors: yes
-  
+  when: cloud_cred == null
+
 - name: Create new working environment
   uri:
     url: http://{{ cloud_mgr }}:80/occm/api/vsa/working-environments
