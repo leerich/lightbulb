@@ -1,0 +1,45 @@
+{
+  "name": "ansible_workshop",
+  "volume": {
+    "exportPolicyInfo": {
+      "policyType": "custom",
+      "ips": [
+        "172.31.0.0/16"
+      ]
+    },
+    "snapshotPolicyName": "default",
+    "name": "workshop_test",
+    "enableThinProvisioning": true,
+    "enableDeduplication": true,
+    "enableCompression": true,
+    "size": {
+      "size": 4,
+      "unit": "GB"
+    }
+  },
+  "tenantId": "workspace-Xkuz4F5D",
+  "region": "us-east-1",
+  "packageName": "aws_poc",
+  "dataEncryptionType": "AWS",
+  "vsaMetadata": {
+    "ontapVersion": "ONTAP-9.6.T1",
+    "licenseType": "cot-explore-paygo",
+    "instanceType": "m5.xlarge"
+  },
+  "writingSpeedState": "NORMAL",
+  "subnetId": "subnet-c0d9ec99",
+  "svmPassword": "{{svm_password }}",
+  "vpcId": "vpc-70548214",
+  "ontapEncryptionParameters": null,
+  "ebsVolumeType": "gp2",
+  "ebsVolumeSize": {
+    "size": 500,
+    "unit": "GB",
+    "_identifier": "500 GB"
+  },
+  "awsTags": [],
+  "optimizedNetworkUtilization": false,
+  "instanceTenancy": "default",
+  "iops": null,
+  "cloudProviderAccount": "CloudProviderAccount-Yu6yHBBa"
+}
