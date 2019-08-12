@@ -1,10 +1,5 @@
 ---
 
-- name: Create Workspace Template
-  template:
-    src: workspace.j2
-    dest: ./workspace.txt
-
 - name: Create AWS Account Template
   template:
     src: account.j2
@@ -29,6 +24,10 @@
       Cookie: "{{ login.set_cookie }}"
   register: cloud_cred
 
+- set_fact:
+    cloud_cred: "{{ (cloud_cred.stdout|from_json).awsAccounts.publicID }}"
+
+
 - name: Create AWS Account Credential
   uri:
     url:  https://{{ cloud_mgr }}:443/occm/api/accounts/aws
@@ -40,7 +39,12 @@
     headers:
       Cookie: "{{ login.set_cookie }}"
   ignore_errors: yes
-  when: cloud_cred == null
+  when: cloud_cred.value["publicId"] is defined
+
+- name: Create Workspace Template
+  template:
+    src: workspace.j2
+    dest: ./workspace.txt
 
 - name: Create new working environment
   uri:
