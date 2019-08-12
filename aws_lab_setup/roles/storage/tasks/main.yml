@@ -26,7 +26,7 @@
     body_format: json
     body: "{{ lookup('file','aws-account.txt') }}"
     validate_certs: no
-    status_code: 204
+    status_code: 200
     headers:
       Cookie: "{{ login.set_cookie }}"
 
