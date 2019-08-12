@@ -24,6 +24,9 @@
       Cookie: "{{ login.set_cookie }}"
   register: cloud_cred
 
+- debug:
+    msg: "{{ cloud_cred }}"
+    
 - set_fact:
     cloud_cred: "{{ (cloud_cred.stdout|from_json).awsAccounts.publicID }}"
 
