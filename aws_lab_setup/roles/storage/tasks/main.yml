@@ -28,7 +28,7 @@
     msg: "{{ cloud_cred_json }}"
 
 - set_fact:
-    cloud_cred: "{{ cloud_cred_json.msg.json.awsAccount.publicId }}"
+    cloud_cred: "{{ cloud_cred_json.json.awsAccount.publicId }}"
   #when: cloud_cred_json.msg.json.awsAccounts.publicId is defined
   #loop: "{{ cloud_cred_json.msg.json }}"
 
