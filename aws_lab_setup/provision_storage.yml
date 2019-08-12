@@ -12,19 +12,18 @@
       with_sequence: start="{{ student_count_start }}" end="{{ student_count_end }}"
 
 
-- name: Create lab instances in AWS
-  hosts: localhost
-  connection: local
+#- name: Create lab instances in AWS
+#  hosts: localhost
+#  connection: local
+#  become: no
+#  gather_facts: no
+#  roles:
+#    - manage_ec2_instances
+
+
+- name: Provision Storage Resources
+  hosts: all
   become: no
   gather_facts: no
   roles:
-    - manage_ec2_instances
-
-
-- name: Install Cloud Commander
-  hosts: all
-  become: yes
-  gather_facts: no
-  roles:
-    - { role: cloudcmd, when: '"control" in ec2_tag_Name' }
- 
+    - storage
