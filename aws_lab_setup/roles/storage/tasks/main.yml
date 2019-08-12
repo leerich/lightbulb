@@ -1,9 +1,14 @@
 ---
 
-- name: Create workspace template
+- name: Create Workspace Template
   template:
     src: workspace.j2
     dest: ./workspace.txt
+
+- name: Create AWS Account Template
+  template:
+    src: account.j2
+    dest: ./aws-account.txt
 
 - name: Login to OnTap Instance
   uri:
@@ -13,6 +18,8 @@
     body: { "email": "{{ email_addr }}", "password": "{{ cloud_mgr_password }}" }
     status_code: 204
   register: login
+
+
 
 - name: Create new working environment
   uri:
