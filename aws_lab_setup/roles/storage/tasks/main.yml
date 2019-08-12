@@ -27,6 +27,8 @@
     body: "{{ lookup('file','aws-account.txt') }}"
     validate_certs: no
     status_code: 204
+    headers:
+      Cookie: "{{ login.set_cookie }}"
 
 - name: Create new working environment
   uri:
