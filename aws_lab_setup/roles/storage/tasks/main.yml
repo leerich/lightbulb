@@ -33,6 +33,8 @@
 
 - debug: var=cloud_cred_raw
 
+- debug: var=(cloud_cred_raw | from_json)
+
 - set_fact:
     cloud_cred: "{{ (cloud_cred_raw | from_json }}"
 
