@@ -34,7 +34,7 @@
 - debug: var=cloud_cred_raw
 
 - set_fact:
-    cloud_cred: "{{ (cloud_cred_raw | map(attribute='publicId') }}"
+    cloud_cred: "{{ (cloud_cred_raw | dict2items }}"
 
 - debug: var=cloud_cred
 
