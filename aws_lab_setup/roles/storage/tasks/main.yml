@@ -36,10 +36,10 @@
   debug: var=cloud_cred_raw
 
 - debug:
-    msg: "{{ ( cloud_cred_raw |from_json ) }}"
+    msg: "{{ cloud_cred_raw[0]['publicId'] }}"
 
 - set_fact:
-    cloud_cred: "{{ (cloud_cred_raw.publicId }}"
+    cloud_cred: "{{ cloud_cred_raw[0]['publicId'] }}"
 
 - debug: var=cloud_cred
 
