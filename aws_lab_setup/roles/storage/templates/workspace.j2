@@ -1,7 +1,7 @@
 {
   "name": "{{ ec2_name_prefix }}_{{ item.username }}",
     "snapshotPolicyName": "default",
-    "name": "workshop_test",
+    "name": "{{ ec2_name_prefix }}_{{ item.username }}",
     "enableThinProvisioning": true,
     "enableDeduplication": true,
     "enableCompression": true,
