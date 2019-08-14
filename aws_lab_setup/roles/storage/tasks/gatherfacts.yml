@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  name: Volume Action
+  gather_facts: no
+  vars:
+    vserver: svm_{{ vserver_name }}
+    aggr: aggr1
+    vol_name: ansibleVol
+  tasks:
+  - name: Gather Netapp Facts
+    na_ontap_gather_facts:
+      state: info
+      hostname: "{{ hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      #https: true
+      validate_certs: false
