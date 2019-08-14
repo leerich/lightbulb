@@ -1,5 +1,22 @@
 {
   "name": "{{ ec2_name_prefix }}_{{ item.username }}",
+  "volume": {
+    "exportPolicyInfo": {
+      "policyType": "custom",
+      "ips": [
+        "172.31.0.0/16"
+      ]
+    },
+    "snapshotPolicyName": "default",
+    "name": "workshop_test",
+    "enableThinProvisioning": true,
+    "enableDeduplication": true,
+    "enableCompression": true,
+    "size": {
+      "size": 4,
+      "unit": "GB"
+    }
+  },
   "tenantId": "workspace-Xkuz4F5D",
   "region": "us-east-1",
   "packageName": "aws_poc",
@@ -15,6 +32,11 @@
   "vpcId": "vpc-70548214",
   "ontapEncryptionParameters": null,
   "ebsVolumeType": "gp2",
+  "ebsVolumeSize": {
+    "size": 500,
+    "unit": "GB",
+    "_identifier": "500 GB"
+  },
   "awsTags": [],
   "optimizedNetworkUtilization": false,
   "instanceTenancy": "default",
