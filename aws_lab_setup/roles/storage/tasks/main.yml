@@ -56,10 +56,19 @@
   ignore_errors: yes
   when: cloud_cred.value["publicId"] is defined
 
-- name: Create Workspace Template
+- name: Create storage directory if it doesn't exist
+  file:
+    path: storage_temp
+    owner: awx
+    group: awx
+    state: directory
+
+
+- name: Create Workspace Templates
   template:
     src: workspace.j2
-    dest: ./workspace.txt
+    dest: ./storage_temp/{{ item.username }}-workspace.txt
+  with_items: "{{ users }}"
 
 - name: Create new working environment
   uri:
