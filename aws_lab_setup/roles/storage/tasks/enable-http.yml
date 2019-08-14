@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  name: Enable http
+  gather_facts: no
+  
+  tasks:
+  - name: Enable http on the cluster
+    na_ontap_command:
+      hostname: "{{ hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      https: true
+      validate_certs: false
+      privilege: advanced
+      command: 'system services web modify -http-enabled true'
