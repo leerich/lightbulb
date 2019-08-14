@@ -1,0 +1,56 @@
+---
+- hosts: localhost
+  name: Volume Action
+  gather_facts: no
+  vars:
+    vserver: "svm_{{ vserver_name }}"
+    aggr: aggr1
+    vol_name: ansibleVol
+    policy: "{{ vserver_name }}_export_policy"
+    state: present
+    volname: citi_vol
+
+  tasks:
+  - name: Create Policy
+    na_ontap_export_policy:
+      state: present
+      name: "{{ policy }}"
+      vserver: "{{ vserver }}"
+      hostname: "{{ hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      https: true
+      validate_certs: false
+
+  - name: Setup rules
+    na_ontap_export_policy_rule:
+      state: "{{ state }}"
+      policy_name: "{{ policy }}"
+      vserver: "{{ vserver }}"
+      client_match: 0.0.0.0/0
+      ro_rule: sys
+      rw_rule: sys
+      protocol: any
+      super_user_security: sys
+      hostname: "{{ hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      https: true
+      validate_certs: false
+
+  - name: Create volume
+    na_ontap_volume:
+      state: "{{ state }}"
+      name: "{{ volname }}"
+      aggregate_name: "{{ aggr }}"
+      size: 1
+      size_unit: gb
+      policy: "{{ policy }}"
+      junction_path: "/{{ volname }}"
+      space_guarantee: "none"
+      vserver: "{{ vserver }}"
+      hostname: "{{ hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      https: true
+      validate_certs: false
