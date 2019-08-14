@@ -1,5 +1,5 @@
 {
-  "name": "{{ ec2_name_prefix }}_student",
+  "name": "{{ ec2_name_prefix }}_{{ item.username }}",
   "volume": {
     "exportPolicyInfo": {
       "policyType": "custom",
