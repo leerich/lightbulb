@@ -43,7 +43,6 @@
     - name: parse clusterProperties
       set_fact:
         clusterIP: "{{ cluster_Properties.json[0]['clusterProperties']['lifs'][0]['ip'] }}"
-      when: "{{ cluster_Properties.json[0]['clusterProperties']['lifs'][0]['lifType'] }} == Cluster Management"
 
     - name: display clusterIP
       debug: var=clusterIP
@@ -55,4 +54,9 @@
     - name: loop test
       debug:
         var: clusterIPs
+
+    - name: parse only cluster IP
+      command: echo {{ item }}
+      loop: "{{ clusterIPs }}"
+      
       #loop: "{{ cluster_Properties.json | json_query('clusterProperties.lifs[*].lifType') }}"
