@@ -46,8 +46,8 @@
         clusterIP: "{{ cluster_Properties.json[0]['clusterProperties']['lifs'][0]['ip'] }}"
 
     - name: debug systemManagerUrl
-      debug:
-        msg: "{{ cluster_Properties.json[item|int]['clusterProperties']['systemManagerUrl'] | urlsplit('hostname') }}"
+      set_fact:
+        mgmtIP{{item}}: "{{ cluster_Properties.json[item|int]['clusterProperties']['systemManagerUrl'] | urlsplit('hostname') }}"
       with_sequence: start=0 end="{{ end_count }}"
 
 
@@ -60,10 +60,7 @@
 
     - name: loop test
       debug:
-        var: clusterIPs
+        var: mgmtIP{{item}}
 
-    - name: parse only cluster IP
-      command: echo {{ item }}
-      loop: "{{ clusterIPs }}"
-      when: clusterIPs[0]['lifType'] == "Cluster Management"
+
       #loop: "{{ cluster_Properties.json | json_query('clusterProperties.lifs[*].lifType') }}"
