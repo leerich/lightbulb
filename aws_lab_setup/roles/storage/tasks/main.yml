@@ -16,7 +16,7 @@
 
 - name: Get working environments
   uri:
-    url:  https://{{ cloud_mgr }}:443/occm/api/vsa/working-environments
+    url:  https://{{ cloud_mgr }}:443/occm/api/vsa/working-environments/VsaWorkingEnvironment-3OL5pqPI
     method: GET
     validate_certs: no
     return_content: yes
