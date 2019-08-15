@@ -47,7 +47,7 @@
 
     - name: debug systemManagerUrl
       set_fact:
-        workspace{{item}}_ip: "{{ cluster_Properties.json[item|int]['clusterProperties']['systemManagerUrl'] | urlsplit('hostname') }}"
+        workspace_{{item}}_ip: "{{ cluster_Properties.json[item|int]['clusterProperties']['systemManagerUrl'] | urlsplit('hostname') }}"
       with_sequence: start=0 end="{{ end_count }}"
 
 
@@ -60,7 +60,7 @@
 
     - name: loop test
       debug:
-        var: workspace{{item}}_ip
+        var: workspace_{{item}}_ip
       with_sequence: start=0 end="{{ end_count }}"
 
       #loop: "{{ cluster_Properties.json | json_query('clusterProperties.lifs[*].lifType') }}"
