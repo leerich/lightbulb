@@ -1,4 +1,7 @@
-
-
-[storage]
-hostname ansible_host={{ workspace_ips[item|int] }}
+[all:vars]
+hostname={{ workspace_ips[item|int] }}
+username=admin
+password={{workshop_password}}
+netapp_hostname={{ workspace_ips[item|int] }}
+netapp_username=admin
+netapp_password={{workshop_password}}
