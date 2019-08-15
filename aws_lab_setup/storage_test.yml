@@ -14,7 +14,8 @@
   hosts: all
   become: no
   gather_facts: no
-
+  vars:
+    end_count: "{{ student_count_end|int - 1 }}"
   tasks:
 
     - name: Login to OnTap Instance
@@ -47,7 +48,7 @@
     - name: debug systemManagerUrl
       debug:
         msg: "{{ cluster_Properties.json[item]['clusterProperties']['systemManagerUrl'] | urlsplit('hostname') }}"
-      with_sequence: start=0 end="{{ student_count_end }}-1"
+      with_sequence: start=0 end="{{ end_count }}"
 
 
     - name: display clusterIP
