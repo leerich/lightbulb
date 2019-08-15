@@ -58,5 +58,5 @@
     - name: parse only cluster IP
       command: echo {{ item }}
       loop: "{{ clusterIPs }}"
-      
+      when: "{{ clusterIPs.lifType == 'Cluster Management'}}"
       #loop: "{{ cluster_Properties.json | json_query('clusterProperties.lifs[*].lifType') }}"
