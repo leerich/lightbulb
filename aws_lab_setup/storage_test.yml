@@ -47,11 +47,8 @@
     - name: debug systemManagerUrl
       debug:
         msg: "{{ cluster_Properties.json[item]['clusterProperties']['systemManagerUrl'] | urlsplit('hostname') }}"
-      with_items:
-        - 0
-        - 1
-        - 2
-      
+      with_sequence: start=0 end="{{ student_count_end }}-1"
+
 
     - name: display clusterIP
       debug: var=clusterIP
