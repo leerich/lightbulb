@@ -43,8 +43,8 @@
 
 - debug: var=workspace_ips
 
-- name: Generate Student Inventories
-  template:
-    src: instances.txt.j2
-    dest: ./workspace-{{item}}.txt
-  with_items: {{ workspace_ips }}
+#- name: Generate Student Inventories
+#  template:
+#    src: instances.txt.j2
+#    dest: ./workspace-{{item}}.txt
+#  with_items: ""{{ workspace_ips }}""
