@@ -24,3 +24,5 @@
     headers:
       Cookie: "{{ login.set_cookie }}"
   register: working_envs
+
+- debug: var=working_envs
