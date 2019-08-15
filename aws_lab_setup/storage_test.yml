@@ -46,3 +46,8 @@
 
     - name: display clusterIP
       debug: var=clusterIP
+
+    - name: loop test
+      debug:
+        var: item
+      loop: "{{ cluster_Properties.json | json_query('clusterProperties.lifs[*].lifType') }}"
