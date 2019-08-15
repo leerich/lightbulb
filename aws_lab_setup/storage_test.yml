@@ -47,7 +47,7 @@
 
     - name: debug systemManagerUrl
       debug:
-        msg: "{{ cluster_Properties.json[item]['clusterProperties']['systemManagerUrl'] | urlsplit('hostname') }}"
+        msg: "{{ cluster_Properties.json[item|int]['clusterProperties']['systemManagerUrl'] | urlsplit('hostname') }}"
       with_sequence: start=0 end="{{ end_count }}"
 
 
