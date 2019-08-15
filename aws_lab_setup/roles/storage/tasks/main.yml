@@ -1,4 +1,7 @@
 ---
+- name: set end end_count
+  set_fact:
+    end_count: "{{ student_count_end|int - 1 }}"
 
 - name: Create AWS Account Template
   template:
@@ -14,70 +17,31 @@
     status_code: 204
   register: login
 
-- name: See if Cloud Credential Already Exists
+- name: Get Cluster Properties
   uri:
-    url:  https://{{ cloud_mgr }}:443/occm/api/accounts
-    method: GET
+    url: https://{{ cloud_mgr }}:443/occm/api/vsa/working-environments?fields=clusterProperties
+    method: Get
     validate_certs: no
     return_content: yes
     status_code: 200
     headers:
       Cookie: "{{ login.set_cookie }}"
-  register: cloud_cred_json
+  register: cluster_Properties
 
-- debug: var=cloud_cred_json
+- name: debug clusterProperties
+  debug: var=cluster_Properties
 
-- set_fact:
-    cloud_cred_raw: "{{ cloud_cred_json.json.awsAccounts}}"
-  #when: cloud_cred_json.json.awsAccounts.publicId is defined
-  #loop: "{{ (cloud_cred_json.json|from_json) }}"
+- name: parse clusterProperties
+  set_fact:
+    clusterIP: "{{ cluster_Properties.json[0]['clusterProperties']['lifs'][0]['ip'] }}"
 
-- name: debug cloud_cred_raw
-  debug: var=cloud_cred_raw
+- name: Set Workspace IP Address
+  set_fact:
+    workspace_{{item}}_ip: "{{ cluster_Properties.json[item|int]['clusterProperties']['systemManagerUrl'] | urlsplit('hostname') }}"
+  with_sequence: start=0 end="{{ end_count }}"
 
-- debug:
-    msg: "{{ cloud_cred_raw[0]['publicId'] }}"
-
-- set_fact:
-    cloud_cred: "{{ cloud_cred_raw[0]['publicId'] }}"
-
-- debug: var=cloud_cred
-
-- name: Create AWS Account Credential
-  uri:
-    url:  https://{{ cloud_mgr }}:443/occm/api/accounts/aws
-    method: POST
-    body_format: json
-    body: "{{ lookup('file','aws-account.txt') }}"
-    validate_certs: no
-    status_code: 200
-    headers:
-      Cookie: "{{ login.set_cookie }}"
-  ignore_errors: yes
-  when: cloud_cred.value["publicId"] is defined
-
-- name: Create storage directory if it doesn't exist
-  file:
-    path: storage_temp
-    owner: awx
-    group: awx
-    state: directory
-
-
-- name: Create Workspace Templates
+- name: Generate Student Inventories
   template:
-    src: workspace.j2
-    dest: ./storage_temp/{{ item.username }}-workspace.txt
-  with_items: "{{ users }}"
-
-- name: Create new working environment
-  uri:
-    url: http://{{ cloud_mgr }}:80/occm/api/vsa/working-environments
-    method: POST
-    body_format: json
-    body: "{{ lookup('file','./storage_temp/{{ item.username }}-workspace.txt') }}"
-    headers:
-      Cookie: "{{ login.set_cookie }}"
-    status_code: 200, 201, 202, 203, 204
-  with_items: "{{ users }}"
-  ignore_errors: yes
+    src: instances.txt.j2
+    dest: ./workspace-{{item}}.txt
+  with_sequence: start=0 end="{{ end_count }}"
