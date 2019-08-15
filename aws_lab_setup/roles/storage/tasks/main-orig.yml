@@ -1,0 +1,82 @@
+---
+
+- name: Create AWS Account Template
+  template:
+    src: account.j2
+    dest: ./aws-account.txt
+
+- name: Login to OnTap Instance
+  uri:
+    url:  http://{{ cloud_mgr }}:80/occm/api/auth/login
+    method: POST
+    body_format: json
+    body: { "email": "{{ email_addr }}", "password": "{{ cloud_mgr_password }}" }
+    status_code: 204
+  register: login
+
+- name: See if Cloud Credential Already Exists
+  uri:
+    url:  https://{{ cloud_mgr }}:443/occm/api/accounts
+    method: GET
+    validate_certs: no
+    return_content: yes
+    status_code: 200
+    headers:
+      Cookie: "{{ login.set_cookie }}"
+  register: cloud_cred_json
+
+- debug: var=cloud_cred_json
+
+- set_fact:
+    cloud_cred_raw: "{{ cloud_cred_json.json.awsAccounts}}"
+  #when: cloud_cred_json.json.awsAccounts.publicId is defined
+  #loop: "{{ (cloud_cred_json.json|from_json) }}"
+
+- name: debug cloud_cred_raw
+  debug: var=cloud_cred_raw
+
+- debug:
+    msg: "{{ cloud_cred_raw[0]['publicId'] }}"
+
+- set_fact:
+    cloud_cred: "{{ cloud_cred_raw[0]['publicId'] }}"
+
+- debug: var=cloud_cred
+
+- name: Create AWS Account Credential
+  uri:
+    url:  https://{{ cloud_mgr }}:443/occm/api/accounts/aws
+    method: POST
+    body_format: json
+    body: "{{ lookup('file','aws-account.txt') }}"
+    validate_certs: no
+    status_code: 200
+    headers:
+      Cookie: "{{ login.set_cookie }}"
+  ignore_errors: yes
+  when: cloud_cred.value["publicId"] is defined
+
+- name: Create storage directory if it doesn't exist
+  file:
+    path: storage_temp
+    owner: awx
+    group: awx
+    state: directory
+
+
+- name: Create Workspace Templates
+  template:
+    src: workspace.j2
+    dest: ./storage_temp/{{ item.username }}-workspace.txt
+  with_items: "{{ users }}"
+
+- name: Create new working environment
+  uri:
+    url: http://{{ cloud_mgr }}:80/occm/api/vsa/working-environments
+    method: POST
+    body_format: json
+    body: "{{ lookup('file','./storage_temp/{{ item.username }}-workspace.txt') }}"
+    headers:
+      Cookie: "{{ login.set_cookie }}"
+    status_code: 200, 201, 202, 203, 204
+  with_items: "{{ users }}"
