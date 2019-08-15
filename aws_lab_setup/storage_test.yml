@@ -1,0 +1,31 @@
+---
+- name: Generate users list
+  hosts: localhost
+  connection: local
+  become: no
+  gather_facts: no
+
+  tasks:
+    - name: generate users list
+      set_fact:
+        users: "{{ users|default([]) + [ {'name': 'student' + item, 'username': 'student' + item, 'email': 'student' + item + '@example.com'} ] }}"
+      with_sequence: start="{{ student_count_start }}" end="{{ student_count_end }}"
+
+
+#- name: Create lab instances in AWS
+#  hosts: localhost
+#  connection: local
+#  become: no
+#  gather_facts: no
+#  roles:
+#    - manage_ec2_instances
+
+
+- name: Provision Storage Resources
+  hosts: all
+  become: no
+  gather_facts: no
+
+  tasks:
+    - name: import tasks
+      import_tasks: ./role/storage/main-orig.yml
