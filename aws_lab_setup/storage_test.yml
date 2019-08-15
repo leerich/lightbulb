@@ -1,15 +1,4 @@
 ---
-- name: Generate users list
-  hosts: localhost
-  connection: local
-  become: no
-  gather_facts: no
-
-  tasks:
-    - name: generate users list
-      set_fact:
-        users: "{{ users|default([]) + [ {'name': 'student' + item, 'username': 'student' + item, 'email': 'student' + item + '@example.com'} ] }}"
-      with_sequence: start="{{ student_count_start }}" end="{{ student_count_end }}"
 
 
 #- name: Create lab instances in AWS
@@ -27,5 +16,26 @@
   gather_facts: no
 
   tasks:
-    - name: import tasks
-      import_tasks: ./roles/storage/tasks/main-orig.yml
+
+    - name: Login to OnTap Instance
+      uri:
+        url:  http://{{ cloud_mgr }}:80/occm/api/auth/login
+        method: POST
+        body_format: json
+        body: { "email": "{{ email_addr }}", "password": "{{ cloud_mgr_password }}" }
+        status_code: 204
+      register: login
+
+    - name: Get Cluster Properties
+      uri:
+        url: https://{{ cloud_mgr }}:443/occm/api/vsa/working-environments?fields=clusterProperties
+        method: Get
+        validate_certs: no
+        return_content: yes
+        status_code: 200
+        headers:
+          Cookie: "{{ login.set_cookie }}"
+      register: clusterProperties
+
+    - name: debug clusterProperties
+      debug: var=clusterProperties
