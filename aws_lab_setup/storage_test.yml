@@ -35,7 +35,14 @@
         status_code: 200
         headers:
           Cookie: "{{ login.set_cookie }}"
-      register: clusterProperties
+      register: cluster_Properties
 
     - name: debug clusterProperties
-      debug: var=clusterProperties
+      debug: var=cluster_Properties
+
+    - name: parse clusterProperties
+      set_fact:
+        clusterIP: "{{ cluster_Properties.json.clusterProperties.lifs[0]['ip'] }}"
+
+    - name: display clusterIP
+      debug: var=clusterIP
