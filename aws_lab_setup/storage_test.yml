@@ -61,6 +61,6 @@
     - name: loop test
       debug:
         var: mgmtIP{{item}}
-
+      with_sequence: start=0 end="{{ end_count }}"
 
       #loop: "{{ cluster_Properties.json | json_query('clusterProperties.lifs[*].lifType') }}"
