@@ -47,7 +47,11 @@
     - name: display clusterIP
       debug: var=clusterIP
 
+    - name: parse clusterProperties
+      set_fact:
+        clusterIPs: "{{ cluster_Properties.json[0]['clusterProperties']['lifs'] }}"
+
     - name: loop test
       debug:
-        var: item
-      loop: "{{ cluster_Properties.json | json_query('clusterProperties.lifs[*].lifType') }}"
+        var: clusterIPs
+      #loop: "{{ cluster_Properties.json | json_query('clusterProperties.lifs[*].lifType') }}"
