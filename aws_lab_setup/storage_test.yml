@@ -46,8 +46,13 @@
 
     - name: debug systemManagerUrl
       debug:
-        msg: "{{ cluster_Properties.json[*]['clusterProperties']['systemManagerUrl'] }}"
-
+        msg: "{{ cluster_Properties.json[item]['clusterProperties']['systemManagerUrl'] }}"
+      with_items:
+        - 0
+        - 1
+        - 2
+        - 3
+        
     - name: display clusterIP
       debug: var=clusterIP
 
