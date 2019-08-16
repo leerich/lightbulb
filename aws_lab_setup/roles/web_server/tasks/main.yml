@@ -6,8 +6,26 @@
   command: /usr/bin/ansible-tower-service stop
   become: true
   ignore_errors: yes
-  
-  
+
+- name: Turn off SELinux
+  command: /usr/sbin/setenforce 0
+  become: true
+  ignore_errors: no
+
+- name: RHEL | Disable SELinux
+  selinux:
+    state: permissive
+    policy: targeted
+  register: selinux_disable
+#  notify:
+#    - reboot
+#    - wait for instance
+#  tags:
+#    - common
+  ignore_errors: yes
+  become: true
+
+
 - name: install httpd
   package: name=httpd state=latest
   become: true
@@ -48,7 +66,7 @@
     dest: /var/www/html/decks
     owner: apache
     group: apache
-           
+
 - name: copy license key
   vars:
     license_key: !vault |
