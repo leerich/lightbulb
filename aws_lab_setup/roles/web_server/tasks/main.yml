@@ -60,12 +60,12 @@
     owner: apache
     group: apache
 
-- name: transfer tower exercises from google docs
-  get_url:
-    url: https://docs.google.com/document/d/1k8QXD4lSUp4gM_vjjjlC-ZXrzePYerzFhaNyP_bG3bQ/export?format=pdf
-    dest: /var/www/html/decks
-    owner: apache
-    group: apache
+#- name: transfer tower exercises from google docs
+#  get_url:
+#    url: https://docs.google.com/document/d/1k8QXD4lSUp4gM_vjjjlC-ZXrzePYerzFhaNyP_bG3bQ/export?format=pdf
+#    dest: /var/www/html/decks
+#    owner: apache
+#    group: apache
 
 - name: copy license key
   vars:

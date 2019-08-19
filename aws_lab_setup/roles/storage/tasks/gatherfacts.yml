@@ -1,6 +1,6 @@
 ---
-- hosts: localhost
-  name: Volume Action
+- hosts: all
+  name: GATHER INFORMATION FROM STORAGE
   gather_facts: no
   vars:
     vserver: svm_{{ vserver_name }}

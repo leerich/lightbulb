@@ -1,0 +1,24 @@
+---
+- hosts: localhost
+  name: Volume Action
+  gather_facts: no
+  vars:
+    vserver: svm_{{ vserver_name }}
+    aggr: aggr1
+    vol_name: ansibleVol
+  tasks:
+  - name: Volume Create
+    na_ontap_volume:
+      state: absent
+      name: "{{ vol_name }}"
+      vserver: "{{ vserver }}"
+      aggregate_name: "{{ aggr }}"
+      size: 4
+      size_unit: gb
+      policy: default
+      junction_path: "/{{ vol_name }}"
+      hostname: "{{ hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      https: true
+      validate_certs: false
