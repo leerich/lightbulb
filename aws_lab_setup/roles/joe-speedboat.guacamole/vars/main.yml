@@ -11,7 +11,7 @@ guacamole_packages_EL:
   - {package: "ghostscript"}
   - {package: "java-1.8.0-openjdk"}
   - {package: "libguac"}
-  - {package: "libguac-client-rdp"}
+  #- {package: "libguac-client-rdp"}
   - {package: "libguac-client-ssh"}
   - {package: "libguac-client-vnc"}
   - {package: "libjpeg-turbo-devel"}
