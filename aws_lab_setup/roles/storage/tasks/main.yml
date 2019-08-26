@@ -35,9 +35,10 @@
 - name: debug cloud_cred_raw
   debug: var=cloud_cred_raw
 
+
 - debug:
     msg: "{{ cloud_cred_raw[0]['publicId'] }}"
-  ignore_errors: yes
+  when: cloud_cred_raw is defined
 
 - set_fact:
     cloud_cred: "{{ cloud_cred_raw[0]['publicId'] }}"
