@@ -56,12 +56,13 @@
 
 - name: Enable http on the cluster
   na_ontap_command:
-    hostname: "{{ workspace_ips[item|int] }}"
+    hostname: "{{ item }}"
     username: "{{ netapp_username }}"
     password: "{{ svm_password }}"
     https: true
     validate_certs: false
     privilege: advanced
     command: 'system services web modify -http-enabled true'
-  with_sequence: start=0 count="{{ student_count_end }}"
+  #with_sequence: start=0 count="{{ student_count_end }}"
+  with_items: workspace_ips
   ignore_errors: yes
