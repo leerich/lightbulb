@@ -53,3 +53,5 @@
     dest: ./storage_temp/student{{item}}-workspace.txt
   with_sequence: start=0 end="{{ end_count }}"
   #with_items: "{{ workspace_ips }}"
+  
+ - include_tasks: setup.yml
