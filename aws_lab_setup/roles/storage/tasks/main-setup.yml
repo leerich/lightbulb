@@ -54,7 +54,7 @@
 - name: Generate Student Inventories
   template:
     src: instances.txt.j2
-    dest: ./storage_temp/student{{item.username}}-instances.txt
+    dest: ./storage_temp/{{item.username}}-instances.txt
   #with_sequence: start=0 end="{{ end_count }}"
   with_items: "{{ users }}"
 
