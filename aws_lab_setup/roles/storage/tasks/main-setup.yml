@@ -58,7 +58,7 @@
   na_ontap_command:
     hostname: "{{ item }}"
     username: "{{ netapp_username }}"
-    password: "{{ svm_password }}"
+    password: "{{ netapp_password }}"
     https: true
     validate_certs: false
     privilege: advanced
