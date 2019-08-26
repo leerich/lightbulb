@@ -65,4 +65,4 @@
     command: 'system services web modify -http-enabled true'
   #with_sequence: start=0 count="{{ student_count_end }}"
   with_items: workspace_ips
-  ignore_errors: yes
+  ignore_errors: no
