@@ -7,10 +7,10 @@
   set_fact:
     workspace_ips: []
 
-- name: Create AWS Account Template
-  template:
-    src: account.j2
-    dest: ./aws-account.txt
+#- name: Create AWS Account Template
+#  template:
+#    src: account.j2
+#    dest: ./aws-account.txt
 
 - name: Login to OnTap Instance
   uri:
