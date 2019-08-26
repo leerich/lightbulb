@@ -60,6 +60,8 @@
   ignore_errors: yes
   when: cloud_cred.raw[0]['publicId'] is not defined
 
+- pause:
+
 - name: Create storage directory if it doesn't exist
   file:
     path: storage_temp
