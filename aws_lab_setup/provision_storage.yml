@@ -82,6 +82,6 @@
       ignore_errors: yes
       delegate_to: "{{ aws_tower }}"
       register: result
-      until: result.rc == 0
-      retries: 10
-      delay: 120
+      #until: result.rc == 0
+      #retries: 10
+      #delay: 120
