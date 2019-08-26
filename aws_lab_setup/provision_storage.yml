@@ -33,3 +33,32 @@
   gather_facts: no
   roles:
     - storage
+
+- name: create Route53 domain names for control nodes
+  hosts: localhost
+  connection: local
+  become: no
+  gather_facts: no
+  roles:
+    - domain-names
+
+- name: Configure common options on managed nodes and control nodes
+  hosts: "managed_nodes:control_nodes"
+  become: yes
+  roles:
+    - user_accounts
+    - common
+
+- name: Configure control node
+  hosts: control_nodes
+  become: yes
+  roles:
+    - control_node
+
+- name: Install Ansible tower
+  hosts: control_nodes
+  become: yes
+  gather_facts: no
+  roles:
+    #- ansible-tower
+    - { role: ansible-tower, when: tower_install }
