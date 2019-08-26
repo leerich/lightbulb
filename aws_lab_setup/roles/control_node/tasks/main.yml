@@ -141,4 +141,12 @@
       owner: "{{ username }}"
       group: "{{ username }}"
     when: username in inventory_hostname
+
+  - name: create storage workshop directory
+    file:
+      dest: "{{ ~/storage-workshop }}"
+      owner: "{{ username }}"
+      group: "{{ username }}"
+      state: directory
+      mode: '0755'
   when: storage_workshop
