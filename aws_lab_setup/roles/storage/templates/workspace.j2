@@ -15,9 +15,9 @@
     "instanceType": "m5.xlarge"
   },
   "writingSpeedState": "NORMAL",
-  "subnetId": "subnet-7e169435",
+  "subnetId": "{{ ec2_vpc_subnet_id }}",
   "svmPassword": "{{svm_password }}",
-  "vpcId": "vpc-37d1504f",
+  "vpcId": "{{ ec2_vpc_id }}",
   "ontapEncryptionParameters": null,
   "ebsVolumeType": "gp2",
   "ebsVolumeSize": {
