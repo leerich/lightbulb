@@ -42,8 +42,10 @@
 
 - set_fact:
     cloud_cred: "{{ cloud_cred_raw[0]['publicId'] }}"
+  when: cloud_cred_raw[0]['publicId'] is defined
 
 - debug: var=cloud_cred
+  when: cloud_cred_raw[0]['publicId'] is defined
 
 - name: Create AWS Account Credential
   uri:
@@ -56,7 +58,7 @@
     headers:
       Cookie: "{{ login.set_cookie }}"
   ignore_errors: yes
-  when: cloud_cred.value["publicId"] is defined
+  when: cloud_cred.raw[0]['publicId'] is not defined
 
 - name: Create storage directory if it doesn't exist
   file:
