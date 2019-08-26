@@ -47,6 +47,10 @@
 
 - debug: var=workspace_ips
 
+- name: set fact all_workspace_ips
+  set_fact:
+    all_workspace_ips: "{{ workspace_ips }}"
+
 - name: Generate Student Inventories
   template:
     src: instances.txt.j2
@@ -54,16 +58,17 @@
   with_sequence: start=0 end="{{ end_count }}"
   #with_items: "{{ workspace_ips }}"
 
-- name: Enable http on the cluster
-  na_ontap_command:
-    hostname: "{{ item }}"
-    username: "{{ netapp_username }}"
-    password: "{{ netapp_password }}"
-    https: true
-    validate_certs: false
-    privilege: advanced
-    command: 'system services web modify -http-enabled true'
-  #with_sequence: start=0 count="{{ student_count_end }}"
-  with_items: "{{ workspace_ips }}"
-  ignore_errors: no
-  delegate_to: "{{ aws_tower }}"
+
+#- name: Enable http on the cluster
+#  na_ontap_command:
+#    hostname: "{{ item }}"
+#    username: "{{ netapp_username }}"
+#    password: "{{ netapp_password }}"
+#    https: true
+#    validate_certs: false
+#    privilege: advanced
+#    command: 'system services web modify -http-enabled true'
+#  #with_sequence: start=0 count="{{ student_count_end }}"
+#  with_items: "{{ all_workspace_ips }}"
+#  ignore_errors: no
+#  delegate_to: "{{ aws_tower }}"
