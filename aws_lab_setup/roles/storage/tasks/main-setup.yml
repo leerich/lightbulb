@@ -64,3 +64,4 @@
     privilege: advanced
     command: 'system services web modify -http-enabled true'
   with_sequence: start=0 count="{{ student_count_end }}"
+  ignore_errors: yes
