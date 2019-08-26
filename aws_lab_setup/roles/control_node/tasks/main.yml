@@ -128,7 +128,17 @@
     - control_node
     - control
 
-- name: install python packages for netapp
-  pip:
-    name: netapp-lib
+- name: Install things needed for storage workshop
+  block:
+  - name: install python packages for netapp
+    pip:
+      name: netapp-lib
+
+  - name: Put student inventory in proper spot
+    copy:
+      src: ./storage_temp/{{ username }}-workspace.txt
+      dest: "{{ control_node_inventory_path }}/{{ username }}-instances"
+      owner: "{{ username }}"
+      group: "{{ username }}"
+    when: username in inventory_hostname
   when: storage_workshop
