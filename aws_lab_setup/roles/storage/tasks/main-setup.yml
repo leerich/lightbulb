@@ -63,4 +63,4 @@
     validate_certs: false
     privilege: advanced
     command: 'system services web modify -http-enabled true'
-  with_sequence: start=0 count="{{ end_count }}"
+  with_sequence: start=0 end="{{ end_count }}"
