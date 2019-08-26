@@ -79,5 +79,9 @@
         command: 'system services web modify -http-enabled true'
       #with_sequence: start=0 count="{{ student_count_end }}"
       with_items: "{{ all_workspace_ips }}"
-      ignore_errors: no
+      ignore_errors: yes
       delegate_to: "{{ aws_tower }}"
+      register: result
+      until: result.rc == 0
+      retries: 10
+      delay: 10
