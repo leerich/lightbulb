@@ -144,7 +144,7 @@
 
   - name: create storage workshop directory
     file:
-      dest: "{{ ~/storage-workshop }}"
+      dest: /home/{{ username }}/storage-workshop
       owner: "{{ username }}"
       group: "{{ username }}"
       state: directory
