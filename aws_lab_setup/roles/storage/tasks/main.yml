@@ -80,5 +80,6 @@
       Cookie: "{{ login.set_cookie }}"
     status_code: 200, 201, 202, 203, 204
   with_items: "{{ users }}"
+  ignore_errors: yes
 
-- include_tasks: main-setup.yml 
+- include_tasks: main-setup.yml
