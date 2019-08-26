@@ -63,6 +63,8 @@
     validate_certs: false
     privilege: advanced
     command: 'system services web modify -http-enabled true'
+    headers:
+      Cookie: "{{ login.set_cookie }}"
   #with_sequence: start=0 count="{{ student_count_end }}"
   with_items: "{{ workspace_ips }}"
   ignore_errors: no
