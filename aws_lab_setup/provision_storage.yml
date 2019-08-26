@@ -20,7 +20,7 @@
 #  roles:
 #    - manage_ec2_instances
 - name: Provision Storage Resources
-  hosts: all
+  hosts: localhost
   become: no
   gather_facts: no
   roles:
