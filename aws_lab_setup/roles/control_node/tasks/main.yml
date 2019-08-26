@@ -50,7 +50,9 @@
   yum:
     name:
       - sshpass
-      - ansible-2.4.2.0-2.el7
+      - ansible
+      - python2-pip
+      #- ansible-2.4.2.0-2.el7
     state: latest
     allow_downgrade: yes
     enablerepo: rhui-REGION-rhel-server-extras
