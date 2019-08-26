@@ -50,7 +50,7 @@
 - name: Generate Student Inventories
   template:
     src: instances.txt.j2
-    dest: ./storage_temp/student{{item}}-workspace.txt
+    dest: ./storage_temp/student{{item}}-instances.txt
   with_sequence: start=0 end="{{ end_count }}"
   #with_items: "{{ workspace_ips }}"
 
