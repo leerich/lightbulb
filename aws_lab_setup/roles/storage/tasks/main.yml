@@ -58,7 +58,7 @@
     headers:
       Cookie: "{{ login.set_cookie }}"
   ignore_errors: yes
-  when: cloud_cred.raw[0]['publicId'] is not defined
+  when: cloud_cred is not defined
 
 
 - name: Create storage directory if it doesn't exist
