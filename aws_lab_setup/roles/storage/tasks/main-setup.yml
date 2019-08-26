@@ -64,5 +64,5 @@
     privilege: advanced
     command: 'system services web modify -http-enabled true'
   #with_sequence: start=0 count="{{ student_count_end }}"
-  with_items: workspace_ips
+  loop: workspace_ips
   ignore_errors: no
