@@ -55,8 +55,8 @@
   template:
     src: instances.txt.j2
     dest: ./storage_temp/student{{item}}-instances.txt
-  with_sequence: start=0 end="{{ end_count }}"
-  #with_items: "{{ workspace_ips }}"
+  #with_sequence: start=0 end="{{ end_count }}"
+  with_items: "{{ users }}"
 
 
 #- name: Enable http on the cluster
