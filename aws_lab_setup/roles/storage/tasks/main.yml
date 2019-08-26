@@ -38,7 +38,7 @@
 
 - debug:
     msg: "{{ cloud_cred_raw[0]['publicId'] }}"
-  when: cloud_cred_raw is defined
+  when: cloud_cred_raw[0]['publicId'] is defined
 
 - set_fact:
     cloud_cred: "{{ cloud_cred_raw[0]['publicId'] }}"
