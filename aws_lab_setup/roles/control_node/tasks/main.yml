@@ -125,3 +125,8 @@
   tags:
     - control_node
     - control
+
+- name: install python packages for netapp
+  pip:
+    name: netapp-lib
+  when: storage_workshop
