@@ -1,0 +1,57 @@
+---
+- name: set end end_count
+  set_fact:
+    end_count: "{{ student_count_end|int - 1 }}"
+
+- name: set fact
+  set_fact:
+    workspace_ips: []
+
+- name: Create AWS Account Template
+  template:
+    src: account.j2
+    dest: ./aws-account.txt
+
+- name: Login to OnTap Instance
+  uri:
+    url:  http://{{ cloud_mgr }}:80/occm/api/auth/login
+    method: POST
+    body_format: json
+    body: { "email": "{{ email_addr }}", "password": "{{ cloud_mgr_password }}" }
+    status_code: 204
+  register: login
+
+- name: Get Cluster Properties
+  uri:
+    url: https://{{ cloud_mgr }}:443/occm/api/vsa/working-environments?fields=clusterProperties
+    method: Get
+    validate_certs: no
+    return_content: yes
+    status_code: 200
+    headers:
+      Cookie: "{{ login.set_cookie }}"
+  register: cluster_Properties
+
+- name: debug clusterProperties
+  debug: var=cluster_Properties
+
+#- name: parse clusterProperties
+#  set_fact:
+#    clusterIP: "{{ cluster_Properties.json[0]['clusterProperties']['lifs'][0]['ip'] }}"
+#
+- name: Set Workspace IP Address
+  set_fact:
+    workspace_{{item}}_ip: "{{ cluster_Properties.json[item|int]['clusterProperties']['systemManagerUrl'] | urlsplit('hostname') }}"
+    workspace_ips: "{{workspace_ips}} + [ '{{ cluster_Properties.json[item|int]['clusterProperties']['systemManagerUrl'] | urlsplit('hostname') }}']"
+  with_sequence: start=0 end="{{ end_count }}"
+
+- debug: var=workspace_ips
+
+- name: Generate Student Inventories
+  template:
+    src: instances.txt.j2
+    dest: ./storage_temp/student{{item}}-workspace.txt
+  with_sequence: start=0 end="{{ end_count }}"
+  #with_items: "{{ workspace_ips }}"
+  
+- include_tasks: setup.yml
