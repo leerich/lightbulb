@@ -134,6 +134,14 @@
     pip:
       name: netapp-lib
 
+  - name: Assemble student inventory File
+    assemble:
+      src: ./storage_temp
+      dest: "{{ control_node_inventory_path }}/{{ username }}-assembeledinstances"
+      regexp: "{{ username }}-"
+    when: username in inventory_hostname
+
+
   - name: Put student inventory in proper spot
     copy:
       src: ./storage_temp/{{ username }}-ontapinstances.txt
@@ -149,4 +157,5 @@
       group: "{{ username }}"
       state: directory
       mode: '0755'
+
   when: storage_workshop
