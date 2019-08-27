@@ -67,8 +67,8 @@
     hostname: "{{ workspace_ips[item|int] }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
-    https: true
-    validate_certs: false
+    #https: true
+    #validate_certs: false
     privilege: advanced
     command: 'system services web modify -http-enabled true'
   with_sequence: start=1 count="{{ student_count_end }}"
