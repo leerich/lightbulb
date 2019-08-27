@@ -55,10 +55,10 @@
   set_fact:
     all_workspace_ips: "{{ workspace_ips }}"
 
-- name: Generate Student Inventories
+- name: Generate Ontap Student Inventories
   template:
     src: instances.txt.j2
-    dest: ./storage_temp/student{{item}}-instances.txt
+    dest: ./storage_temp/student{{item}}-ontapinstances.txt
   with_sequence: start=1 end="{{ student_count_end }}"
   #with_items: "{{ users }}"
 

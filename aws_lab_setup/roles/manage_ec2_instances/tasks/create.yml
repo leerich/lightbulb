@@ -62,6 +62,13 @@
     - users
     - user_accounts
 
+- name: Generate student inventories for storage workshop
+  template:
+    src: instances.txt.j2
+    dest: ./storage_temp/{{ item.username }}-instances.txt
+  with_items: "{{ users }}"
+  when: storage_workshop
+
 - name: Generate instructor inventory
   template:
     src: instructor_inventory.j2
