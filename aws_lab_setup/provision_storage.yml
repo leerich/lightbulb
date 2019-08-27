@@ -64,24 +64,24 @@
     #- ansible-tower
     - { role: ansible-tower, when: tower_install }
 
-- name: Enable http on the cluster
-  hosts: "{{ aws_tower }}"
-  become: no
-  gather_facts: no
-  tasks:
-    - na_ontap_command:
-        hostname: "{{ all_workspace_ips[item] }}"
-        username: "{{ netapp_username }}"
-        password: "{{ netapp_password }}"
-        https: true
-        validate_certs: false
-        privilege: advanced
-        command: 'system services web modify -http-enabled true'
-      with_sequence: start=1 count="{{ student_count_end }}"
-      #with_items: "{{ all_workspace_ips }}"
-      ignore_errors: yes
-      delegate_to: "{{ aws_tower }}"
-      register: result
+#- name: Enable http on the cluster
+#  hosts: "{{ aws_tower }}"
+#  become: no
+#  gather_facts: no
+#  tasks:
+#    - na_ontap_command:
+#        hostname: "{{ all_workspace_ips[item] }}"
+#        username: "{{ netapp_username }}"
+#        password: "{{ netapp_password }}"
+#        https: true
+#        validate_certs: false
+#        privilege: advanced
+#        command: 'system services web modify -http-enabled true'
+#      with_sequence: start=1 count="{{ student_count_end }}"
+#      #with_items: "{{ all_workspace_ips }}"
+#      ignore_errors: yes
+#      #delegate_to: "{{ aws_tower }}"
+#      register: result
       #until: result.rc == 0
       #retries: 10
       #delay: 120
