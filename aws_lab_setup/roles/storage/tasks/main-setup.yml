@@ -75,7 +75,7 @@
   #with_items: "{{ all_workspace_ips }}"
   ignore_errors: no
   delegate_to: "{{ aws_tower }}"
-  register: result
+  #register: result
 #- name: Enable http on the cluster
 #  na_ontap_command:
 #    hostname: "{{ item }}"
