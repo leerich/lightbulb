@@ -136,7 +136,7 @@
 
   - name: Assemble student inventory File
     assemble:
-      src: ./student_instances/
+      src: "{{ control_node_inventory_path }}/"
       dest: "{{ control_node_inventory_path }}/{{ username }}-assembeledinstances"
       regexp: "{{ username }}-"
     when: username in inventory_hostname
