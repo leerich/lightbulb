@@ -137,7 +137,7 @@
   - name: Put student inventory in proper spot
     copy:
       src: ./storage_temp/{{ username }}-ontapinstances.txt
-      dest: "{{ control_node_inventory_path }}/{{ username }}-instances"
+      dest: "{{ control_node_inventory_path }}/{{ username }}-ontapinstances"
       owner: "{{ username }}"
       group: "{{ username }}"
     when: username in inventory_hostname
