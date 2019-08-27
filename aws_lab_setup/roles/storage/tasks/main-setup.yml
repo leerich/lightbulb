@@ -64,14 +64,15 @@
 
 - name: Enable http on the cluster
   na_ontap_command:
-    hostname: "{{ all_workspace_ips[item|int] }}"
+    #hostname: "{{ all_workspace_ips[item|int] }}"
+    hostname: "{{ cluster_Properties.json[item|int]['clusterProperties']['systemManagerUrl'] | urlsplit('hostname') }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
     #https: true
     #validate_certs: false
     privilege: advanced
     command: 'system services web modify -http-enabled true'
-  with_sequence: start=1 count="{{ student_count_end }}"
+  with_sequence: start=0 count="{{ end_count }}"
   #with_items: "{{ all_workspace_ips }}"
   ignore_errors: no
   delegate_to: "{{ aws_tower }}"
