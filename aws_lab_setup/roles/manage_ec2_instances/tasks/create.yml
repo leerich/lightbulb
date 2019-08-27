@@ -65,7 +65,7 @@
 - name: Generate student inventories for storage workshop
   template:
     src: storageinstances.txt.j2
-    dest: ./storage_temp/{{ item.username }}-instances.txt
+    dest: ./student_instances/{{ item.username }}-instances.txt
   with_items: "{{ users }}"
   when: storage_workshop
 

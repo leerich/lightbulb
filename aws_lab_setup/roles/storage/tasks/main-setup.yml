@@ -58,7 +58,7 @@
 - name: Generate Ontap Student Inventories
   template:
     src: instances.txt.j2
-    dest: ./storage_temp/student{{item}}-ontapinstances.txt
+    dest: ./student_instances/student{{item}}-ontapinstances.txt
   with_sequence: start=1 end="{{ student_count_end }}"
   #with_items: "{{ users }}"
 
