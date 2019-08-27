@@ -59,7 +59,7 @@
   template:
     src: instances.txt.j2
     dest: ./storage_temp/student{{item}}-instances.txt
-  with_sequence: start=1 end="{{ end_count }}"
+  with_sequence: start=1 end="{{ student_count_end }}"
   #with_items: "{{ users }}"
 
 
