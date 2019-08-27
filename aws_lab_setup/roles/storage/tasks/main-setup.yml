@@ -73,7 +73,7 @@
     command: 'system services web modify -http-enabled true'
   with_sequence: start=1 count="{{ student_count_end }}"
   #with_items: "{{ all_workspace_ips }}"
-  ignore_errors: yes
+  ignore_errors: no
   #delegate_to: "{{ aws_tower }}"
   register: result
 #- name: Enable http on the cluster
