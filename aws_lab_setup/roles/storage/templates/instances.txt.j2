@@ -1,7 +1,7 @@
 [all:vars]
-hostname={{ workspace_ips[item|int] }}
+hostname={{ workspace_ips[item-1|int] }}
 username=admin
 password={{svm_password}}
-netapp_hostname={{ workspace_ips[item|int] }}
+netapp_hostname={{ workspace_ips[item-1|int] }}
 netapp_username=admin
 netapp_password={{svm_password}}
