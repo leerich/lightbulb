@@ -54,9 +54,9 @@
 - name: Generate Student Inventories
   template:
     src: instances.txt.j2
-    dest: ./storage_temp/{{item.username}}-instances.txt
-  #with_sequence: start=0 end="{{ end_count }}"
-  with_items: "{{ users }}"
+    dest: ./storage_temp/student{{item + 1|int}}-instances.txt
+  with_sequence: start=0 end="{{ end_count }}"
+  #with_items: "{{ users }}"
 
 
 #- name: Enable http on the cluster
