@@ -64,7 +64,7 @@
 
 - name: Enable http on the cluster
   na_ontap_command:
-    hostname: "{{ workspace_ips[item|int] }}"
+    hostname: "{{ all_workspace_ips[item|int] }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
     #https: true
