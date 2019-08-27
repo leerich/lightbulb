@@ -1,4 +1,6 @@
-
+netapp_hostname={{ workspace_ips[item|int] }}
+netapp_username=admin
+netapp_password={{svm_password}}
 
 [ontap]
 ontap-mgr ansible_host={{ workspace_ips[item|int] }} netapp_username={{ netapp_username }} netapp_password={{ netapp_password }}
