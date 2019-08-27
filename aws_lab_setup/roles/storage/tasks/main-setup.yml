@@ -74,7 +74,7 @@
   with_sequence: start=1 count="{{ student_count_end }}"
   #with_items: "{{ all_workspace_ips }}"
   ignore_errors: no
-  #delegate_to: "{{ aws_tower }}"
+  delegate_to: "{{ aws_tower }}"
   register: result
 #- name: Enable http on the cluster
 #  na_ontap_command:
