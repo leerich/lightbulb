@@ -3,4 +3,4 @@ netapp_username=admin
 netapp_password={{svm_password}}
 
 [ontap]
-ontap-mgr ansible_host={{ workspace_ips[item|int] }} ansible_password={{ workshop_password }}
+ontap-mgr ansible_host={{ workspace_ips[item|int] }} ansible_user={{ netapp_username }} ansible_password={{ netapp_password }} 
