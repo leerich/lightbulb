@@ -159,7 +159,14 @@
 
   - name: remove uneeded inventory files
     file:
-      path: "{{ control_node_inventory_path }}/{{ username }}-*"
+      path: "{{ control_node_inventory_path }}/{{ username }}-instances"
+      state: absent
+    when: username in inventory_hostname
+  when: storage_workshop
+
+  - name: remove uneeded inventory files
+    file:
+      path: "{{ control_node_inventory_path }}/{{ username }}-ontapinstances"
       state: absent
     when: username in inventory_hostname
   when: storage_workshop
