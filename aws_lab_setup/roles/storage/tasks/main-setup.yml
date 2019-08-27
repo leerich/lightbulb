@@ -62,22 +62,22 @@
   with_sequence: start=1 end="{{ student_count_end }}"
   #with_items: "{{ users }}"
 
-- name: Enable http on the cluster
-  na_ontap_command:
-    #hostname: "{{ all_workspace_ips[item|int] }}"
-    #hostname: "{{ cluster_Properties.json[item|int]['clusterProperties']['systemManagerUrl'] | urlsplit('hostname') }}"
-    hostname: "{{ workspace_ips[item|int] }}"
-    username: "{{ netapp_username }}"
-    password: "{{ netapp_password }}"
-    #https: true
-    #validate_certs: false
-    privilege: advanced
-    command: 'system services web modify -http-enabled true'
-  loop: "{{ range( 0 , 3) | list }}"
-  #with_sequence: start=1 end="{{ student_count_end }}"
-  #with_items: "{{ all_workspace_ips }}"
-  ignore_errors: no
-  delegate_to: "{{ aws_tower }}"
+#- name: Enable http on the cluster
+#  na_ontap_command:
+#    #hostname: "{{ all_workspace_ips[item|int] }}"
+#    #hostname: "{{ cluster_Properties.json[item|int]['clusterProperties']['systemManagerUrl'] | urlsplit('hostname') }}"
+#    hostname: "{{ workspace_ips[item|int] }}"
+#    username: "{{ netapp_username }}"
+#    password: "{{ netapp_password }}"
+#    #https: true
+#    #validate_certs: false
+#    privilege: advanced
+#    command: 'system services web modify -http-enabled true'
+#  loop: "{{ range( 0 , 3) | list }}"
+#  #with_sequence: start=1 end="{{ student_count_end }}"
+#  #with_items: "{{ all_workspace_ips }}"
+#  ignore_errors: no
+#  delegate_to: "{{ aws_tower }}"
   #register: result
 #- name: Enable http on the cluster
 #  na_ontap_command:
