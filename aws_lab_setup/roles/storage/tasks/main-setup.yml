@@ -53,7 +53,9 @@
 
 - name: set fact all_workspace_ips
   set_stats:
-    all_workspace_ips: "{{ workspace_ips }}"
+    data:
+      all_workspace_ips: "{{ workspace_ips }}"
+    aggregate: no
 
 - name: Generate Student Inventories
   template:
