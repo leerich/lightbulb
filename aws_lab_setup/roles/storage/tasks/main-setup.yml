@@ -52,7 +52,7 @@
 - debug: var=workspace_ips
 
 - name: set fact all_workspace_ips
-  set_fact:
+  set_stat:
     all_workspace_ips: "{{ workspace_ips }}"
 
 - name: Generate Student Inventories
