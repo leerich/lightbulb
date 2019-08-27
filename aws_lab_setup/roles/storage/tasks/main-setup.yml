@@ -72,7 +72,7 @@
     #validate_certs: false
     privilege: advanced
     command: 'system services web modify -http-enabled true'
-  with_sequence: start=0 count="{{ student_count_end }}"
+  with_sequence: start=0 end="{{ end_count }}"
   #with_items: "{{ all_workspace_ips }}"
   ignore_errors: no
   delegate_to: "{{ aws_tower }}"
