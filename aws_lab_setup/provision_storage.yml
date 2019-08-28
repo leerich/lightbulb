@@ -64,6 +64,13 @@
     #- ansible-tower
     - { role: ansible-tower, when: tower_install }
 
+- name: Populate tower
+  hosts: control_nodes
+  become: yes
+  gather_facts: no
+
+  roles:
+    - populate_tower
 #- name: Enable http on the cluster
 #  hosts: "{{ aws_tower }}"
 #  become: no
