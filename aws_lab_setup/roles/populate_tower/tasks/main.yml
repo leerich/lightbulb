@@ -1,2 +1,11 @@
+- name: CREATE INVENTORY
+  tower_inventory:
+    name: "Workshop Inventory"
+    organization: Default
+    tower_username: admin
+    tower_password: "{{ workshop_password }}"
+    tower_host: "{{ ansible_host }}"
+    tower_verify_ssl: no
+
 - name: IMPORT INVENTORY
   shell: "tower-manage inventory_import --source=/home/{{ username }}/lightbulb/lab_inventory/inventory --inventory-name='Workshop Inventory'"
