@@ -139,6 +139,7 @@
       src: ./student_instances/{{ username }}-ontapinstances.txt
       dest: "{{ control_node_inventory_path }}/{{ username }}-ontapinstances"
       owner: "{{ username }}"
+      force: yes
       group: "{{ username }}"
     when: username in inventory_hostname
 
