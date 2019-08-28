@@ -133,6 +133,14 @@
   - name: install python packages for netapp
     pip:
       name: netapp-lib
+  - name: Put student inventory in proper spot
+    copy:
+      src: ./student_instances/{{ username }}-instances.txt
+      dest: "{{ control_node_inventory_path }}/{{ username }}-instances"
+      owner: "{{ username }}"
+      group: "{{ username }}"
+      force: yes
+    when: username in inventory_hostname
 
   - name: Put student inventory in proper spot
     copy:
