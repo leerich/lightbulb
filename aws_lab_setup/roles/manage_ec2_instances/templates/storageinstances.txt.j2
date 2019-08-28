@@ -21,4 +21,5 @@ ansible_user={{ item.username }}
 ansible_ssh_pass={{ admin_password }}
 {% if ssh_port is defined %}
 ansible_port={{ ssh_port }}
+vserver_name={{ec2_name_prefix}}-{{ item.username }}
 {% endif %}
