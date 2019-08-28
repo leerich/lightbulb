@@ -16,6 +16,12 @@
 #  tags:
 #    - common
 
+- name: Install nfs packages for storage workshop
+  yum:
+    name: nfs-utils
+    state: present
+  when: storage_workshop
+  
 - name: RHEL | Disable SELinux
   selinux:
     state: permissive
