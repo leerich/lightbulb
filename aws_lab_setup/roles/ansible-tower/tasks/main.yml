@@ -16,14 +16,14 @@
 
 - name: download tower installer
   get_url:
-    url: https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-{{ towerversion }}.tar.gz
+    url: https://releases.ansible.com/ansible-tower/setup-bundle/ansible-tower-setup-bundle-{{ towerversion }}.tar.gz
     dest: /tmp/ansible-tower-setup-{{ towerversion }}.tar.gz
     mode: 0640
   when: towerchk != realtowerversion
 
 - name: extract installer
   unarchive:
-    src: /tmp/ansible-tower-setup-{{ towerversion }}.tar.gz
+    src: /tmp/ansible-tower-setup-bundle-{{ towerversion }}.tar.gz
     dest: /tmp/
     remote_src: True
   when: towerchk != realtowerversion
@@ -31,11 +31,11 @@
 - name: template inventory file
   template:
     src: inventory
-    dest: /tmp/ansible-tower-setup-{{ towerversion }}/inventory
+    dest: /tmp/ansible-tower-setup-bundle-{{ towerversion }}/inventory
   when: towerchk != realtowerversion
 
 - name: run the tower installer
-  shell: ./setup.sh chdir=/tmp/ansible-tower-setup-{{ towerversion }}
+  shell: ./setup.sh chdir=/tmp/ansible-tower-setup-bundle-{{ towerversion }}
   when: towerchk != realtowerversion
 
 #- name: wait for tower to be up
