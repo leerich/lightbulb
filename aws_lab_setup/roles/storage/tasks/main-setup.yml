@@ -66,6 +66,7 @@
   with_sequence: start=1 end="{{ student_count_end }}"
   #with_items: "{{ users }}"
 
+- pause:
 #- name: Enable http on the cluster
 #  na_ontap_command:
 #    #hostname: "{{ all_workspace_ips[item|int] }}"
