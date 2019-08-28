@@ -48,7 +48,7 @@
   set_fact:
     workspace_{{item}}_ip: "{{ cluster_Properties.json[item|int]['clusterProperties']['systemManagerUrl'] | urlsplit('hostname') }}"
     workspace_ips: "{{workspace_ips}} + [ '{{ cluster_Properties.json[item|int]['clusterProperties']['systemManagerUrl'] | urlsplit('hostname') }}']"
-    data_ips: "{{data_ips}}" + [ '{{ cluster_Properties.json[item|int]['clusterProperties']['lifs'][4]['ip'] }}']"
+    data_ips: "{{data_ips}} + [ '{{ cluster_Properties.json[item|int]['clusterProperties']['lifs'][4]['ip'] }}']"
   with_sequence: start=0 end="{{ end_count }}"
 
 - debug: var=workspace_ips
