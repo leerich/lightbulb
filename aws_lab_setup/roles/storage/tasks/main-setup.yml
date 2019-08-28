@@ -53,9 +53,6 @@
 
 - debug: var=workspace_ips
 
-- name: Set ontap data ips
-  set_fact:
-    data_ips: "{{ data_ips }}" +
 
 - name: set fact all_workspace_ips
   set_fact:
