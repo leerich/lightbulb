@@ -57,7 +57,7 @@
 
 - name: set stat all_workspace_ips
   set_fact:
-    all_workspace_ips: "this is a test"
+    all_workspace_ips: "{{ workspace_ips }}"
     cacheable: yes
 
 #- debug: var="{{ item }}"
