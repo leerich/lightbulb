@@ -72,7 +72,7 @@
         groupname: web_server
       loop: "{{ ec2.instances }}"
 
-    - name: Create DNS name for each web server
+    - name: Create DNS name for the web server
       route53:
         state: "{{ route53_state }}"
         zone: "{{workshop_dns_zone}}"
