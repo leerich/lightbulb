@@ -3,6 +3,7 @@ towerpass: "mypassword"
 towerversion: 3.2.2
 pgpass: awx
 rabbitpass: tower
+ec2_security_groupID: sg-30fe9e46
 
 ec2_regions:
   us-east-1:
