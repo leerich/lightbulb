@@ -1,3 +1,20 @@
+#PROJECT
+# this displays warning, documented here: https://github.com/ansible/ansible/issues/60327
+- name: ADD REPO INTO TOWER
+  tower_project:
+    name: "Workshop Project"
+    organization: Default
+    scm_type: git
+    scm_url: "https://github.com/leerich/ansible-storage"
+    tower_username: admin
+    tower_password: "{{ workshop_password }}"
+    tower_host: "{{ ansible_host }}"
+    tower_verify_ssl: no
+  connection: local
+  become: no
+
+
+#INVENTORY
 - name: CREATE INVENTORY
   tower_inventory:
     name: "Workshop Inventory"
