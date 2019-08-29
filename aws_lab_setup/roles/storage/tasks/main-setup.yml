@@ -62,7 +62,8 @@
     data:
       all_workspace_ips: "{{ workspace_ips }}"
 
-- debug: var="{{all_workspace_ips}}"
+- debug: var="{{ item }}"
+  with_items: "{{all_workspace_ips}}"
   failed_when: all_workspace_ips is undefined
 
 - name: Generate Ontap Student Inventories
