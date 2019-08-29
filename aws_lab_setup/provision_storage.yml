@@ -36,7 +36,10 @@
   roles:
     - manage_ec2_instances
 
-- hosts: localhost
+- name: do something
+  hosts: localhost
+  gather_facts: no
+  become: no
   tasks:
   - debug: var=all_workspace_ips
   - pause:
