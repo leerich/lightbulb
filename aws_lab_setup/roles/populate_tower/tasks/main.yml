@@ -9,4 +9,4 @@
   connection: local
 
 - name: IMPORT INVENTORY
-  shell: "tower-manage inventory_import --source=/home/{{ username }}/lightbulb/lab_inventory/inventory --inventory-name='Workshop Inventory'"
+  command: "tower-manage inventory_import --source=/home/{{ username }}/lightbulb/lab_inventory/inventory --inventory-name='Workshop Inventory'"
