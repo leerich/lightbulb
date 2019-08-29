@@ -55,14 +55,15 @@
 
 - debug: var=data_ips
 
-- name: set fact all_workspace_ips
+- name: set stat all_workspace_ips
   set_stats:
     aggregate: no
     per_host: no
     data:
       all_workspace_ips: "{{ workspace_ips }}"
 
-- debug: var=all_workspace_ips
+- debug: var="{{all_workspace_ips}}"
+  failed_when: all_workspace_ips is undefined
 
 - name: Generate Ontap Student Inventories
   template:
