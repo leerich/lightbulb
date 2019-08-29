@@ -37,12 +37,15 @@
     - manage_ec2_instances
 
 - name: do something
-  hosts: control_nodes
+  hosts: localhost
   gather_facts: no
   become: no
   tasks:
   - debug:
-      msg: "This is the message {{ hostvars['localhost']['all_workspace_ips'] }}"
+      msg: "This is the message {{ all_workspace_ips }}"
+    delegat_to: "{{ item }}"
+    with_items: "{{ control_nodes }}"
+
   - set_fact:
       student_num: "{{ username | regex_replace ('student') | int }}"
 
