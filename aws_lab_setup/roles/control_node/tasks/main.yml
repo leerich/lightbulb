@@ -31,12 +31,8 @@
 #    - control_node
 #    - control
 - set_fact:
-    student_num: "{{username}}"
+    student_num: "{{ username | regex_replace ('student') }}"
 
-- name: Replace studen in Username
-  replace:
-    regexp: 'student'
-    replace: ''
 
 - debug:
     msg: "The username is {{student_num}}"
