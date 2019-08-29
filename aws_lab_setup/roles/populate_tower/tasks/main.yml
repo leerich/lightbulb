@@ -10,4 +10,4 @@
   become: no
 
 - name: IMPORT INVENTORY
-  command: "tower-manage inventory_import --source=/home/{{ username }}/lightbulb/lab_inventory/inventory --inventory-name='Workshop Inventory'"
+  command: "tower-manage inventory_import --source=/home/{{ username }}/lightbulb/lessons/lab_inventory/inventory --inventory-name='Workshop Inventory'"
