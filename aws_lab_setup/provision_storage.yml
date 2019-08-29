@@ -26,8 +26,13 @@
   roles:
     - storage
 
-- debug: var="{{all_workspace_ips}}"
-- pause:
+- name: Test variables
+  hosts: localhost
+  gather_facts: no
+  become: no
+  tasks:
+  - debug: var="{{all_workspace_ips}}"
+  - pause:
 
 - name: Create lab instances in AWS
   hosts: localhost
