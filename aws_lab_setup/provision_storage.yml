@@ -37,11 +37,22 @@
     - manage_ec2_instances
 
 - name: do something
-  hosts: localhost
+  hosts: control_nodes
   gather_facts: no
   become: no
   tasks:
   - debug: var=all_workspace_ips
+  - set_fact:
+      student_num: "{{ username | regex_replace ('student') | int }}"
+
+
+  - debug:
+      msg: "The username is {{student_num}}"
+
+  - debug:
+      msg: "The workspace IP is {{all_workspace_ips[]}}"
+  
+
   - pause:
 
 - name: create Route53 domain names for control nodes
