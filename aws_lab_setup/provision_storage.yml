@@ -25,9 +25,10 @@
   gather_facts: no
   roles:
     - storage
-    
-- debug: var=all_workspace_ips
 
+- debug: var=all_workspace_ips
+- pause:
+  
 - name: Create lab instances in AWS
   hosts: localhost
   connection: local
