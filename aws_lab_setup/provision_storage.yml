@@ -25,6 +25,8 @@
   gather_facts: no
   roles:
     - storage
+    
+- debug: var=all_workspace_ips
 
 - name: Create lab instances in AWS
   hosts: localhost
@@ -74,24 +76,25 @@
 #  roles:
 #    - populate_tower
 
-- name: Enable http on the cluster
-  hosts: control_nodes
-  become: no
-  gather_facts: no
-  tasks:
-    - na_ontap_command:
-        hostname: "{{ all_workspace_ips[item] }}"
-        username: "{{ netapp_username }}"
-        password: "{{ netapp_password }}"
-        https: true
-        validate_certs: false
-        privilege: advanced
-        command: 'system services web modify -http-enabled true'
-      with_sequence: start="{{ student_count_start }}" end="{{ student_count_end }}"
-      #with_items: "{{ all_workspace_ips }}"
-      ignore_errors: yes
-      #delegate_to: "{{ aws_tower }}"
-      register: result
-      #until: result.rc == 0
+#- name: Enable http on the cluster
+#  hosts: control_nodes
+#  become: no
+#  gather_facts: no
+#  tasks:
+
+#    - na_ontap_command:
+#        hostname: "{{ all_workspace_ips[item] }}"
+#        username: "{{ netapp_username }}"
+#        password: "{{ netapp_password }}"
+#        https: true
+#        validate_certs: false
+#        privilege: advanced
+#        command: 'system services web modify -http-enabled true'
+#      with_sequence: start="{{ student_count_start }}" end="{{ student_count_end }}"
+#      #with_items: "{{ all_workspace_ips }}"
+#      ignore_errors: yes
+#      #delegate_to: "{{ aws_tower }}"
+#      register: result
+#      #until: result.rc == 0
       #retries: 10
       #delay: 120
