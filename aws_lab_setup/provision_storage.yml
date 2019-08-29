@@ -36,29 +36,6 @@
   roles:
     - manage_ec2_instances
 
-- name: do something
-  hosts: localhost
-  gather_facts: no
-  become: no
-  tasks:
-  - debug:
-      msg: "This is the message {{ all_workspace_ips }}"
-    delegate_to: "{{ item }}"
-    with_items: "{{ control_nodes }}"
-
-  - set_fact:
-      student_num: "{{ username | regex_replace ('student') | int }}"
-
-
-  - debug:
-      msg: "The username is {{student_num}}"
-
-  - debug:
-      msg: "The workspace IP is {{all_workspace_ips[student_num]}}"
-
-
-  - pause:
-
 - name: create Route53 domain names for control nodes
   hosts: localhost
   connection: local
