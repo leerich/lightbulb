@@ -71,6 +71,7 @@
 
   roles:
     - populate_tower
+  tags: populate
 #- name: Enable http on the cluster
 #  hosts: "{{ aws_tower }}"
 #  become: no
