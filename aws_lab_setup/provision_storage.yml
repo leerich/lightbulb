@@ -50,8 +50,8 @@
       msg: "The username is {{student_num}}"
 
   - debug:
-      msg: "The workspace IP is {{all_workspace_ips[]}}"
-  
+      msg: "The workspace IP is {{all_workspace_ips[student_num]}}"
+
 
   - pause:
 
