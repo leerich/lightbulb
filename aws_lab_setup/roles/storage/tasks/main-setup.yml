@@ -60,7 +60,7 @@
     aggregate: no
     per_host: no
     data:
-      all_workspace_ips: "{{ workspace_ips }}"
+      all_workspace_ips: "{{ workspace_ips | dict2items }}"
 
 - name: Generate Ontap Student Inventories
   template:
