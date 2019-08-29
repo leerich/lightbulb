@@ -36,6 +36,8 @@
   roles:
     - manage_ec2_instances
 
+- debug: var=all_workspace_ips
+- pause:
 
 - name: create Route53 domain names for control nodes
   hosts: localhost
