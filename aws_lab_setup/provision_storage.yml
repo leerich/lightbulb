@@ -32,7 +32,7 @@
   become: no
   tasks:
   - debug:
-      msg: "{{all_workspace_ips[]}}"
+      msg: "{{all_workspace_ips}}"
   - pause:
 
 - name: Create lab instances in AWS
