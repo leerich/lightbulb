@@ -60,7 +60,7 @@
     aggregate: no
     per_host: no
     data:
-      all_workspace_ips: "{{ workspace_ips | list}}"
+      all_workspace_ips: "this is a test"
 
 - debug: var="{{ item }}"
   with_items: "{{all_workspace_ips}}"
