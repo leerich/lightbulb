@@ -37,7 +37,7 @@
     - manage_ec2_instances
 
 - name: do something
-  hosts: control_nodes
+  hosts: localhost
   gather_facts: no
   become: no
   tasks:
