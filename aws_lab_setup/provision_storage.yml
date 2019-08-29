@@ -12,6 +12,7 @@
       with_sequence: start="{{ student_count_start }}" end="{{ student_count_end }}"
 
 
+
 #- name: Create lab instances in AWS
 #  hosts: localhost
 #  connection: local
@@ -26,14 +27,6 @@
   roles:
     - storage
 
-- name: Test variables
-  hosts: localhost
-  gather_facts: no
-  become: no
-  tasks:
-  - debug:
-      msg: "{{all_workspace_ips}}"
-  - pause:
 
 - name: Create lab instances in AWS
   hosts: localhost
@@ -88,20 +81,22 @@
 #  become: no
 #  gather_facts: no
 #  tasks:
-
+#    vars:
+#      student_num:
+#
 #    - na_ontap_command:
-#        hostname: "{{ all_workspace_ips[item] }}"
+#        hostname: "{{ all_workspace_ips[{{student_num}}] }}"
 #        username: "{{ netapp_username }}"
 #        password: "{{ netapp_password }}"
 #        https: true
 #        validate_certs: false
 #        privilege: advanced
 #        command: 'system services web modify -http-enabled true'
-#      with_sequence: start="{{ student_count_start }}" end="{{ student_count_end }}"
+#      #with_sequence: start="{{ student_count_start }}" end="{{ student_count_end }}"
 #      #with_items: "{{ all_workspace_ips }}"
 #      ignore_errors: yes
-#      #delegate_to: "{{ aws_tower }}"
-#      register: result
-#      #until: result.rc == 0
+      #delegate_to: "{{ aws_tower }}"
+      #register: result
+      #until: result.rc == 0
       #retries: 10
       #delay: 120
