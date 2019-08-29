@@ -5,13 +5,13 @@
     name: "Workshop Credential"
     #ssh_key_data: "{{ lookup('file', playbook_dir +'/' + ec2_name_prefix + '/' + ec2_name_prefix + '-private.pem') }}"
     kind: ssh
-    password: {{" workshop_password "}}
-    organization: REDHAT NETWORK ORGANIZATION
+    password: "{{ workshop_password }}"
+    organization: Default
     tower_username: admin
     tower_password: "{{ admin_password }}"
     tower_host: "{{ ansible_host }}"
     tower_verify_ssl: no
-  connection: local 
+  connection: local
   become: no
 
 #PROJECT
