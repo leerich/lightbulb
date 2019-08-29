@@ -43,7 +43,7 @@
   tasks:
   - debug:
       msg: "This is the message {{ all_workspace_ips }}"
-    delegat_to: "{{ item }}"
+    delegate_to: "{{ item }}"
     with_items: "{{ control_nodes }}"
 
   - set_fact:
