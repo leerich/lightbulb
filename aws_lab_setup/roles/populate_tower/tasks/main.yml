@@ -1,3 +1,19 @@
+#CREDENTIAL
+- name: ADD CREDENTIAL INTO TOWER
+  tower_credential:
+    username: "{{ username }}"
+    name: "Workshop Credential"
+    #ssh_key_data: "{{ lookup('file', playbook_dir +'/' + ec2_name_prefix + '/' + ec2_name_prefix + '-private.pem') }}"
+    kind: ssh
+    password: {{" workshop_password "}}
+    organization: REDHAT NETWORK ORGANIZATION
+    tower_username: admin
+    tower_password: "{{ admin_password }}"
+    tower_host: "{{ ansible_host }}"
+    tower_verify_ssl: no
+  connection: local 
+  become: no
+
 #PROJECT
 # this displays warning, documented here: https://github.com/ansible/ansible/issues/60327
 - name: ADD REPO INTO TOWER
@@ -7,7 +23,7 @@
     scm_type: git
     scm_url: "https://github.com/leerich/ansible-storage"
     scm_update_on_launch: true
-    scm_clean: yes 
+    scm_clean: yes
     tower_username: admin
     tower_password: "{{ workshop_password }}"
     tower_host: "{{ ansible_host }}"
