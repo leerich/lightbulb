@@ -7,6 +7,7 @@
     tower_host: "{{ ansible_host }}"
     tower_verify_ssl: no
   connection: local
+  become: no
 
 - name: IMPORT INVENTORY
   command: "tower-manage inventory_import --source=/home/{{ username }}/lightbulb/lab_inventory/inventory --inventory-name='Workshop Inventory'"
