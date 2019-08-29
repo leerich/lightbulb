@@ -6,6 +6,8 @@
     organization: Default
     scm_type: git
     scm_url: "https://github.com/leerich/ansible-storage"
+    scm_update_on_launch: true
+    scm_clean: yes 
     tower_username: admin
     tower_password: "{{ workshop_password }}"
     tower_host: "{{ ansible_host }}"
