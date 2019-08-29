@@ -56,7 +56,7 @@
 - debug: var=data_ips
 
 - name: set fact all_workspace_ips
-  set_stat:
+  set_stats:
     all_workspace_ips: "{{ workspace_ips }}"
 
 - name: Generate Ontap Student Inventories
