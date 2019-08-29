@@ -56,11 +56,9 @@
 - debug: var=data_ips
 
 - name: set stat all_workspace_ips
-  set_stats:
-    aggregate: no
-    per_host: no
-    data:
-      all_workspace_ips: "this is a test"
+  set_fact:
+    all_workspace_ips: "this is a test"
+    cacheable: yes
 
 #- debug: var="{{ item }}"
 #  with_items: "{{all_workspace_ips}}"
