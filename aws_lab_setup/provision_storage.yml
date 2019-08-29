@@ -31,7 +31,8 @@
   gather_facts: no
   become: no
   tasks:
-  - debug: var="{{all_workspace_ips[]}}"
+  - debug:
+      msg: "{{all_workspace_ips[]}}"
   - pause:
 
 - name: Create lab instances in AWS
