@@ -57,7 +57,10 @@
 
 - name: set fact all_workspace_ips
   set_stats:
-    all_workspace_ips: "{{ workspace_ips }}"
+    aggregate: no
+    per_host: no
+    data:
+      all_workspace_ips: "{{ workspace_ips }}"
 
 - name: Generate Ontap Student Inventories
   template:
