@@ -62,7 +62,7 @@
     data:
       all_workspace_ips: "{{ workspace_ips | flatten }}"
 
-debug: var=all_workspace_ips
+- debug: var=all_workspace_ips
 
 - name: Generate Ontap Student Inventories
   template:
