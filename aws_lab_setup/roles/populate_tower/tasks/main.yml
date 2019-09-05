@@ -53,7 +53,7 @@
 #JOB TEMPLATES
 - name: CREATE SVM JOB IN TOWER
   tower_job_template:
-    name: "Create-SVM-and-Interface"
+    name: "Create SVM and Interface"
     job_type: "run"
     inventory: "Workshop Inventory"
     project: "Workshop Project"
