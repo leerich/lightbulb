@@ -46,3 +46,36 @@
 
 - name: IMPORT INVENTORY
   command: "tower-manage inventory_import --source=/home/{{ username }}/lightbulb/lessons/lab_inventory/inventory --inventory-name='Workshop Inventory'"
+
+#JOB TEMPLATES
+- name: CREATE SVM JOB IN TOWER
+      tower_job_template:
+        name: "Create SVM and Interface"
+        job_type: "run"
+        inventory: "Workshop Inventory"
+        project: "Workshop Project"
+        playbook: "create-svm-interface.yml"
+        credential: "Workshop Credential"
+        state: "present"
+        survey_enabled: false
+        #survey_spec: "{{ lookup('template', 'user.json') }}"
+        tower_username: admin
+        tower_password: "{{ workshop_password }}"
+        tower_host: "{{ ansible_host }}"
+        tower_verify_ssl: no
+
+- name: CREATE NFS JOB IN TOWER
+      tower_job_template:
+        name: "Enable NFS"
+        job_type: "run"
+        inventory: "Workshop Inventory"
+        project: "Workshop Project"
+        playbook: "enable-nfs.yml"
+        credential: "Workshop Credential"
+        state: "present"
+        survey_enabled: false
+        #survey_spec: "{{ lookup('template', 'user.json') }}"
+        tower_username: admin
+        tower_password: "{{ workshop_password }}"
+        tower_host: "{{ ansible_host }}"
+        tower_verify_ssl: no
