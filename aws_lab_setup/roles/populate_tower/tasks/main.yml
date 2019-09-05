@@ -47,6 +47,9 @@
 - name: IMPORT INVENTORY
   command: "tower-manage inventory_import --source=/home/{{ username }}/lightbulb/lessons/lab_inventory/inventory --inventory-name='Workshop Inventory'"
 
+#TRIGGER PROJECT UPDATE
+
+
 #JOB TEMPLATES
 - name: CREATE SVM JOB IN TOWER
   tower_job_template:
@@ -57,7 +60,7 @@
     playbook: "create-svm-interface.yml"
     credential: "Workshop Credential"
     state: "present"
-    survey_enabled: false
+    #survey_enabled: false
     #survey_spec: "{{ lookup('template', 'user.json') }}"
     tower_username: admin
     tower_password: "{{ workshop_password }}"
@@ -75,7 +78,7 @@
     playbook: "enable-nfs.yml"
     credential: "Workshop Credential"
     state: "present"
-    survey_enabled: false
+    #survey_enabled: false
     #survey_spec: "{{ lookup('template', 'user.json') }}"
     tower_username: admin
     tower_password: "{{ workshop_password }}"
