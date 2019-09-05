@@ -63,6 +63,8 @@
     tower_password: "{{ workshop_password }}"
     tower_host: "{{ ansible_host }}"
     tower_verify_ssl: no
+  connection: local
+  become: no
 
 - name: CREATE NFS JOB IN TOWER
   tower_job_template:
@@ -79,3 +81,6 @@
     tower_password: "{{ workshop_password }}"
     tower_host: "{{ ansible_host }}"
     tower_verify_ssl: no
+  connection: local
+  become: no
+  
