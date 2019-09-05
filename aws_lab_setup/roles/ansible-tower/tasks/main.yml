@@ -14,6 +14,12 @@
     towerchk: "{{ checkout.json.version }}"
   when: checkout.json is defined
 
+- debug:
+    msg: "towerchk is {{ towerchk }}"
+
+- debug:
+    msg: "realtowerversion is {{ realtowerversion }}"
+    
 - name: download tower installer
   get_url:
     url: https://releases.ansible.com/ansible-tower/setup-bundle/ansible-tower-setup-bundle-{{ towerversion }}.el7.tar.gz
