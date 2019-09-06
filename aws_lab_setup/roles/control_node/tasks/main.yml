@@ -179,4 +179,12 @@
       state: absent
     when: username in inventory_hostname
 
+  - name: Copy playbook.yml file to storage-workshop directory
+    copy:
+      src: playbook.yml
+      dest: /home/{{ username }}/storage-workshop
+      owner: "{{ username }}"
+      group: "{{ username }}"
+      mode: '0755'
+
   when: storage_workshop
