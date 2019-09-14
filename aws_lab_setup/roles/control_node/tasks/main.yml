@@ -187,4 +187,4 @@
       group: "{{ username }}"
       mode: '0755'
 
-  when: storage_workshop
+  when: storage_workshop|d(False) == True
