@@ -60,6 +60,12 @@
     owner: apache
     group: apache
 
+- name: Copy exercises from github for storage workshop
+  git:
+    repo: https://github.com/leerich/workshops.git
+    dest: /var/www/html
+    accept_hostkey: yes
+  when: storage_workshop|d(False) == True
 #- name: transfer tower exercises from google docs
 #  get_url:
 #    url: https://docs.google.com/document/d/1k8QXD4lSUp4gM_vjjjlC-ZXrzePYerzFhaNyP_bG3bQ/export?format=pdf
