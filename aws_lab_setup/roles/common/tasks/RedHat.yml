@@ -20,8 +20,8 @@
   yum:
     name: nfs-utils
     state: present
-  when: storage_workshop
-  
+  when: storage_workshop|d(False) == True
+
 - name: RHEL | Disable SELinux
   selinux:
     state: permissive
