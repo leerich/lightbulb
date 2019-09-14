@@ -67,7 +67,7 @@
     src: storageinstances.txt.j2
     dest: ./student_instances/{{ item.username }}-instances.txt
   with_items: "{{ users }}"
-  when: storage_workshop
+  when: storage_workshop|d(False) == True
 
 - name: Generate instructor inventory
   template:
