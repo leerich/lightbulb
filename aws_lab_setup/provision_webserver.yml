@@ -92,3 +92,5 @@
 - hosts: web_server
   roles:
   - web_server
+  tags:
+    - web_server_only
