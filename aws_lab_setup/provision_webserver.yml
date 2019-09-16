@@ -90,7 +90,7 @@
 #    - skip
 
 #- hosts: web_server
--hosts: "{{ host_addr }}"
+- hosts: "{{ host_addr }}"
   roles:
   - web_server
   tags:
