@@ -45,11 +45,11 @@
           Name: "{{ ec2_name_prefix }}-Cloud-Mgr"
         wait: true
         vpc_subnet_id: "{{ ec2_vpc_subnet_id | default(omit) }}"
-        volumes:
-          - device_name: /dev/sda1
-            volume_type: gp2
-            volume_size: 20
-            delete_on_termination: true
+        #volumes:
+        #  - device_name: /dev/sda1
+        #    volume_type: gp2
+        #    volume_size: 20
+        #    delete_on_termination: true
       register: ec2
 
 
@@ -74,7 +74,7 @@
         groupname: ontap_mgr
       loop: "{{ ec2.instances }}"
 
-    - name: Create DNS name for the web server
+    - name: Create DNS name for the Ontap Cloud Manager
       route53:
         state: "{{ route53_state }}"
         zone: "{{workshop_dns_zone}}"
