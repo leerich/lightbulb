@@ -40,9 +40,9 @@
         #zone: "{{ ec2_zone }}"
         exact_count: 1
         count_tag:
-          Name: "{{ ec2_name_prefix }}-cloud-mgr"
+          Name: "{{ ec2_name_prefix }}-ontap-cloud-mgr"
         instance_tags:
-          Name: "{{ ec2_name_prefix }}-cloud-mgr"
+          Name: "{{ ec2_name_prefix }}-ontap-cloud-mgr"
         wait: true
         vpc_subnet_id: "{{ ec2_vpc_subnet_id | default(omit) }}"
         #volumes:
@@ -79,7 +79,7 @@
         state: "{{ route53_state }}"
         zone: "{{workshop_dns_zone}}"
         #region: "{{ec2_region}}"
-        record: "cloud-mgr.{{workshop_dns_zone}}"
+        record: "{{ ec2_name_prefix }}-cloud-mgr.{{workshop_dns_zone}}"
         type: CNAME
         overwrite: yes
         value: "{{ item.public_ip }}"
