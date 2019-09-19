@@ -40,9 +40,9 @@
         #zone: "{{ ec2_zone }}"
         exact_count: 1
         count_tag:
-          Name: "{{ ec2_name_prefix }}-Cloud-Mgr"
+          Name: "{{ ec2_name_prefix }}-cloud-mgr"
         instance_tags:
-          Name: "{{ ec2_name_prefix }}-Cloud-Mgr"
+          Name: "{{ ec2_name_prefix }}-cloud-mgr"
         wait: true
         vpc_subnet_id: "{{ ec2_vpc_subnet_id | default(omit) }}"
         #volumes:
