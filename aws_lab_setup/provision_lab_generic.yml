@@ -37,14 +37,14 @@
 - name: Configure control node
   hosts: control_nodes
   become: yes
-  strategy: free
+  #strategy: free
   roles:
     - control_node
 
 - name: Install Ansible tower
   hosts: control_nodes
   become: yes
-  strategy: free
+  #strategy: free
   gather_facts: no
   roles:
     #- ansible-tower
