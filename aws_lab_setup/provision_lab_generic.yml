@@ -29,6 +29,7 @@
 - name: Configure common options on managed nodes and control nodes
   hosts: "managed_nodes:control_nodes"
   become: yes
+  strategy: free
   roles:
     - user_accounts
     - common
@@ -36,12 +37,14 @@
 - name: Configure control node
   hosts: control_nodes
   become: yes
+  strategy: free
   roles:
     - control_node
 
 - name: Install Ansible tower
   hosts: control_nodes
   become: yes
+  strategy: free
   gather_facts: no
   roles:
     #- ansible-tower
@@ -73,4 +76,3 @@
 #  gather_facts: no
 #  roles:
 #    - email-instructor
-
