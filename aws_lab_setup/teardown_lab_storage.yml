@@ -1,0 +1,85 @@
+- name: Generate users list
+  hosts: localhost
+  connection: local
+  become: no
+  gather_facts: no
+
+  tasks:
+    - name: generate users list
+      set_fact:
+        users: "{{ users|default([]) + [ {'name': 'student' + item, 'username': 'student' + item, 'email': 'student' + item + '@example.com'} ] }}"
+      with_sequence: start="{{ student_count_start }}" end="{{ student_count_end }}"
+
+
+- name: Destroy lab instances in AWS
+  hosts: localhost
+  connection: local
+  become: no
+  gather_facts: yes
+
+  vars:
+    ec2_exact_count: 0
+    ec2_wait: no
+
+  roles:
+    - manage_ec2_instances
+
+- name: Destroy lab instances in AWS
+  hosts: localhost
+  connection: local
+  become: no
+  gather_facts: yes
+
+  vars:
+    ec2_exact_count: 0
+    ec2_wait: no
+
+  tasks:
+  - name: Destroy Ontap Working Environments
+    ec2:
+      assign_public_ip: yes
+      key_name: "{{ ec2_key_name }}"
+      group: "{{ ec2_security_group }}"
+      instance_type: "{{ ec2_instance_types[item.1.type].size }}"
+      image: "{{ ec2_instance_types[item.1.type].ami_id }}"
+      region: "{{ ec2_region }}"
+      #zone: "{{ ec2_zone }}"
+      exact_count: "{{ ec2_exact_count }}"
+      count_tag:
+        Name: "{{ ec2_name_prefix }}-{{ item.0.username }}"
+      instance_tags:
+        Name: "{{ ec2_name_prefix }}-{{ item.0.username }}"
+      wait: "{{ ec2_wait }}"
+      vpc_subnet_id: "{{ ec2_vpc_subnet_id | default(omit) }}"
+    #  volumes:
+    #    - device_name: /dev/sda1
+    #      volume_type: gp2
+    #      volume_size: "{{ ec2_instance_types[item.1.type].disk_space }}"
+    #      delete_on_termination: true
+    with_nested:
+      - "{{ users }}"
+    register: ec2_jobs
+    async: 7200
+    poll: 0
+    tags:
+      - always
+      - provision
+
+#  post_tasks:
+#    - name: Remove inventory files
+#      file: path="{{ item }}" state=absent
+#      with_fileglob: "{{ playbook_dir }}/*.txt"
+#      register: removal
+#      changed_when: removal|success
+#
+#    - name: Remove guacamole files
+#      file: path="{{ item }}" state=absent
+#      with_fileglob: "{{ playbook_dir }}/user-mapping.xml*"
+#      register: removal
+#      changed_when: removal|success
+#
+#    - name: Remove files in guacamole directory
+#      file: path="{{ item }}" state=absent
+#      with_fileglob: "{{ playbook_dir }}/guacamole/*"
+#      register: removal
+#      changed_when: removal|success
