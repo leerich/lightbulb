@@ -28,11 +28,12 @@
   hosts: localhost
   connection: local
   become: no
-  gather_facts: yes
+  gather_facts: no
 
   vars:
     ec2_exact_count: 0
     ec2_wait: no
+    cloud_image: ami-0ff1d3d1d2b0be33a
 
   tasks:
   - name: Destroy Ontap Working Environments
@@ -41,14 +42,14 @@
       key_name: "{{ ec2_key_name }}"
       group: "{{ ec2_security_group }}"
       instance_type: "m5.xlarge"
-      image: "{{ ec2_instance_types[item.1.type].ami_id }}"
+      image: "{{ cloud_image }}"
       region: "{{ ec2_region }}"
       #zone: "{{ ec2_zone }}"
       exact_count: "{{ ec2_exact_count }}"
       count_tag:
-        Name: "{{ ec2_name_prefix }}-{{ item.username}}"
+        Name: "{{ ec2_name_prefix }}-{{ item.0.username}}"
       instance_tags:
-        Name: "{{ ec2_name_prefix }}-{{ item.username }}"
+        Name: "{{ ec2_name_prefix }}-{{ item.0.username }}"
       wait: "{{ ec2_wait }}"
       vpc_subnet_id: "{{ ec2_vpc_subnet_id | default(omit) }}"
     #  volumes:
