@@ -10,7 +10,9 @@
         users: "{{ users|default([]) + [ {'name': 'student' + item, 'username': 'student' + item, 'email': 'student' + item + '@example.com'} ] }}"
       with_sequence: start="{{ student_count_start }}" end="{{ student_count_end }}"
 
-
+    - name: debug user variable
+      debug: var=users
+      
 - name: Destroy lab instances in AWS
   hosts: localhost
   connection: local
