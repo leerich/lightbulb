@@ -54,6 +54,7 @@
         Name: "{{ ec2_name_prefix }}-{{ item.name }}"
       wait: "{{ ec2_wait }}"
       vpc_subnet_id: "{{ ec2_vpc_subnet_id | default(omit) }}"
+      termination_protection: no
     #  volumes:
     #    - device_name: /dev/sda1
     #      volume_type: gp2
