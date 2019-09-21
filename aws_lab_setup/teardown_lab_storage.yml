@@ -40,7 +40,7 @@
       assign_public_ip: yes
       key_name: "{{ ec2_key_name }}"
       group: "{{ ec2_security_group }}"
-      instance_type: "{{ ec2_instance_types[item.1.type].size }}"
+      instance_type: "m5.xlarge"
       image: "{{ ec2_instance_types[item.1.type].ami_id }}"
       region: "{{ ec2_region }}"
       #zone: "{{ ec2_zone }}"
