@@ -12,7 +12,7 @@
 
     - name: debug user variable
       debug: var=users
-      
+
 - name: Destroy lab instances in AWS
   hosts: localhost
   connection: local
@@ -49,9 +49,9 @@
       #zone: "{{ ec2_zone }}"
       exact_count: "{{ ec2_exact_count }}"
       count_tag:
-        Name: "{{ ec2_name_prefix }}-{{ item.0.username}}"
+        Name: "{{ ec2_name_prefix }}-{{ item.username}}"
       instance_tags:
-        Name: "{{ ec2_name_prefix }}-{{ item.0.username }}"
+        Name: "{{ ec2_name_prefix }}-{{ item.username }}"
       wait: "{{ ec2_wait }}"
       vpc_subnet_id: "{{ ec2_vpc_subnet_id | default(omit) }}"
     #  volumes:
