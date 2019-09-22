@@ -26,6 +26,20 @@
   roles:
     - manage_ec2_instances
 
+- name: Turn of termination protection on all Ontap instances
+  hosts: "{{ ec2_name_prefix }}_student*"
+  connection: local
+  become: no
+  gather_facts: no
+
+  tasks:
+    - name: Set termination protection to off
+      ec2:
+        state: restarted
+        instance_ids: "{{ ec2.instance_ids }}"
+        termination_protection: no
+        
+
 - name: Destroy lab instances in AWS
   hosts: localhost
   connection: local
