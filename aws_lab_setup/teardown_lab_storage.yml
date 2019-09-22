@@ -38,7 +38,7 @@
         state: restarted
         instance_ids: "{{ ec2.instance_ids }}"
         termination_protection: no
-        
+
 
 - name: Destroy lab instances in AWS
   hosts: localhost
@@ -63,9 +63,9 @@
       #zone: "{{ ec2_zone }}"
       exact_count: "{{ ec2_exact_count }}"
       count_tag:
-        Name: "{{ ec2_name_prefix }}-{{ item.name}}"
+        Name: "{{ ec2_name_prefix }}_{{ item.name}}"
       instance_tags:
-        Name: "{{ ec2_name_prefix }}-{{ item.name }}"
+        Name: "{{ ec2_name_prefix }}_{{ item.name }}"
       wait: "{{ ec2_wait }}"
       vpc_subnet_id: "{{ ec2_vpc_subnet_id | default(omit) }}"
       termination_protection: no
