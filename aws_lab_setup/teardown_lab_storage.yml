@@ -27,7 +27,7 @@
     - manage_ec2_instances
 
 - name: Turn of termination protection on all Ontap instances
-  hosts: tag_Name_{{ ec2_name_prefix }}_student*
+  hosts: localhost
   connection: local
   become: no
   gather_facts: no
