@@ -36,7 +36,7 @@
     - name: Set termination protection to off
       ec2:
         state: restarted
-        instance_ids: "{{ ec2.instance_ids }}"
+        #instance_ids: "{{ ec2.instance_ids }}"
         termination_protection: no
 
     - pause:
