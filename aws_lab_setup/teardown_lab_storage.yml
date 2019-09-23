@@ -33,17 +33,17 @@
   gather_facts: no
 
   tasks:
-    - name: Set termination protection to off
-      ec2:
-        state: restarted
-        #instance_ids: "{{ ec2.instance_ids }}"
-        termination_protection: no
-        region: "{{ ec2_region }}"
-        instance_tags:
-          Name: "{{ ec2_name_prefix }}_{{ item.name }}"
-      with_items:
-        - "{{ users }}"
-    - pause:
+  - name: Set termination protection to off
+    ec2:
+      state: restarted
+      #instance_ids: "{{ ec2.instance_ids }}"
+      termination_protection: no
+      region: "{{ ec2_region }}"
+      instance_tags:
+        Name: "{{ ec2_name_prefix }}_{{ item.name }}"
+    with_items:
+      - "{{ users }}"
+  - pause:
 
 - name: Destroy lab instances in AWS
   hosts: localhost
