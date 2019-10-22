@@ -23,8 +23,8 @@
     - sudo
     - common
 
-- hostname:
-    name: "{{short_name}}"
+#- hostname:
+#    name: "{{short_name}}"
 
 - name: Update rh-amazon-rhui-client to latest
   yum:
