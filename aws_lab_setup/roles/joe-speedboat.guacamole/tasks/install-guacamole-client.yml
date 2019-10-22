@@ -60,7 +60,8 @@
 
 - name: Download mysql-connector-java
   get_url:
-    url: 'https://cdn.mysql.com//Downloads/Connector-J/mysql-connector-java-5.1.46.tar.gz'
+    url: 'http://ftp.jaist.ac.jp/pub/mysql/Downloads/Connector-J/mysql-connector-java-5.1.46.tar.gz'
+    #url: 'https://cdn.mysql.com//Downloads/Connector-J/mysql-connector-java-5.1.46.tar.gz'
     dest: '{{ guacamole_temp_path }}'
     timeout: 120
   when: not mysql_connector_is_installed.stat.exists
