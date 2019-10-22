@@ -1,2 +1,4 @@
 ---
 - src: geerlingguy.repo-epel
+
+- src: zaxos.guacamole-ansible-role
