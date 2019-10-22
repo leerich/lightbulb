@@ -37,7 +37,7 @@
       - vim
       - git
     state: latest
-    enablerepo: rhel-7-server-rhui-extras-rpms
+    #enablerepo: rhel-7-server-rhui-extras-rpms
     #enablerepo: rhui-REGION-rhel-server-extras
   register: install_base_packages
   until: install_base_packages|success
