@@ -4,4 +4,4 @@
     guacamole_version: 0.9.14
     guacamole_mysql_root_password: MY-PASSWORD-HERE
   roles:
-   - role: zaxos.guacamole-ansible-role
+   - role: guacamole-ansible-role
