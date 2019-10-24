@@ -37,7 +37,7 @@
       - vim
       - git
     state: latest
-    #enablerepo: rhel-7-server-rhui-extras-rpms
+    enablerepo: rhel-7-server-rhui-extras-rpms
     #enablerepo: rhui-REGION-rhel-server-extras
   register: install_base_packages
   until: install_base_packages|success
@@ -56,7 +56,7 @@
       #- ansible-2.4.2.0-2.el7
     state: latest
     allow_downgrade: yes
-    #enablerepo: rhel-7-server-rhui-extras-rpms
+    enablerepo: rhel-7-server-rhui-extras-rpms
     #enablerepo: rhui-REGION-rhel-server-extras
   register: install_ansible
   until: install_ansible|success
