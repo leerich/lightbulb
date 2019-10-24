@@ -1,5 +1,5 @@
 ---
-- hosts: "{{ host_addr }}"
+- hosts: localhost
   #connection: local
   gather_facts: False
   become: false
@@ -66,11 +66,11 @@
     #- debug:
     #    var: "{{ host_addr }}"
 
-    - name: Add instance to host group
-      add_host:
-        hostname: "{{ item.public_ip }}"
-        groupname: web_server
-      loop: "{{ ec2.instances }}"
+    #- name: Add instance to host group
+    #  add_host:
+    #    hostname: "{{ item.public_ip }}"
+    #    groupname: web_server
+    #  loop: "{{ ec2.instances }}"
 
     - name: Create DNS name for the web server
       route53:
@@ -80,17 +80,17 @@
         record: "lightbulb.{{workshop_dns_zone}}"
         type: CNAME
         overwrite: yes
-        value: "{{ item.public_ip }}"
+        value: "{{ host_addr }}"
         type: A
-      loop: "{{ ec2.instances }}"
+      #loop: "{{ ec2.instances }}"
       #when: "'control' in item.invocation.module_args.instance_tags.Name"
 #  roles:
 #  - web_instance
 #  tags:
 #    - skip
 
-- hosts: web_server
-#- hosts: "{{ host_addr }}"
+#- hosts: web_server
+- hosts: "{{ host_addr }}"
   roles:
   - web_server
   tags:
