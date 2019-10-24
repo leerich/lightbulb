@@ -41,14 +41,14 @@
   roles:
     - control_node
 
-#- name: Install Ansible tower
-#  hosts: control_nodes
-#  become: yes
+- name: Install Ansible tower
+  hosts: control_nodes
+  become: yes
   #strategy: free
-#  gather_facts: no
-#  roles:
+  gather_facts: no
+  roles:
     #- ansible-tower
-#    - { role: ansible-tower, when: tower_install }
+    - { role: ansible-tower, when: tower_install }
 
 
 
