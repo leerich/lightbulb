@@ -31,6 +31,22 @@
     - control_node
     - control
 
+- name: Install rhui Repo
+  yum_repository:
+    name: "rhui-REGION-rhel-server-rhscl"
+    description: "Red Hat Enterprise Linux Server 7 RHUI(RPMs)"
+    file: redhat-rhui
+    mirrorlist: https://rhui3.REGION.aws.ce.redhat.com/pulp/mirror/content/dist/rhel/rhui/server/7/$releasever/$basearch/rhscl/1/os
+    enabled: yes
+    gpgcheck: no
+    sslverify: yes
+    sslcacert: /etc/pki/rhui/cdn.redhat.com-chain.crt
+    sslclientcert: /etc/pki/rhui/product/content-rhel7.crt
+    sslclientkey: /etc/pki/rhui/content-rhel7.key
+  tags:
+    - control_node
+    - control
+
 - name: Install base packages
   yum:
     name:
