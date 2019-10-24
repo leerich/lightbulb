@@ -1,5 +1,5 @@
 ---
-- hosts: {{host_addr}}
+- hosts: "{{ host_addr }}"
   #connection: local
   gather_facts: False
   become: false
