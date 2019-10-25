@@ -91,7 +91,7 @@
     url: https://localhost/api/v2/ping/
     method: GET
     user: admin
-    password: "{{admin_password}}"
+    password: "{{workshop_password}}"
     validate_certs: False
   register: check2
   until: check2.json is defined
