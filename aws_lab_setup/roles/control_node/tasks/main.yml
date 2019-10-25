@@ -19,7 +19,7 @@
   yum_repository:
     name: "rhui-REGION-rhel-server-extras"
     description: "Red Hat Enterprise Linux Server 7 Extra(RPMs)"
-    file: tower-rhui
+    file: redhat-rhui
     mirrorlist: https://rhui2-cds01.REGION.aws.ce.redhat.com/pulp/mirror/content/dist/rhel/rhui/server/7/$releasever/$basearch/extras/os
     enabled: yes
     gpgcheck: no
@@ -35,7 +35,7 @@
   yum_repository:
     name: "rhui-REGION-rhel-server-rhscl"
     description: "Red Hat Enterprise Linux Server 7 RHUI(RPMs)"
-    file: tower-rhui
+    file: redhat-rhui
     mirrorlist: https://rhui3.REGION.aws.ce.redhat.com/pulp/mirror/content/dist/rhel/rhui/server/7/$releasever/$basearch/rhscl/1/os
     enabled: yes
     gpgcheck: no
