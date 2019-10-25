@@ -63,7 +63,8 @@
 
 - name: template inventory file for Ansible Tower Install
   template:
-    src: tower_install.j2
+    #src: tower_install.j2
+    src: inventory
     dest: /tmp/tower_install/inventory
 
 - copy:
