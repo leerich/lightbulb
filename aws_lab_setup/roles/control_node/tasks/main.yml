@@ -54,7 +54,7 @@
       - git
     state: latest
     #enablerepo: rhel-7-server-rhui-extras-rpms
-    enablerepo: rhui-REGION-rhel-server-extras
+    #enablerepo: rhui-REGION-rhel-server-extras
   register: install_base_packages
   until: install_base_packages|success
   delay: 3
@@ -73,7 +73,7 @@
     state: latest
     allow_downgrade: yes
     #enablerepo: rhel-7-server-rhui-extras-rpms
-    enablerepo: rhui-REGION-rhel-server-extras
+    #enablerepo: rhui-REGION-rhel-server-extras
   register: install_ansible
   until: install_ansible|success
   delay: 3
