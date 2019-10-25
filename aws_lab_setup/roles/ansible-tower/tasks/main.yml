@@ -19,31 +19,90 @@
 
 - debug:
     msg: "realtowerversion is {{ realtowerversion }}"
-    
-- name: download tower installer
+
+###
+#- name: download tower installer
+#  get_url:
+#    url: https://releases.ansible.com/ansible-tower/setup-bundle/ansible-tower-setup-bundle-{{ towerversion }}.el7.tar.gz
+#    dest: /tmp/ansible-tower-setup-bundle-{{ towerversion }}.el7.tar.gz
+#    mode: 0640
+#  when: towerchk != realtowerversion
+#
+#- name: extract installer
+#  unarchive:
+#    src: /tmp/ansible-tower-setup-bundle-{{ towerversion }}.el7.tar.gz
+#    dest: /tmp/
+#    remote_src: True
+#  when: towerchk != realtowerversion
+#
+#- name: template inventory file
+#  template:
+#    src: inventory
+#    dest: /tmp/ansible-tower-setup-bundle-{{ towerversion }}.el7/inventory
+#  when: towerchk != realtowerversion
+#
+#- name: run the tower installer
+#  shell: ./setup.sh chdir=/tmp/ansible-tower-setup-bundle-{{ towerversion }}.el7
+#  when: towerchk != realtowerversion
+#####
+
+- name: Download Ansible Tower
   get_url:
-    url: https://releases.ansible.com/ansible-tower/setup-bundle/ansible-tower-setup-bundle-{{ towerversion }}.el7.tar.gz
-    dest: /tmp/ansible-tower-setup-bundle-{{ towerversion }}.el7.tar.gz
-    mode: 0640
-  when: towerchk != realtowerversion
+    url: '{{ tower_installer_url | default("https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-3.5.3-1.tar.gz") }}'
+    dest: /tmp/tower.tar.gz
 
-- name: extract installer
+- name: Create directory for Ansible Tower
+  file: path=/tmp/tower_install state=directory
+
+- name: Extract Ansible Tower install
   unarchive:
-    src: /tmp/ansible-tower-setup-bundle-{{ towerversion }}.el7.tar.gz
-    dest: /tmp/
-    remote_src: True
-  when: towerchk != realtowerversion
+    src: /tmp/tower.tar.gz
+    dest: /tmp/tower_install
+    remote_src: yes
+    extra_opts: ['--strip-components=1', '--show-stored-names']
 
-- name: template inventory file
+- name: template inventory file for Ansible Tower Install
   template:
-    src: inventory
-    dest: /tmp/ansible-tower-setup-bundle-{{ towerversion }}.el7/inventory
-  when: towerchk != realtowerversion
+    src: tower_install.j2
+    dest: /tmp/tower_install/inventory
 
-- name: run the tower installer
-  shell: ./setup.sh chdir=/tmp/ansible-tower-setup-bundle-{{ towerversion }}.el7
-  when: towerchk != realtowerversion
+- copy:
+    dest: /tmp/tower_install/extras-vars.yml
+    content: |
+      redhat_aws_rhui_repos: {{ redhat_aws_rhui_repos | to_yaml }}
 
+- name: run the Ansible Tower installer
+  shell: ./setup.sh -e @extras-vars.yml
+  args:
+    chdir: /tmp/tower_install
+  async: 900
+  poll: 10
+
+- name: install ansible-tower-cli and requests
+  become: yes
+  pip:
+    name:
+      - ansible-tower-cli
+      - "requests==2.6.0"
+    state: latest
+
+- name: wait for Ansible Tower to be up
+  uri:
+    url: https://localhost/api/v2/ping/
+    method: GET
+    user: admin
+    password: "{{admin_password}}"
+    validate_certs: False
+  register: check2
+  until: check2.json is defined
+  retries: 10
+  delay: 30
+
+- name: Display /api/v2/ping results
+  debug:
+    msg: '{{ check2.json }}'
+
+####
 #- name: wait for tower to be up
 #  uri:
 #    url: https://localhost/api/v1/ping/
