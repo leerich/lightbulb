@@ -82,7 +82,7 @@
         overwrite: yes
         value: "{{ host_addr }}"
         type: A
-        state: absent
+        state: present
       #loop: "{{ ec2.instances }}"
       #when: "'control' in item.invocation.module_args.instance_tags.Name"
 #  roles:
