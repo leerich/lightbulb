@@ -357,7 +357,7 @@ DNS: {{ ec2_name_prefix }}-{{user.username}}.{{workshop_dns_zone}}<br>
 <pre><code>ssh {{user.username}}@{{ ec2_name_prefix }}-{{user.username}}.{{workshop_dns_zone}}</code></pre>
 
 Or use Guacamole with a web browser:<br>
-<pre><code>https://{{ec2_name_prefix}}.rhdemo.io/ssh</code></pre>
+<a href="https://{{ec2_name_prefix}}.{{workshop_dns_zone}}/ssh">https://{{ec2_name_prefix}}.{{workshop_dns_zone}}/ssh</a><br>
 <br />
 <pre>
 Your Ansible Nodes:
