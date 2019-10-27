@@ -77,7 +77,8 @@
         state: "{{ route53_state }}"
         zone: "{{workshop_dns_zone}}"
         #region: "{{ec2_region}}"
-        record: "{{ec2_name_prefix}}.{{workshop_dns_zone}}"
+        #record: "{{ec2_name_prefix}}.{{workshop_dns_zone}}"
+        record: "lightbulb.{{workshop_dns_zone}}"
         type: CNAME
         overwrite: yes
         value: "{{ host_addr }}"
