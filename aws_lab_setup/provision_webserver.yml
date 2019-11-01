@@ -80,7 +80,7 @@
         record: "{{ec2_name_prefix}}.{{workshop_dns_zone}}"
         #record: "lightbulb.{{workshop_dns_zone}}"
         type: CNAME
-        overwrite: yes
+        #overwrite: yes
         value: "{{ host_addr }}"
         type: A
         state: absent
