@@ -94,7 +94,7 @@
         #value: "{{ host_addr }}"
         type: A
         state: absent
-      when: rec != ""
+      when: dynip != ""
 
 
     - name: Create DNS name for the web server
