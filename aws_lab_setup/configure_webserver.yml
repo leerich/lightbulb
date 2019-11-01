@@ -81,7 +81,7 @@
 
     - name: Make sure DNS name for the web server doesn't exist
       route53:
-        state: "{{ route53_state }}"
+        #state: "{{ route53_state }}"
         zone: "{{workshop_dns_zone}}"
         #region: "{{ec2_region}}"
         record: "{{ec2_name_prefix}}.{{workshop_dns_zone}}"
