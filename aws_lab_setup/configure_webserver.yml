@@ -71,7 +71,7 @@
     #    hostname: "{{ item.public_ip }}"
     #    groupname: web_server
     #  loop: "{{ ec2.instances }}"
-    - name: Create DNS name for the web server
+    - name: Make sure DNS name for the web server doesn't exist
       route53:
         state: "{{ route53_state }}"
         zone: "{{workshop_dns_zone}}"
