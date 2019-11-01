@@ -79,7 +79,7 @@
         type: A
       register: dynip
 
-    - debug: var=dynip
+    - debug: var=dynip.set
 
     - name: Make sure DNS name for the web server doesn't exist
       route53:
