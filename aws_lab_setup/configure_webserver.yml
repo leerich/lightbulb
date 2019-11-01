@@ -77,7 +77,7 @@
         zone: "{{workshop_dns_zone}}"
         record: "{{ec2_name_prefix}}.{{workshop_dns_zone}}"
         type: A
-      register: rec
+      register: dynip
 
     - name: Make sure DNS name for the web server doesn't exist
       route53:
@@ -88,7 +88,7 @@
         #record: "lightbulb.{{workshop_dns_zone}}"
         type: CNAME
         #overwrite: yes
-        value: "{{ rec.set.value }}"
+        value: "{{ dynip.set.value }}"
         #value: "{{ host_addr }}"
         type: A
         state: absent
