@@ -261,7 +261,21 @@ $("document").ready(function(){
           <div class="col-sm-4">
               <a class="btn btn-secondary btn-block" href="https://network-automation.github.io/linklight/decks/ansible_f5.pdf">Ansible F5 Deck</a>
           </div>
-
+        </div>
+        {% elif storage_workshop %}
+        <div class="row">
+          <div class="col-sm-4">
+              <a class="btn btn-secondary btn-block" href="http://lightbulb.rhdemo.io/decks/Ansible-Storage.pdf">Ansible for Storage</a>
+          </div>
+          <div class="col-sm-4">
+              <a class="btn btn-secondary btn-block" href="https://github.com/leerich/ansible-storage/tree/master/exercises/ansible_storage">Ansible Storage Exercises</a>
+          </div>
+          <div class="col-sm-4">
+              <a class="btn btn-secondary btn-block" href="http://lightbulb.rhdemo.io/decks/intro-to-ansible-tower.html">Intro to Ansible Tower</a>
+          </div>
+          <div class="col-sm-4">
+              <a class="btn btn-secondary btn-block" href="https://github.com/leerich/workshops/blob/master/decks/tower_intro.pdf">Intro to Ansible Tower (New)</a>
+          </div>
         </div>
         {% else %}
         <div class="row">
@@ -281,13 +295,13 @@ $("document").ready(function(){
             <div class="col-sm-4">
                 <a class="btn btn-secondary btn-block" href="http://lightbulb.rhdemo.io/decks/Condensed-Red_Hat_Ansible_Tower-Workshop_8hrs_v2.2.pdf">Ansible Tower Exercises</a>
             </div>
-            --->
             <div class="col-sm-4">
                 <a class="btn btn-secondary btn-block" href="http://lightbulb.rhdemo.io/decks/Ansible-Storage.pdf">Ansible for Storage</a>
             </div>
             <div class="col-sm-4">
                 <a class="btn btn-secondary btn-block" href="https://github.com/leerich/ansible-storage/tree/master/exercises/ansible_storage">Ansible Storage Exercises</a>
             </div>
+            --->
         </div>
         {% endif %}
 <br><br>
