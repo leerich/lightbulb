@@ -94,7 +94,7 @@
         #value: "{{ host_addr }}"
         type: A
         state: absent
-      when: (dynip.set != "") or (dynip.set is defined)
+      #when: (dynip.set != "") or (dynip.set is defined)
 
 
     - name: Create DNS name for the web server
