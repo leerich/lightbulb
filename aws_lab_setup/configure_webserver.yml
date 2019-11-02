@@ -71,30 +71,30 @@
     #    hostname: "{{ item.public_ip }}"
     #    groupname: web_server
     #  loop: "{{ ec2.instances }}"
-    - name: Get DNS record
-      route53:
-        state: get
-        zone: "{{workshop_dns_zone}}"
-        record: "{{ec2_name_prefix}}.{{workshop_dns_zone}}"
-        type: A
-      register: dynip
+#    - name: Get DNS record
+#      route53:
+#        state: get
+#        zone: "{{workshop_dns_zone}}"
+#        record: "{{ec2_name_prefix}}.{{workshop_dns_zone}}"
+#        type: A
+#      register: dynip
+#
+#    - debug: var=dynip.set
 
-    - debug: var=dynip
-    
-    - name: Make sure DNS name for the web server doesn't exist
-      route53:
-        #state: "{{ route53_state }}"
-        zone: "{{workshop_dns_zone}}"
-        #region: "{{ec2_region}}"
-        record: "{{ec2_name_prefix}}.{{workshop_dns_zone}}"
-        #record: "lightbulb.{{workshop_dns_zone}}"
-        #type: CNAME
-        #overwrite: yes
-        value: "{{ dynip.set.value }}"
-        #value: "{{ host_addr }}"
-        type: A
-        state: absent
-      when: (dynip.set != "") or (dynip.set is defined)
+#    - name: Make sure DNS name for the web server doesn't exist
+#      route53:
+#        #state: "{{ route53_state }}"
+#        zone: "{{workshop_dns_zone}}"
+#        #region: "{{ec2_region}}"
+#        record: "{{ec2_name_prefix}}.{{workshop_dns_zone}}"
+#        #record: "lightbulb.{{workshop_dns_zone}}"
+#        #type: CNAME
+#        #overwrite: yes
+#        value: "{{ dynip.set.value }}"
+#        #value: "{{ host_addr }}"
+#        type: A
+#        state: absent
+#      when: (dynip.set != "") or (dynip.set is defined)
 
 
     - name: Create DNS name for the web server
