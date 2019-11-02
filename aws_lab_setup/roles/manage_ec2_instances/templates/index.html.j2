@@ -364,14 +364,14 @@ DNS: {{ ec2_name_prefix }}-{{user.username}}.{{workshop_dns_zone}}<br>
 Or use Guacamole with a web browser:<br>
 <a href="https://{{ec2_name_prefix}}.{{workshop_dns_zone}}/ssh">https://{{ec2_name_prefix}}.{{workshop_dns_zone}}/ssh</a><br>
 <br />
+Your Ansible Nodes:<br>
 <pre>
-Your Ansible Nodes:
 Ansible Tower: {{ ec2_name_prefix }}-{{user.username}}.{{workshop_dns_zone}}
 Node1: {{ ec2_name_prefix }}-{{user.username}}-node1.{{workshop_dns_zone}}
 Node2: {{ ec2_name_prefix }}-{{user.username}}-node2.{{workshop_dns_zone}}
 Node3: {{ ec2_name_prefix }}-{{user.username}}-node3.{{workshop_dns_zone}}
 </pre>
-<br>Your Ansible Inventory File:<br>
+Your Ansible Inventory File:<br>
 <pre>
 [web]
 {% for grouper, list in instances.results|groupby('item') if grouper.item[0] == user %}
@@ -381,7 +381,7 @@ Node3: {{ ec2_name_prefix }}-{{user.username}}-node3.{{workshop_dns_zone}}
 {% endif %}
 {% endfor %}
 {% endfor %}
-[ansible]
+<br>[ansible]
 {% for grouper, list in instances.results|groupby('item') if grouper.item[0] == user %}
 {% for vm in list %}
 {% if 'control' in vm.invocation.module_args.instance_tags.Name %}
