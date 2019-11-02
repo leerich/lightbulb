@@ -88,13 +88,13 @@
         #region: "{{ec2_region}}"
         record: "{{ec2_name_prefix}}.{{workshop_dns_zone}}"
         #record: "lightbulb.{{workshop_dns_zone}}"
-        type: CNAME
+        #type: CNAME
         #overwrite: yes
         value: "{{ dynip.set.value }}"
         #value: "{{ host_addr }}"
         type: A
         state: absent
-      #when: (dynip.set != "") or (dynip.set is defined)
+      when: (dynip.set != "") or (dynip.set is defined)
 
 
     - name: Create DNS name for the web server
@@ -104,10 +104,9 @@
         #region: "{{ec2_region}}"
         record: "{{ec2_name_prefix}}.{{workshop_dns_zone}}"
         #record: "lightbulb.{{workshop_dns_zone}}"
-        type: CNAME
+        type: A
         overwrite: yes
         value: "{{ host_addr }}"
-        type: A
         #state: present
       #loop: "{{ ec2.instances }}"
       #when: "'control' in item.invocation.module_args.instance_tags.Name"
