@@ -44,7 +44,7 @@
     workspace_ips: ['null']
     data_ips: ['null']
 
-- name: Set Workspace IP Address
+- name: Set Workspace IP Address (This will fail until volume is initialized. May take up to 25 mins)
   set_fact:
     workspace_{{item}}_ip: "{{ cluster_Properties.json[item|int]['clusterProperties']['systemManagerUrl'] | urlsplit('hostname') }}"
     workspace_ips: "{{workspace_ips}} + [ '{{ cluster_Properties.json[item|int]['clusterProperties']['systemManagerUrl'] | urlsplit('hostname') }}']"
