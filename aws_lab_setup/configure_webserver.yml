@@ -71,15 +71,15 @@
     #    hostname: "{{ item.public_ip }}"
     #    groupname: web_server
     #  loop: "{{ ec2.instances }}"
-    - name: Get DNS record
-      route53:
-        state: get
-        zone: "{{workshop_dns_zone}}"
-        record: "{{ec2_name_prefix}}.{{workshop_dns_zone}}"
-        type: A
-      register: dynip
-
-    - debug: var=dynip.set
+#    - name: Get DNS record
+#      route53:
+#        state: get
+#        zone: "{{workshop_dns_zone}}"
+#        record: "{{ec2_name_prefix}}.{{workshop_dns_zone}}"
+#        type: A
+#      register: dynip
+#
+#    - debug: var=dynip.set
 
 #    - name: Make sure DNS name for the web server doesn't exist
 #      route53:
