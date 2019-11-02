@@ -62,6 +62,13 @@
     - users
     - user_accounts
 
+- name: Create directory for storage inventory if it doesn't exist
+  file:
+    path: ./student_instances
+    state: directory
+    mode: '0755'
+  when: storage_workshop|d(False) == True
+  
 - name: Generate student inventories for storage workshop
   template:
     src: storageinstances.txt.j2
