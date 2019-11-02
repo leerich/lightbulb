@@ -370,11 +370,11 @@ Node3: {{ ec2_name_prefix }}-{{user.username}}-node3.{{workshop_dns_zone}}
 </pre>
 <br>Your Ansible Inventory File:<br>
 <pre>
-<br>[web]<br />
+[web]
 {% for grouper, list in instances.results|groupby('item') if grouper.item[0] == user %}
 {% for vm in list %}
 {% if 'control' not in vm.invocation.module_args.instance_tags.Name and 'haproxy' not in vm.invocation.module_args.instance_tags.Name%}
-{{ vm.invocation.module_args.instance_tags.Name | regex_replace('.*-(node)(\\d)', '\\1-\\2') }} ansible_host={{ vm.tagged_instances[0].public_ip }}<br />
+{{ vm.invocation.module_args.instance_tags.Name | regex_replace('.*-(node)(\\d)', '\\1-\\2') }} ansible_host={{ vm.tagged_instances[0].public_ip }}
 {% endif %}
 {% endfor %}
 {% endfor %}
@@ -383,7 +383,7 @@ Node3: {{ ec2_name_prefix }}-{{user.username}}-node3.{{workshop_dns_zone}}
 {% for grouper, list in instances.results|groupby('item') if grouper.item[0] == user %}
 {% for vm in list %}
 {% if 'control' in vm.invocation.module_args.instance_tags.Name %}
-{{ vm.invocation.module_args.instance_tags.Name | regex_replace('.*-([\\w]*)', '\\1') }} ansible_host={{ vm.tagged_instances[0].public_ip }}<br><br>
+{{ vm.invocation.module_args.instance_tags.Name | regex_replace('.*-([\\w]*)', '\\1') }} ansible_host={{ vm.tagged_instances[0].public_ip }}<br>
 </pre>
 Tower Link: <a href="https://{{ec2_name_prefix}}-{{user.username}}.{{workshop_dns_zone}}">https://{{ec2_name_prefix}}-{{user.username}}.{{workshop_dns_zone}}</a><br>
 Tower Username: admin<br>
