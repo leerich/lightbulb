@@ -378,6 +378,7 @@ Node3: {{ ec2_name_prefix }}-{{user.username}}-node3.{{workshop_dns_zone}}
 {% endif %}
 {% endfor %}
 {% endfor %}
+<br>
 [ansible]
 {% for grouper, list in instances.results|groupby('item') if grouper.item[0] == user %}
 {% for vm in list %}
