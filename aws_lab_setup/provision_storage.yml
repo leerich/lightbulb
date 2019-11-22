@@ -33,6 +33,7 @@
   connection: local
   become: no
   gather_facts: no
+  tags: storage
   roles:
     - manage_ec2_instances
 
