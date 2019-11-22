@@ -20,12 +20,12 @@
 #  gather_facts: no
 #  roles:
 #    - manage_ec2_instances
-- name: Provision Storage Resources
-  hosts: localhost
-  become: no
-  gather_facts: no
-  roles:
-    - storage
+#- name: Provision Storage Resources
+#  hosts: localhost
+#  become: no
+#  gather_facts: no
+#  roles:
+#    - storage
 
 
 - name: Create lab instances in AWS
