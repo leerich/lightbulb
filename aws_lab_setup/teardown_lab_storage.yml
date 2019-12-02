@@ -26,7 +26,7 @@
   roles:
     - manage_ec2_instances
 
-- name: Turn of termination protection on all Ontap instances
+- name: Turn off termination protection on all Ontap instances
   hosts: localhost
   connection: local
   become: no
