@@ -88,6 +88,15 @@
       - always
       - provision
 
+
+  - name: Destroy Cloudformation Stack
+    cloudformation:
+      stack_name: "{{ ec2_name_prefix }}-{{ item.name }}"
+      state: "absent"
+      region: "{{ ec2_region }}"
+    with_items:
+      - "{{ users }}"
+
 #  post_tasks:
 #    - name: Remove inventory files
 #      file: path="{{ item }}" state=absent
