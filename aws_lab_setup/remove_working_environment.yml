@@ -1,4 +1,4 @@
-- name: Generate users list
+- name: Remove environments
   hosts: localhost
   connection: local
   become: no
@@ -7,10 +7,10 @@
   tasks:
     - name: Login to OnTap Instance
       uri:
-        url:  http://{{ cloud_mgr }}:80/occm/api/auth/login
+        url:  http://204.236.211.203:80/occm/api/auth/login
         method: POST
         body_format: json
-        body: { "email": "{{ email_addr }}", "password": "{{ cloud_mgr_password }}" }
+        body: { "email": "lrich00@gmail.com", "password": "password00!" }
         status_code: 204
       register: login
 
@@ -27,9 +27,25 @@
 
     - debug: var=working_environments
 
+    - name: parse variable
+      debug:
+        var: item
+      loop: "{{ working_environments | json_query('json[*].svmName') }}"
+
+    - name: Show publicID
+      debug:
+        var: item
+      loop: "{{ working_environments | json_query(id_query) }}"
+      vars:
+        id_query: "json[?svmName=='svm_citi_student16'].publicId"
+      register: pubid
+
+    - name: Display PubID
+      debug: var=pubid.results[0].item
+
     - name: Remove working environment
       uri:
-        url: http://204.236.211.203:80/occm/api/vsa/working-environments/VsaWorkingEnvironment-qH8iTGRW?localDelete=false&forceDelete=true
+        url: http://204.236.211.203:80/occm/api/vsa/working-environments/
         method: Get
         validate_certs: no
         return_content: yes
