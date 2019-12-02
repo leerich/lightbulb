@@ -14,6 +14,19 @@
         status_code: 204
       register: login
 
+    - name: Get working environments
+      uri:
+        url: http://204.236.211.203:80/occm/api/vsa/working-environments
+        method: Get
+        validate_certs: no
+        return_content: yes
+        status_code: 200
+        headers:
+          Cookie: "{{ login.set_cookie }}"
+      register: working_environments
+
+    - debug: var=working_environments
+
     - name: Remove working environment
       uri:
         url: http://204.236.211.203:80/occm/api/vsa/working-environments/mex_student16?localDelete=false&forceDelete=true
