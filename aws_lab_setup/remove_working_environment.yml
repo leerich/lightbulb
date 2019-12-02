@@ -1,0 +1,25 @@
+- name: Generate users list
+  hosts: localhost
+  connection: local
+  become: no
+  gather_facts: no
+
+  tasks:
+    - name: Login to OnTap Instance
+      uri:
+        url:  http://{{ cloud_mgr }}:80/occm/api/auth/login
+        method: POST
+        body_format: json
+        body: { "email": "{{ email_addr }}", "password": "{{ cloud_mgr_password }}" }
+        status_code: 204
+      register: login
+
+    - name: Remove working environment
+      uri:
+        url: http://204.236.211.203:80/occm/api/vsa/working-environments/mex_student16?localDelete=false&forceDelete=true
+        method: Get
+        validate_certs: no
+        return_content: yes
+        status_code: 200
+        headers:
+          Cookie: "{{ login.set_cookie }}"
