@@ -89,7 +89,7 @@
       - provision
 
 
-  - name: Destroy Cloudformation Stack
+  - name: Destroy Cloudformation Stacks
     cloudformation:
       stack_name: "{{ ec2_name_prefix }}-{{ item.name }}"
       state: "absent"
