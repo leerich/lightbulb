@@ -57,7 +57,7 @@
     cloud_image: ami-0ff1d3d1d2b0be33a
 
   tasks:
-  - name: Destroy Ontap Working Environments
+  - name: Destroy Ontap Instances
     ec2:
       assign_public_ip: yes
       key_name: "{{ ec2_key_name }}"
