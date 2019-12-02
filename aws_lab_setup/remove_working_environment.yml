@@ -29,7 +29,7 @@
 
     - name: Remove working environment
       uri:
-        url: http://204.236.211.203:80/occm/api/vsa/working-environments/mex_student16?localDelete=false&forceDelete=true
+        url: http://204.236.211.203:80/occm/api/vsa/working-environments/VsaWorkingEnvironment-xlJ5Om6j?localDelete=false&forceDelete=true
         method: Get
         validate_certs: no
         return_content: yes
