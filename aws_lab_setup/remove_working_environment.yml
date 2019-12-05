@@ -75,7 +75,7 @@
 
     - name: Display PubID
       debug: var=pubid.results[{{item}}].item
-      with_sequence: start=1 end=17
+      with_sequence: start=0 end=17
 
     - name: Remove working environment
       uri:
