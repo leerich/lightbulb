@@ -42,8 +42,8 @@
       debug:
         var: item
       with_nested:
-        - "{{ working_environments | json_query(id_query) }}"
         - "{{ users }}"
+        - "{{ working_environments | json_query(json[?svmName=='svm_{{ ec2_name_prefix }}_{{ item.0.username }}'].publicId) }}"
       vars:
         id_query: "json[?svmName=='svm_{{ ec2_name_prefix }}_{{ item.0.username }}'].publicId"
       register: pubid
