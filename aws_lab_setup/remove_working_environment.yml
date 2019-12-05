@@ -78,6 +78,9 @@
       set_fact: new_pub=pubid.results[{{item}}].item
       with_sequence: start={{student_count_start}} end={{student_count_end - 1}}
 
+    - name: debug new_pub
+      debug: var=new_pub
+
     - name: Remove working environment
       uri:
         url: "http://{{cloud_mgr}}:80/occm/api/vsa/working-environments/pubid.results[{{item}}].item"
