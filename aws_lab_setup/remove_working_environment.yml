@@ -49,6 +49,11 @@
         id_query: "json[?svmName=='svm_citi_student17'].publicId"
       register: pubid
 
+    - name: Set fact
+      set_fact:
+        stud_num[item]: "json[?svmName=='svm_citi_student{{item}}'].publicId"
+      with_sequence: start=1 end=17
+
     - name: Show publicID loop
       debug:
         msg: "Running my loop"
