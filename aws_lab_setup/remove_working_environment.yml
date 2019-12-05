@@ -27,7 +27,7 @@
 
     - name: Get working environments
       uri:
-        url: http://204.236.211.203:80/occm/api/vsa/working-environments
+        url: http://{{cloud_mgr}}:80/occm/api/vsa/working-environments
         method: Get
         validate_certs: no
         return_content: yes
