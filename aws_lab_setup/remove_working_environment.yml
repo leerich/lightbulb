@@ -6,6 +6,7 @@
   vars:
     stud_num: []
     stud_num2: [""]
+    new_pub: []
   tasks:
 
     - name: generate users list
@@ -74,7 +75,7 @@
   #    register: pubid2
 
     - name: Display PubID
-      debug: var=pubid.results[{{item}}].item
+      set_fact: new_pub=pubid.results[{{item}}].item
       with_sequence: start={{student_count_start}} end={{student_count_end - 1}}
 
     - name: Remove working environment
