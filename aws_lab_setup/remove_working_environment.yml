@@ -51,7 +51,7 @@
 
     - name: Show publicID loop
       debug:
-        var: item[0]
+        var: item.results
       with_nested:
         - "{{ users }}"
         - "{{ working_environments | json_query(id_query) }}"
