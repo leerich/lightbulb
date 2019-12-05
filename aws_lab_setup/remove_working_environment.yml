@@ -74,7 +74,7 @@
   #    register: pubid2
 
     - name: Display PubID
-      debug: var=pubid.results[].item
+      debug: var=pubid.results[0].item
 
     - name: Remove working environment
       uri:
