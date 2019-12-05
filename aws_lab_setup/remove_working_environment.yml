@@ -53,10 +53,11 @@
     - name: Set fact
       set_fact:
         stud_num: "json[?svmName=='svm_citi_student{{item}}'].publicId"
+        stud_num2: "{{ stud_num2 }} + {{ stud_num }}"
       with_sequence: start=1 end=16
 
     - name: debug set fact
-      debug: var=stud_num[14]
+      debug: var=stud_num2
       #with_items: "{{ stud_num[14] }}"
 
     - name: Show publicID loop
