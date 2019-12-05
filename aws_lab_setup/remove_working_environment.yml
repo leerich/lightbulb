@@ -79,7 +79,7 @@
       with_sequence: start={{student_count_start}} end={{student_count_end - 1}}
 
     - name: debug new_pub
-      debug: var=pubid.results[{{student_count_start:student_count_end}}].item
+      debug: var=pubid.results[0:2].item
 
     - name: Remove working environment
       uri:
