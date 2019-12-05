@@ -74,8 +74,8 @@
   #    register: pubid2
 
     - name: Display PubID
-      debug: var=pubid.item
-      #with_sequence: start={{student_count_start}} end={{student_count_end - 1}}
+      debug: var=pubid[{{item}}].item
+      with_sequence: start={{student_count_start}} end={{student_count_end - 1}}
 
     - name: Remove working environment
       uri:
