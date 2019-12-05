@@ -10,7 +10,6 @@
       set_fact:
         users: "{{ users|default([]) + [ {'name': 'student' + item, 'username': 'student' + item, 'email': 'student' + item + '@example.com'} ] }}"
       with_sequence: start="{{ student_count_start }}" end="{{ student_count_end }}"
-
     - name: Login to OnTap Instance
       uri:
         url:  http://204.236.211.203:80/occm/api/auth/login
@@ -41,16 +40,13 @@
     - name: Show publicID
       debug:
         var: item
-      with_nested:
-        - "{{ users }}"
-        - "{{ working_environments | json_query(json[?svmName=='svm_{{ ec2_name_prefix }}_{{ item.0.username }}'].publicId) }}"
+      loop: "{{ working_environments | json_query(id_query) }}"
       vars:
-        id_query: "json[?svmName=='svm_{{ ec2_name_prefix }}_{{ item.0.username }}'].publicId"
+        id_query: "json[?svmName=='svm_citi_student17'].publicId"
       register: pubid
 
     - name: Display PubID
-      debug: var=pubid
-      #debug: var=pubid.results[0].item
+      debug: var=pubid.results[0].item
 
     - name: Remove working environment
       uri:
