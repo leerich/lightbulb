@@ -52,7 +52,7 @@
     - name: Show publicID loop
       debug:
         msg: "Running my loop"
-      loop: {{ working_environments | json_query(json[?svmName=='svm_citi_student17'].publicId) }}"
+      loop: "{{ working_environments | json_query(json[?svmName=='svm_citi_student17'].publicId) }}"
     #  vars:
     #    id_query: "json[?svmName=='svm_citi_{{item.0.name}}'].publicId"
       register: pubid2
