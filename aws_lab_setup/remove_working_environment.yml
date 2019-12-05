@@ -41,7 +41,7 @@
     - name: parse variable
       debug:
         var: item
-      loop: "{{ working_environments | json_query('json[*].svmName.publicId') }}"
+      loop: "{{ working_environments | json_query('json[*].svmName') }}"
 
     - name: Show publicID
       debug:
