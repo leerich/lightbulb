@@ -5,6 +5,7 @@
   gather_facts: no
   vars:
     stud_num: []
+    stud_num2: []
   tasks:
 
     - name: generate users list
