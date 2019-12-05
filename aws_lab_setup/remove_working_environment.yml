@@ -91,8 +91,8 @@
         status_code: 200
         headers:
           Cookie: "{{ login.set_cookie }}"
-      with_sequence: start={{student_count_start}} end={{student_count_end - 1}}
+      #with_sequence: start={{student_count_start}} end={{student_count_end - 1}}
       #loop_control:
       #  loop_var: id_num
-      #with_items:
-      #  - "{{ pubid }}"
+      with_items:
+        - "{{ pubid }}"
