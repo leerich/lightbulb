@@ -64,9 +64,10 @@
     - name: Show publicID loop
       debug:
         msg: "Running my loop"
-      with_nested:
-        - "{{ stud_num2 }}"
-        - "{{ working_environments | json_query(stud_num2) }}"
+      #with_nested:
+        #- "{{ stud_num2 }}"
+      loop: "{{ working_environments | json_query(stud_num2) }}"
+      with_items: "{{ stud_num2 }}"
     #  vars:
     #    id_query: "json[?svmName=='svm_citi_{{item.0.name}}'].publicId"
       register: pubid2
