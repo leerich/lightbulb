@@ -95,4 +95,4 @@
       #loop_control:
       #  loop_var: id_num
       with_items:
-        - "{{ pubid }}"
+        - "{{ new_pub }}"
