@@ -49,7 +49,7 @@
       loop: "{{ working_environments | json_query(id_query) }}"
       vars:
         #id_query: "json[?svmName=='svm_citi_student*'].publicId"
-        id_query: "json[?contains(smvName, `svm_citi_student`].publicId"
+        id_query: "json[?contains(svmName, `svm_citi_student`].publicId"
       register: pubid
 
     - name: Set fact
