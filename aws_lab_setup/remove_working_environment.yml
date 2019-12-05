@@ -56,7 +56,8 @@
       with_sequence: start=1 end=16
 
     - name: debug set fact
-      debug: var=stud_num
+      debug: var=item
+      with_items: "{{ stud_num }}"
 
     - name: Show publicID loop
       debug:
