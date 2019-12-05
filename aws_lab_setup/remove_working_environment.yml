@@ -84,11 +84,11 @@
 
     - name: Remove working environment
       uri:
-        url: "http://{{cloud_mgr}}:80/occm/api/vsa/working-environments/VsaWorkingEnvironment-i0OiqwoO?localDelete=false&forceDelete=false"
+        url: "http://{{cloud_mgr}}:80/occm/api/vsa/working-environments/{{item}}?localDelete=false&forceDelete=false"
         method: Delete
         validate_certs: no
         return_content: yes
-        status_code: 200
+        status_code: 202
         headers:
           Cookie: "{{ login.set_cookie }}"
       loop: "{{ working_environments | to_json | from_json | json_query(id_query) }}"
