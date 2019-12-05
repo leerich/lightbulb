@@ -41,7 +41,7 @@
     - name: parse variable
       debug:
         var: item
-      loop: "{{ working_environments | json_query('json[*].svmName') }}"
+      loop: "{{ working_environments | json_query('json[*].svmName.publicId') }}"
 
     - name: Show publicID
       debug:
@@ -67,7 +67,7 @@
       #with_nested:
         #- "{{ stud_num2 }}"
       loop: "{{ working_environments | json_query(stud_num2) }}"
-      with_items: "{{ stud_num2 }}"
+      #with_items: "{{ stud_num2 }}"
     #  vars:
     #    id_query: "json[?svmName=='svm_citi_{{item.0.name}}'].publicId"
       register: pubid2
