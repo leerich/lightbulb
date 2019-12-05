@@ -5,6 +5,12 @@
   gather_facts: no
 
   tasks:
+
+    - name: generate users list
+      set_fact:
+        users: "{{ users|default([]) + [ {'name': 'student' + item, 'username': 'student' + item, 'email': 'student' + item + '@example.com'} ] }}"
+      with_sequence: start="{{ student_count_start }}" end="{{ student_count_end }}"
+
     - name: Login to OnTap Instance
       uri:
         url:  http://204.236.211.203:80/occm/api/auth/login
@@ -35,9 +41,11 @@
     - name: Show publicID
       debug:
         var: item
-      loop: "{{ working_environments | json_query(id_query) }}"
+      with_nested:
+        - "{{ working_environments | json_query(id_query) }}"
+        - "{{ users }}"
       vars:
-        id_query: "json[?svmName=='svm_citi_student17'].publicId"
+        id_query: "json[?svmName=='svm_{{ ec2_name_prefix }}_{{ item.0.username }}'].publicId"
       register: pubid
 
     - name: Display PubID
