@@ -57,7 +57,7 @@
 
     - name: debug set fact
       debug: var=item
-      with_items: "{{ stud_num }}"
+      with_items: "{{ stud_num[14] }}"
 
     - name: Show publicID loop
       debug:
