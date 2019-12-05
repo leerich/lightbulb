@@ -80,7 +80,7 @@
       register: new_pub
 
     - name: debug new_pub
-      debug: var=new_pub
+      debug: var=new_pub.item
 
     - name: Remove working environment
       uri:
