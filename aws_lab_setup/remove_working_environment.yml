@@ -18,10 +18,10 @@
 
     - name: Login to OnTap Instance
       uri:
-        url:  http://204.236.211.203:80/occm/api/auth/login
+        url:  http://{{cloud_mgr}}:80/occm/api/auth/login
         method: POST
         body_format: json
-        body: { "email": "lrich00@gmail.com", "password": "password00!" }
+        body: { "email": "{{email_addr}}", "password": "{{cloud_mgr_password}}" }
         status_code: 204
       register: login
 
@@ -79,7 +79,7 @@
 
     - name: Remove working environment
       uri:
-        url: http://204.236.211.203:80/occm/api/vsa/working-environments/
+        url: http://{{cloud_mgr}}:80/occm/api/vsa/working-environments/
         method: Get
         validate_certs: no
         return_content: yes
