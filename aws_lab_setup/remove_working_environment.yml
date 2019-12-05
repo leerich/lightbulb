@@ -52,9 +52,7 @@
     - name: Show publicID loop
       debug:
         var: item.results
-      with_nested:
-        - "{{ users }}"
-        - "{{ working_environments | json_query(id_query) }}"
+      loop: "{{ users }} | {{ working_environments | json_query(id_query) }}"
       vars:
         id_query: "json[?svmName=='svm_citi_{{item.0.name}}'].publicId"
       register: pubid
