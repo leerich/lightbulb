@@ -83,11 +83,12 @@
 
     - name: Remove working environment
       uri:
-        url: "http://{{cloud_mgr}}:80/occm/api/vsa/working-environments/pubid.results[{{item}}].item"
+        url: "http://{{cloud_mgr}}:80/occm/api/vsa/working-environments/{{item}}
         method: Get
         validate_certs: no
         return_content: yes
         status_code: 200
         headers:
           Cookie: "{{ login.set_cookie }}"
-      with_sequence: start={{student_count_start}} end={{student_count_end - 1}}
+      with_items:
+        - {{ pubid }}
