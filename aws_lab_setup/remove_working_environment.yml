@@ -80,7 +80,7 @@
       register: new_pub
 
     - name: debug new_pub
-      debug: var=new_pub.item
+      debug: var=new_pub
 
     - name: Remove working environment
       uri:
@@ -92,7 +92,7 @@
         headers:
           Cookie: "{{ login.set_cookie }}"
       with_sequence: start={{student_count_start}} end={{student_count_end - 1}}
-      loop_control:
-        loop_var: id_num
+      #loop_control:
+      #  loop_var: id_num
       #with_items:
       #  - "{{ pubid }}"
