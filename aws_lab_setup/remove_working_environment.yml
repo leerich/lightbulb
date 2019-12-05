@@ -10,6 +10,10 @@
       set_fact:
         users: "{{ users|default([]) + [ {'name': 'student' + item, 'username': 'student' + item, 'email': 'student' + item + '@example.com'} ] }}"
       with_sequence: start="{{ student_count_start }}" end="{{ student_count_end }}"
+
+    - name: Debug users
+      debug: var=users
+      
     - name: Login to OnTap Instance
       uri:
         url:  http://204.236.211.203:80/occm/api/auth/login
@@ -38,6 +42,14 @@
       loop: "{{ working_environments | json_query('json[*].svmName') }}"
 
     - name: Show publicID
+      debug:
+        var: item
+      loop: "{{ working_environments | json_query(id_query) }}"
+      vars:
+        id_query: "json[?svmName=='svm_citi_student17'].publicId"
+      register: pubid
+
+    - name: Show publicID loop
       debug:
         var: item
       loop: "{{ working_environments | json_query(id_query) }}"
