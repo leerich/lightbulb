@@ -84,8 +84,8 @@
 
     - name: Remove working environment
       uri:
-        url: "http://{{cloud_mgr}}:80/occm/api/vsa/working-environments/{{item}}"
-        method: Get
+        url: "http://{{cloud_mgr}}:80/occm/api/vsa/working-environments/VsaWorkingEnvironment-i0OiqwoO?localDelete=false&forceDelete=false"
+        method: Delete
         validate_certs: no
         return_content: yes
         status_code: 200
