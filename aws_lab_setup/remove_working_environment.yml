@@ -54,7 +54,7 @@
         var: item.1
       with_nested:
         - "{{ users }}"
-        - "{{ working_environments | json_query("json[?svmName=='svm_citi_item.0.name'].publicId") }}"
+        - "{{ working_environments | json_query(json[?svmName=='svm_citi_item.0.name'].publicId) }}"
       vars:
         id_query: "json[?svmName=='svm_citi_student17'].publicId"
       register: pubid
