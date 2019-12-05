@@ -54,7 +54,7 @@
         msg: "Running my loop"
       with_nested:
         - "{{ users }}"
-        - "{{ working_environments | json_query('json[?svmName==`svm_citi_student17`].publicId') | join(', ') }}"
+        - "{{ working_environments | json_query('json[?svmName==`svm_citi_"item0.username"`].publicId') | join(', ') }}"
     #  vars:
     #    id_query: "json[?svmName=='svm_citi_{{item.0.name}}'].publicId"
       register: pubid2
