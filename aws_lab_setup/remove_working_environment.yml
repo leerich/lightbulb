@@ -45,7 +45,7 @@
 
     - name: Show publicID
       debug:
-        msg: "Showing public id"
+        msg: "Showing public id {{item}}"
       loop: "{{ working_environments | to_json | from_json | json_query(id_query) }}"
       vars:
         #id_query: "json[?svmName=='svm_citi_student*'].publicId"
