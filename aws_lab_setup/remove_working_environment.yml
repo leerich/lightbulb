@@ -13,7 +13,7 @@
 
     - name: Debug users
       debug: var=users
-      
+
     - name: Login to OnTap Instance
       uri:
         url:  http://204.236.211.203:80/occm/api/auth/login
@@ -51,8 +51,10 @@
 
     - name: Show publicID loop
       debug:
-        var: item
-      loop: "{{ working_environments | json_query(id_query) }}"
+        var: item.1
+      with_nested:
+        - "{{ users }}"
+        - "{{ working_environments | json_query("json[?svmName=='svm_citi_item.0.name'].publicId") }}"
       vars:
         id_query: "json[?svmName=='svm_citi_student17'].publicId"
       register: pubid
