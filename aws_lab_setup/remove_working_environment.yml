@@ -84,7 +84,7 @@
 
     - name: Remove working environment
       uri:
-        url: "http://{{cloud_mgr}}:80/occm/api/vsa/working-environments/{{pubid.results[item].item}}"
+        url: "http://{{cloud_mgr}}:80/occm/api/vsa/working-environments/{{pubid.results[0].item}}"
         method: Get
         validate_certs: no
         return_content: yes
