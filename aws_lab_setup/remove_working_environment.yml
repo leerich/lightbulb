@@ -56,7 +56,7 @@
         - "{{ users }}"
         - "{{ working_environments | json_query(id_query) }}"
       vars:
-        id_query: "json[?svmName=='svm_citi_student17'].publicId"
+        id_query: "json[?svmName=='svm_citi_{{item.0.name}}'].publicId"
       register: pubid
 
     - name: Display PubID
