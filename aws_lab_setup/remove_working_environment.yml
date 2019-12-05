@@ -74,8 +74,8 @@
   #    register: pubid2
 
     - name: Display PubID
-      debug: var=pubid
-      
+      debug: var=pubid.results[].item
+
     - name: Remove working environment
       uri:
         url: http://204.236.211.203:80/occm/api/vsa/working-environments/
