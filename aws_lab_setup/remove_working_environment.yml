@@ -54,6 +54,9 @@
         stud_num: "json[?svmName=='svm_citi_student{{item}}'].publicId"
       with_sequence: start=1 end=16
 
+    - name: debug set fact
+      debug: var=stud_num
+
     - name: Show publicID loop
       debug:
         msg: "Running my loop"
