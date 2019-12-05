@@ -75,8 +75,8 @@
   #    register: pubid2
 
     - name: Display PubID
-      debug: var="pubid.results[{{item}}].item"
-      with_sequence: start={{student_count_start}} end={{student_count_end - 1}}
+      debug: var=pubid
+      #with_sequence: start={{student_count_start}} end={{student_count_end - 1}}
       register: new_pub
 
     - name: debug new_pub
