@@ -54,7 +54,7 @@
     - name: Set fact
       set_fact:
         stud_num: "json[?svmName=='svm_citi_student{{item}}'].publicId"
-        stud_num2: "{{ stud_num + stud_num2 }}"
+        stud_num2: "{{ stud_num }} + {{ stud_num2 }}"
       with_sequence: start=1 end=16
 
     - name: debug set fact
