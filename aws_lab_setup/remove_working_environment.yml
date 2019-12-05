@@ -59,7 +59,7 @@
         msg: "Running my loop"
       with_nested:
         - "{{ stud_num }}"
-        - "{{ working_environments | json_query(item) }}"
+        - "{{ working_environments | json_query(stud_num) }}"
     #  vars:
     #    id_query: "json[?svmName=='svm_citi_{{item.0.name}}'].publicId"
       register: pubid2
