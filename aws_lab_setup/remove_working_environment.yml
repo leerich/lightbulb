@@ -55,7 +55,7 @@
       loop: "{{ users }} | {{ working_environments | json_query(id_query) }}"
       vars:
         id_query: "json[?svmName=='svm_citi_{{item.0.name}}'].publicId"
-      register: pubid
+      register: pubid2
 
     - name: Display PubID
       debug: var=pubid.results[0].item
