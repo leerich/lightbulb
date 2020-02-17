@@ -4,7 +4,7 @@
     url: https://localhost/api/v2/ping/
     method: GET
     user: admin
-    password: "{{ towerpass }}"
+    password: "{{ workshop_password }}"
     validate_certs: False
   register: checkout
   ignore_errors: True
