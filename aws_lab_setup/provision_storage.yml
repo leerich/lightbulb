@@ -65,7 +65,7 @@
   gather_facts: no
   roles:
     #- ansible-tower
-    - { role: ansible-tower, when: tower_install }
+    #- { role: ansible-tower, when: tower_install }
     - { role: populate_tower, when: tower_install }
 
 #- name: Populate tower
