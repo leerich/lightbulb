@@ -61,6 +61,7 @@
 - name: Install Ansible tower
   hosts: control_nodes
   become: yes
+  tags: tower
   gather_facts: no
   roles:
     #- ansible-tower
