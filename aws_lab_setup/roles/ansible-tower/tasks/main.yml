@@ -128,7 +128,7 @@
     body_format: json
     validate_certs: False
     force_basic_auth: yes
-  ignore_errors: True
+  ignore_errors: False
 
 #- name: Post license key
 #  uri:
