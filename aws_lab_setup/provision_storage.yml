@@ -34,6 +34,7 @@
   connection: local
   become: no
   gather_facts: no
+  #tags: skip
   roles:
     - manage_ec2_instances
 
@@ -42,12 +43,14 @@
   connection: local
   become: no
   gather_facts: no
+  tags: skip
   roles:
     - domain-names
 
 - name: Configure common options on managed nodes and control nodes
   hosts: "managed_nodes:control_nodes"
   become: yes
+  tags: skip
   roles:
     - user_accounts
     - common
@@ -55,6 +58,7 @@
 - name: Configure control node
   hosts: control_nodes
   become: yes
+  tags: skip
   roles:
     - control_node
 
