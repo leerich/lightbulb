@@ -49,7 +49,7 @@
   roles:
     #- ansible-tower
     - { role: ansible-tower, when: tower_install }
-    - { role: code-server, when: tower_install }
+    - { role: code_server, when: tower_install }
 
 #- name: Setup Amazon S3 Website for Student Login
 #  hosts: localhost
