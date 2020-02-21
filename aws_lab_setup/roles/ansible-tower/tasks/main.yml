@@ -6,13 +6,14 @@
     user: admin
     password: "{{ workshop_password }}"
     validate_certs: False
+    force_basic_auth: true
   register: checkout
   ignore_errors: True
 
 - name: set conditional if the above didn't error
   set_fact:
     towerchk: "{{ checkout.json.version }}"
-  when: checkout.json is defined
+  when: checkout is not failed
 
 - debug:
     msg: "towerchk is {{ towerchk }}"
@@ -46,64 +47,67 @@
 #  when: towerchk != realtowerversion
 #####
 
-- name: Download Ansible Tower
-  get_url:
-    #url: '{{ tower_installer_url | default("https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-3.5.3-1.tar.gz") }}'
-    url: https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-{{ towerversion }}.tar.gz
-    dest: /tmp/tower.tar.gz
+- name: Download Ansible Tower only if needed
+  block:
+    - name: Download Ansible Tower
+      get_url:
+        #url: '{{ tower_installer_url | default("https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-3.5.3-1.tar.gz") }}'
+        url: https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-{{ towerversion }}.tar.gz
+        dest: /tmp/tower.tar.gz
 
-- name: Create directory for Ansible Tower
-  file: path=/tmp/tower_install state=directory
+    - name: Create directory for Ansible Tower
+      file: path=/tmp/tower_install state=directory
 
-- name: Extract Ansible Tower install
-  unarchive:
-    src: /tmp/tower.tar.gz
-    dest: /tmp/tower_install
-    remote_src: yes
-    extra_opts: ['--strip-components=1', '--show-stored-names']
+    - name: Extract Ansible Tower install
+      unarchive:
+        src: /tmp/tower.tar.gz
+        dest: /tmp/tower_install
+        remote_src: yes
+        extra_opts: ['--strip-components=1', '--show-stored-names']
 
-- name: template inventory file for Ansible Tower Install
-  template:
-    #src: tower_install.j2
-    src: inventory
-    dest: /tmp/tower_install/inventory
+    - name: template inventory file for Ansible Tower Install
+      template:
+        #src: tower_install.j2
+        src: inventory
+        dest: /tmp/tower_install/inventory
 
-- copy:
-    dest: /tmp/tower_install/extras-vars.yml
-    content: |
-      redhat_aws_rhui_repos: {{ redhat_aws_rhui_repos | to_yaml }}
+    - copy:
+        dest: /tmp/tower_install/extras-vars.yml
+        content: |
+          redhat_aws_rhui_repos: {{ redhat_aws_rhui_repos | to_yaml }}
 
-- name: run the Ansible Tower installer
-  shell: ./setup.sh -e @extras-vars.yml
-  args:
-    chdir: /tmp/tower_install
-  async: 900
-  poll: 10
+    - name: run the Ansible Tower installer
+      shell: ./setup.sh -e @extras-vars.yml
+      args:
+        chdir: /tmp/tower_install
+      async: 900
+      poll: 10
 
-- name: install ansible-tower-cli and requests
-  become: yes
-  pip:
-    name:
-      - ansible-tower-cli
-      - "requests==2.6.0"
-    state: latest
+    - name: install ansible-tower-cli and requests
+      become: yes
+      pip:
+        name:
+          - ansible-tower-cli
+          - "requests==2.6.0"
+        state: latest
 
-- name: wait for Ansible Tower to be up
-  uri:
-    url: https://localhost/api/v2/ping/
-    method: GET
-    user: admin
-    password: "{{workshop_password}}"
-    validate_certs: False
-  register: check2
-  until: check2.json is defined
-  retries: 10
-  delay: 30
+    - name: wait for Ansible Tower to be up
+      uri:
+        url: https://localhost/api/v2/ping/
+        method: GET
+        user: admin
+        password: "{{workshop_password}}"
+        validate_certs: False
+      register: check2
+      until: check2.json is defined
+      retries: 10
+      delay: 30
 
-- name: Display /api/v2/ping results
-  debug:
-    msg: '{{ check2.json }}'
+    - name: Display /api/v2/ping results
+      debug:
+        msg: '{{ check2.json }}'
 
+    when: checkout is failed
 ####
 #- name: wait for tower to be up
 #  uri:
