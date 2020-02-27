@@ -51,17 +51,17 @@
     - { role: ansible-tower, when: tower_install }
     - { role: code_server, when: tower_install }
 
-- name: Setup Amazon S3 Website for Student Login
-  hosts: localhost
-  connection: local
-  become: no
-  gather_facts: no
-  roles:
-    - role: aws_workshop_login_page
-      when:
-        - create_login_page is defined
-        - create_login_page
-  tags: control_node
+#- name: Setup Amazon S3 Website for Student Login
+#  hosts: localhost
+#  connection: local
+#  become: no
+#  gather_facts: no
+#  roles:
+#    - role: aws_workshop_login_page
+#      when:
+#        - create_login_page is defined
+#        - create_login_page
+#  tags: control_node
 #- name: Install Cloud Commander
 #  hosts: control_nodes
 #  become: yes
