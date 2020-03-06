@@ -1,0 +1,36 @@
+- name: Install Amazon Epel
+  command: amazon-linux-extras install epel -y
+
+- name: Wait for yum lock to finish
+  pause:
+    minutes:
+- name: Install certbot
+  yum:
+    name: certbot
+    state: lates
+- name: ISSUE CERT
+  shell: certbot certonly --standalone -d {{ec2_name_prefix|lower}}.rhdemo.io --email lrich@redhat.com --noninteractive --agree-tos
+  register: issue_cert
+  ignore_errors: ye
+- name: APPEND LETS ENCRYPT FAILED
+  set_fact:
+    dns_information: |
+      - The Lets Encrypt certbot failed, please check https://letsencrypt.status.io/ to make sure the service is running
+  run_once: yes
+  delegate_to: localhost
+  delegate_facts: true
+  when: issue_cert is faile
+- name: MOVE SSL KEY
+  copy:
+    remote_src: True
+    src: "/etc/letsencrypt/live/{{ec2_name_prefix|lower}}.rhdemo.io/privkey.pem"
+    dest: /home/ec2-user/guaws/nginx/ssl/server.key
+  when: issue_cert is not faile
+- name: MOVE SSL Chain
+  copy:
+    remote_src: True
+    src: "/etc/letsencrypt/live/{{ec2_name_prefix|lower}}.rhdemo.io/fullchain.pem"
+    dest: /home/ec2-user/guaws/nginx/ssl/server.crt
+  when: issue_cert is not faile
+- name: Unconditionally reboot the machine with all defaults
+  reboot:
