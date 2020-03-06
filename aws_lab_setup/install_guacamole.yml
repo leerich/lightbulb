@@ -104,6 +104,7 @@
 
 - name: Install certbot on guacamole server
   hosts: "{{ host_addr }}"
+  become: yes
   gather_facts: false
   roles:
     - guacamole_certbot
