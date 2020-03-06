@@ -89,22 +89,24 @@
 #  tags:
 #    - skip
 
-- hosts: web_server
+- name: Install Web Server
+  hosts: web_server
+  gather_facts: false
 #- hosts: "{{ host_addr }}"
-  - name: Install Web Server
-    roles:
-      - web_server
-    tags:
-      - web_server_only
+  roles:
+    - web_server
+  tags:
+    - web_server_only
 
 - hosts: web_server
-  - name: Install guacamole
+  name: Install guacamole
     include_tasks: intall_guacamole.yml
     tags:
       - guacamole
 
 - hosts: web_server
-  - name: Install certbot on guacamole server
-    roles:
-      - guacamole_certbot
-    tags: guacamole
+  name: Install certbot on guacamole server
+  roles:
+    - guacamole_certbot
+  tags: guacamole
+  
