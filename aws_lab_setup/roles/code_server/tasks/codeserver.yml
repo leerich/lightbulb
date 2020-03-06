@@ -11,7 +11,7 @@
   route53:
     state: "{{ s3_state }}"
     zone: "{{workshop_dns_zone}}"
-    record: "{{username}}-code.{{ec2_name_prefix|lower}}.{{workshop_dns_zone}}"
+    record: "{{ec2_name_prefix|lower}}-{{ username }}.{{workshop_dns_zone}}"
     type: A
     overwrite: true
     value: "{{ansible_host}}"
@@ -103,7 +103,7 @@
     enabled: true
 
 - name: issue cert
-  shell: certbot certonly --standalone -d {{username}}-code.{{ec2_name_prefix|lower}}.{{workshop_dns_zone}} --email ansible-network@redhat.com --noninteractive --agree-tos
+  shell: certbot certonly --standalone -d {{ec2_name_prefix|lower}}-{{ username }}.{{workshop_dns_zone}} --email lrich@redhat.com --noninteractive --agree-tos
   register: issue_cert
   until: issue_cert is not failed
   retries: 5
