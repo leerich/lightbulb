@@ -19,5 +19,5 @@ nginx_ssl_port: 443
 nginx_ssl_cert_dir: /etc/nginx_cert
 nginx_ssl_cert_days: 3650
 nginx_ssl_cert_host: "{{ansible_fqdn}}"
-nginx_ssl_cert_key: "{{nginx_ssl_cert_host}}_key.pem"
-nginx_ssl_cert_crt: "{{nginx_ssl_cert_host}}_crt.pem"
+nginx_ssl_cert_key: "server.key"
+nginx_ssl_cert_crt: "server.crt"

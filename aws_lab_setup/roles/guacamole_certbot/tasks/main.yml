@@ -31,14 +31,14 @@
   copy:
     remote_src: True
     src: "/etc/letsencrypt/live/{{ec2_name_prefix|lower}}.rhdemo.io/privkey.pem"
-    dest: /home/ec2-user/guaws/nginx/ssl/server.key
+    dest: /etc/nginx_cert/server.key
   when: issue_cert is not failed
 
 - name: MOVE SSL Chain
   copy:
     remote_src: True
     src: "/etc/letsencrypt/live/{{ec2_name_prefix|lower}}.rhdemo.io/fullchain.pem"
-    dest: /home/ec2-user/guaws/nginx/ssl/server.crt
+    dest: /etc/nginx_cert/server.crt
   when: issue_cert is not failed
 
 - name: Unconditionally reboot the machine with all defaults
