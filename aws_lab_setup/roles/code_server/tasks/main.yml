@@ -47,4 +47,4 @@
       delegate_facts: true
   when:
     - not teardown|bool
-    - check_cert is failed
+    #- check_cert is failed
