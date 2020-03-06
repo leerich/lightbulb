@@ -101,7 +101,8 @@
 - name: Install guacamole
   hosts: web_server
   gather_facts: false
-  include: "install_guacamole.yml"
+  tasks:
+    - include: "install_guacamole.yml"
   tags:
     - guacamole
 
