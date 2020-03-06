@@ -92,6 +92,12 @@
 - hosts: web_server
 #- hosts: "{{ host_addr }}"
   roles:
-  - web_server
+    - web_server
   tags:
     - web_server_only
+
+- hosts: web_server
+  roles:
+    - guacamole
+  tags:
+    - guacamole
