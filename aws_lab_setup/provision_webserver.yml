@@ -98,14 +98,16 @@
   tags:
     - web_server_only
 
-- hosts: web_server
-  name: Install guacamole
+- name: Install guacamole
+  hosts: web_server
+  gather_facts: false
   include_tasks: intall_guacamole.yml
   tags:
     - guacamole
 
-- hosts: web_server
-  name: Install certbot on guacamole server
+- name: Install certbot on guacamole server
+  hosts: web_server
+  gather_facts: false
   roles:
     - guacamole_certbot
   tags: guacamole
