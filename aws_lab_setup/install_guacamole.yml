@@ -100,4 +100,11 @@
         name: nginx
         state: restarted
         enabled: yes
+
+- name: Install certbot on guacamole server
+  hosts: "{{ host_addr }}"
+  gather_facts: false
+  roles:
+    - guacamole_certbot
+  tags: guacamole
 ...
