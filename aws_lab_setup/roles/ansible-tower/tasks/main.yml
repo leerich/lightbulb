@@ -138,9 +138,9 @@
 - name: CERTBOT for Tower
   include_tasks: "tower.yml"
   when:
-    - towerinstall | bool
+    - tower_install | bool
 
-    
+
 #- name: create project
 #  uri:
 #    url:  https://localhost/api/v1/projects/
