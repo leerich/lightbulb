@@ -8,11 +8,15 @@
   yum:
     name: certbot
 
+- name: Stop httpd
+  service:
+    name: httpd
+    state: stopped
 
 - name: ISSUE CERT
   shell: certbot certonly --standalone -d {{ec2_name_prefix|lower}}.rhdemo.io --email lrich@redhat.com --noninteractive --agree-tos
   register: issue_cert
-  ignore_errors: yes
+  ignore_errors: no
 
 - name: APPEND LETS ENCRYPT FAILED
   set_fact:
