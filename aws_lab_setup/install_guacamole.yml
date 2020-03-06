@@ -11,7 +11,7 @@
   tasks:
   - name: RHEL | Disable SELinux
     selinux:
-      state: permissive
+      state: disabled
       policy: targeted
     register: selinux_disable
     #notify:
@@ -91,6 +91,7 @@
       service:
         name: "{{ item }}"
         state: restarted
+        enabled: yes
       with_items:
         - guacd
         - tomcat
