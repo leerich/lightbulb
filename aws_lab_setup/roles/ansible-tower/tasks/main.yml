@@ -132,7 +132,7 @@
     body_format: json
     validate_certs: False
     force_basic_auth: yes
-  ignore_errors: true
+  ignore_errors: false
 
 
 - name: CERTBOT for Tower

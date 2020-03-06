@@ -7,7 +7,7 @@
     tower_host: localhost
     tower_username: admin
     tower_password: "{{admin_password}}"
-  ignore_errors: true
+  ignore_errors: false
 
 - name: INSTALL CERTBOT
   yum:
@@ -23,7 +23,7 @@
   register: issue_cert
   until: issue_cert is not failed
   retries: 5
-  ignore_errors: true
+  ignore_errors: false
 
 - name: APPEND LETS ENCRYPT FAILED
   set_fact:
