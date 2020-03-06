@@ -209,6 +209,7 @@
 
 - name: Install certbot on guacamole server
   hosts: web_server
+  become: yes
   gather_facts: false
   roles:
     - guacamole_certbot
