@@ -134,16 +134,7 @@
     force_basic_auth: yes
   ignore_errors: false
 
-#- name: Post license key
-#  uri:
-#    url: https://localhost/api/v1/config/
-#    method: POST
-#    user: admin
-#    password: "{{ towerpass }}"
-#    body: "{{ lookup('file','tower_license.json') }}"
-#    body_format: json
-#    validate_certs: False
-#  ignore_errors: True
+
 
 #- name: create project
 #  uri:
