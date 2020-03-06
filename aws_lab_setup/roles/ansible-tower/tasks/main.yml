@@ -107,7 +107,7 @@
       debug:
         msg: '{{ check2.json }}'
 
-  when: checkout is failed
+  when: checkout is not failed
 ####
 #- name: wait for tower to be up
 #  uri:
