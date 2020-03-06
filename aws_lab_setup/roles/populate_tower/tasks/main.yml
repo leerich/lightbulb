@@ -1,14 +1,14 @@
-- name: Post license key
-  uri:
-    url: https://localhost/api/v1/config/
-    method: POST
-    user: admin
-    password: "{{ workshop_password }}"
-    body: "{{ tower_license }}"
-    body_format: json
-    validate_certs: False
-    force_basic_auth: yes
-  ignore_errors: False
+#- name: Post license key
+#  uri:
+#    url: https://localhost/api/v1/config/
+#    method: POST
+#    user: admin
+#    password: "{{ workshop_password }}"
+#    body: "{{ tower_license }}"
+#    body_format: json
+#    validate_certs: False
+#    force_basic_auth: yes
+#  ignore_errors: False
 
 #CREDENTIAL
 
