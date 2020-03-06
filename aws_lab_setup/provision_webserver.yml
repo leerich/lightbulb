@@ -100,13 +100,12 @@
 
 - hosts: web_server
   name: Install guacamole
-    include_tasks: intall_guacamole.yml
-    tags:
-      - guacamole
+  include_tasks: intall_guacamole.yml
+  tags:
+    - guacamole
 
 - hosts: web_server
   name: Install certbot on guacamole server
   roles:
     - guacamole_certbot
   tags: guacamole
-  
