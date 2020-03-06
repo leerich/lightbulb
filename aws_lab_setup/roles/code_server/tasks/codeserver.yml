@@ -109,6 +109,20 @@
   retries: 5
   ignore_errors: true
 
+- name: MOVE SSL KEY
+  copy:
+    remote_src: True
+    src: "/etc/letsencrypt/live/{{ec2_name_prefix|lower}}-{{username}}.rhdemo.io/privkey.pem"
+    dest: /opt/server.key
+  #when: issue_cert is not failed
+
+- name: MOVE SSL Chain
+  copy:
+    remote_src: True
+    src: "/etc/letsencrypt/live/{{ec2_name_prefix|lower}}-{{username}}.rhdemo.io/fullchain.pem"
+    dest: /opt/server.crt
+  #when: issue_cert is not failed
+
 - name: turn on tower
   shell: ansible-tower-service start
   register: install_tower
