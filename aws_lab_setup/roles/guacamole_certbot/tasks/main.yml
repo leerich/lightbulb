@@ -1,9 +1,9 @@
-- name: Install Amazon Epel
-  command: amazon-linux-extras install epel -y
-
-- name: Wait for yum lock to finish
-  pause:
-    minutes:
+#- name: Install Amazon Epel
+#  command: amazon-linux-extras install epel -y
+#
+#- name: Wait for yum lock to finish
+#  pause:
+#    minutes:
 - name: Install certbot
   yum:
     name: certbot
