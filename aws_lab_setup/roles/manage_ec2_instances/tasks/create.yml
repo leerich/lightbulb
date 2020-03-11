@@ -9,7 +9,7 @@
 - name: Waiting for servers to come online
   wait_for: host="{{ item.tagged_instances[0].public_ip }}" port="{{ ssh_port }}" search_regex=OpenSSH
   with_items: "{{ instances.results }}"
-  when: instances | changed
+  when: instances .changed 
   tags:
     - always
     - provision
