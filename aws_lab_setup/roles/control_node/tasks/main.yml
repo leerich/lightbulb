@@ -3,7 +3,7 @@
     name: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
     state: present
   register: install_epel
-  until: install_epel|success
+  until: install_epel is success
   delay: 3
   retries: 5
   tags:
