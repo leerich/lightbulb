@@ -1,7 +1,7 @@
 - name: Wait for instances to finish initializing
   pause:
     seconds: 90
-  when: instances | changed
+  when: instances .changed
   tags:
     - always
     - provision
@@ -68,7 +68,7 @@
     state: directory
     mode: '0755'
   when: storage_workshop|d(False) == True
-  
+
 - name: Generate student inventories for storage workshop
   template:
     src: storageinstances.txt.j2
