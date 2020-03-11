@@ -56,7 +56,7 @@
     #enablerepo: rhel-7-server-rhui-extras-rpms
     #enablerepo: rhui-REGION-rhel-server-extras
   register: install_base_packages
-  until: install_base_packages|success
+  until: install_base_packages is success
   delay: 3
   retries: 5
   tags:
@@ -75,7 +75,7 @@
     #enablerepo: rhel-7-server-rhui-extras-rpms
     #enablerepo: rhui-REGION-rhel-server-extras
   register: install_ansible
-  until: install_ansible|success
+  until: install_ansible is success
   delay: 3
   retries: 5
   tags:
@@ -92,7 +92,7 @@
     repo: https://github.com/ansible/lightbulb.git
     force: yes
   register: clone_lightbulb
-  until: clone_lightbulb|success
+  until: clone_lightbulb is success
   delay: 3
   retries: 5
   become_user: "{{ username }}"
