@@ -1,7 +1,7 @@
 - name: Wait for instances to finish initializing
   pause:
     seconds: 90
-  when: instances .changed
+  when: instances is changed
   tags:
     - always
     - provision
@@ -9,7 +9,7 @@
 - name: Waiting for servers to come online
   wait_for: host="{{ item.tagged_instances[0].public_ip }}" port="{{ ssh_port }}" search_regex=OpenSSH
   with_items: "{{ instances.results }}"
-  when: instances is changed 
+  when: instances is changed
   tags:
     - always
     - provision
