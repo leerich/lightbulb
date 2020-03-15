@@ -106,7 +106,8 @@
 #  tags:
 #    - guacamole
 
-- hosts: web_server
+- name: Installing guacamole
+  hosts: web_server
   roles:
   - role: joe-speedboat.guacamole
     mariadb_db_host: 'localhost'
