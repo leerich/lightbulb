@@ -150,5 +150,5 @@
 
 - name: cleanup Coder binary from student directory
   file:
-    path: /home/{{username}}/{{ version_name }}
+    path: /home/{{username}}/{{ unarchive_out.files[0] }}
     state: absent
