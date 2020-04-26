@@ -135,10 +135,10 @@
   ignore_errors: false
 
 
-#- name: CERTBOT for Tower
-#  include_tasks: "tower.yml"
-#  when:
-#    - tower_install | bool
+- name: CERTBOT for Tower
+  include_tasks: "tower.yml"
+  when:
+    - tower_install | bool
 
 
 #- name: create project
