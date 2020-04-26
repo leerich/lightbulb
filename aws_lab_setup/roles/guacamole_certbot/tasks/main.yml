@@ -14,7 +14,7 @@
     state: stopped
 
 - name: ISSUE CERT
-  shell: certbot certonly --standalone -d {{ec2_name_prefix|lower}}.rhdemo.io --email ansible-workshop@redhat.com --noninteractive --agree-tos
+  shell: certbot certonly --standalone -d {{ec2_name_prefix|lower}}.{{workshop_dns_zone}} --email ansible-workshop@redhat.com --noninteractive --agree-tos
   register: issue_cert
   until: issue_cert is not failed
   retries: 5
@@ -32,14 +32,14 @@
 - name: MOVE SSL KEY
   copy:
     remote_src: True
-    src: "/etc/letsencrypt/live/{{ec2_name_prefix|lower}}.rhdemo.io/privkey.pem"
+    src: "/etc/letsencrypt/live/{{ec2_name_prefix|lower}}.{{workshop_dns_zone}}/privkey.pem"
     dest: /etc/nginx_cert/server.key
   when: issue_cert is not failed
 
 - name: MOVE SSL Chain
   copy:
     remote_src: True
-    src: "/etc/letsencrypt/live/{{ec2_name_prefix|lower}}.rhdemo.io/fullchain.pem"
+    src: "/etc/letsencrypt/live/{{ec2_name_prefix|lower}}.{{workshop_dns_zone}}/fullchain.pem"
     dest: /etc/nginx_cert/server.crt
   when: issue_cert is not failed
 
