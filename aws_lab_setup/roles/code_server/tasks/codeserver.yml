@@ -123,11 +123,11 @@
     - vscoss.vscode-ansible-0.5.2.vsix
   ignore_errors: true
 
-- name: start code-server service
-  service:
-    name: code-server
-    state: started
-    enabled: true
+#- name: start code-server service
+#  service:
+#    name: code-server
+#    state: started
+#    enabled: true
 
 #- name: issue cert
 #  shell: /usr/local/bin/certbot-auto certonly --no-bootstrap --standalone -d {{ec2_name_prefix|lower}}-{{ username }}.{{workshop_dns_zone}} --email ansible-network@redhat.com --noninteractive --agree-tos
@@ -156,6 +156,12 @@
     src: "/etc/letsencrypt/live/{{ec2_name_prefix|lower}}-{{username}}.rhdemo.io/fullchain.pem"
     dest: /opt/server.crt
   #when: issue_cert is not failed
+
+- name: start code-server service
+  service:
+    name: code-server
+    state: started
+    enabled: true
 
 - name: turn on tower
   shell: ansible-tower-service start
