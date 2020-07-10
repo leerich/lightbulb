@@ -63,7 +63,7 @@
   strategy: linear
   gather_facts: no
   vars_files:
-     - vars.yml
+    - vars.yml
     tasks:
       - ignore_errors: True
         block:
