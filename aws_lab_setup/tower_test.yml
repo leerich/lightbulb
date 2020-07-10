@@ -64,24 +64,24 @@
   gather_facts: no
   vars_files:
     - vars.yml
-    tasks:
-      - ignore_errors: True
-        block:
-        - name: collect facts with setup
-          setup:
-            gather_timeout: 30
-        - debug:
-            msg: "Metadata Version Number is  {{metadataVersion}}"
+  tasks:
+    - ignore_errors: True
+      block:
+    - name: collect facts with setup
+      setup:
+        gather_timeout: 30
+    - debug:
+        msg: "Metadata Version Number is  {{metadataVersion}}"
 
 
 
-        #########################  SERVER KERNEL VERSION  #########################
-        - debug:
-            msg: "[INFO] The kernel version for {{inventory_hostname}} is {{ansible_kernel}}"
-        #########################  END SERVER KERNEL VERSION  #########################
+    #########################  SERVER KERNEL VERSION  #########################
+    - debug:
+        msg: "[INFO] The kernel version for {{inventory_hostname}} is {{ansible_kernel}}"
+    #########################  END SERVER KERNEL VERSION  #########################
 
-        #########################  RUNLEVEL CHECK #########################
-        - name: get runlevel
-          shell: who -r
-          register: runlevel
-          become: yes
+    #########################  RUNLEVEL CHECK #########################
+    - name: get runlevel
+      shell: who -r
+      register: runlevel
+        become: yes
