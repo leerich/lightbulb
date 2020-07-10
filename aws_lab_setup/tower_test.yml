@@ -51,7 +51,7 @@
   #delegate_to: localhost
   #run_once:  true
 
-        - meta: clear_host_errors
+  - meta: clear_host_errors
 
 - name: To precheck hosts for patching
   hosts: available
