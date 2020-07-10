@@ -15,22 +15,22 @@
 
   - name: run on tower node
     block:
-    - add_host:
-        name:    "{{ item }}"
-        group:   buggy
-      with_items:  "{{ groups['all'] }}"
-      when:      hostvars[item]['df_test']['changed'] is defined and hostvars[item]['df_test']['changed'] == false
-
       - add_host:
-        name:    "{{ item }}"
-        group:   available
-      with_items:  "{{ groups['all'] }}"
-      when:      hostvars[item]['df_test']['changed'] is defined and hostvars[item]['df_test']['changed'] == true
+          name:    "{{ item }}"
+          group:   buggy
+        with_items:  "{{ groups['all'] }}"
+        when:      hostvars[item]['df_test']['changed'] is defined and hostvars[item]['df_test']['changed'] == false
 
-      - template:
-        src:     email.j2
-        dest:    /tmp/buggy_hosts.txt
-      when:      groups.buggy is defined
+        - add_host:
+          name:    "{{ item }}"
+          group:   available
+        with_items:  "{{ groups['all'] }}"
+        when:      hostvars[item]['df_test']['changed'] is defined and hostvars[item]['df_test']['changed'] == true
+
+        - template:
+          src:     email.j2
+          dest:    /tmp/buggy_hosts.txt
+        when:      groups.buggy is defined
 
   #  - mail:
   #      from:      "{{ email_username }}"
@@ -51,7 +51,7 @@
   #delegate_to: localhost
   #run_once:  true
 
-      - meta: clear_host_errors
+        - meta: clear_host_errors
 
 - name: To precheck hosts for patching
   hosts: available
